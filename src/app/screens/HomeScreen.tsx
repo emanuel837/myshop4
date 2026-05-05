@@ -63,8 +63,9 @@ function IconShoppingBag(props: { className?: string }) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M6 8h12l-1 13H7L6 8Z" />
-      <path d="M9 8a3 3 0 0 1 6 0" />
+      <path d="M6.5 8.5h11L17 21H7L6.5 8.5Z" />
+      <path d="M9 10V8.8a3 3 0 0 1 6 0V10" />
+      <path d="M6.8 8.5 8.8 5.7A2 2 0 0 1 10.4 5h3.2a2 2 0 0 1 1.6.7l2 2.8" />
     </svg>
   )
 }
@@ -217,25 +218,25 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-950 via-blue-950 to-indigo-950 text-white">
       <header className="sticky top-0 z-10 bg-blue-950/90 backdrop-blur">
-        <div className="mx-auto max-w-md px-4 py-4">
+        <div className="mx-auto max-w-md px-4 py-3">
           <div className="flex items-start justify-between">
             <div className="text-start">
               <div className="flex items-center gap-2">
-                <span className="text-lg font-semibold">
+                <span className="text-base font-semibold">
                   היי {firstName || 'עובד'}
                 </span>
                 <button
                   type="button"
                   onClick={onLogout}
-                  className="inline-flex items-center justify-center rounded-xl bg-white/10 p-2.5 text-white hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+                  className="inline-flex items-center justify-center rounded-xl bg-white/10 p-2 text-white hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                   aria-label="התנתקות"
                   title="התנתקות"
                 >
-                  <IconArrowRight className="h-5 w-5" />
+                  <IconArrowRight className="h-4 w-4" />
                 </button>
               </div>
 
-              <div className="mt-1.5 text-sm text-white/85">
+              <div className="mt-1 text-xs text-white/85">
                 <span>סניף: </span>
                 <button
                   type="button"
@@ -248,25 +249,25 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             </div>
 
             <div className="text-end">
-              <h1 className="text-2xl font-semibold tracking-tight">myShop 4</h1>
+              <h1 className="text-xl font-semibold tracking-tight">myShop 4</h1>
             </div>
           </div>
         </div>
       </header>
 
       {tab === 'home' ? (
-        <main className="mx-auto max-w-md px-4 pb-28 pt-6">
-          <div className="space-y-4">
+        <main className="mx-auto max-w-md px-4 pb-24 pt-4">
+          <div className="space-y-3">
             <button
               type="button"
-              className="w-full rounded-3xl bg-white px-6 py-6 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+              className="w-full rounded-3xl bg-white px-5 py-4 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
             >
               <div className="flex flex-col items-center text-center">
-                <span className="grid h-16 w-16 place-items-center rounded-2xl bg-blue-950/10">
-                  <IconShoppingBag className="h-9 w-9" />
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-950/10">
+                  <IconShoppingBag className="h-7 w-7" />
                 </span>
-                <span className="mt-4 text-2xl font-extrabold">הזמנת פריט</span>
-                <span className="mt-2 text-base font-medium text-blue-950/80">
+                <span className="mt-3 text-xl font-extrabold">הזמנת פריט</span>
+                <span className="mt-1.5 text-sm font-medium text-blue-950/80">
                   להזמין פריט עבור לקוח במהירות ובקלות
                 </span>
               </div>
@@ -274,14 +275,14 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
 
             <button
               type="button"
-              className="w-full rounded-3xl bg-white px-6 py-6 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+              className="w-full rounded-3xl bg-white px-5 py-4 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
             >
               <div className="flex flex-col items-center text-center">
-                <span className="grid h-16 w-16 place-items-center rounded-2xl bg-blue-950/10">
-                  <IconWrench className="h-9 w-9" />
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-950/10">
+                  <IconWrench className="h-7 w-7" />
                 </span>
-                <span className="mt-4 text-2xl font-extrabold">שליחה למעבדה</span>
-                <span className="mt-2 text-base font-medium text-blue-950/80">
+                <span className="mt-3 text-xl font-extrabold">שליחה למעבדה</span>
+                <span className="mt-1.5 text-sm font-medium text-blue-950/80">
                   לפתוח פנייה ולשלוח פריט לתיקון / בדיקה
                 </span>
               </div>
@@ -289,16 +290,16 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
 
             <button
               type="button"
-              className="w-full rounded-3xl bg-white px-6 py-6 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+              className="w-full rounded-3xl bg-white px-5 py-4 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
             >
               <div className="flex flex-col items-center text-center">
-                <span className="grid h-16 w-16 place-items-center rounded-2xl bg-blue-950/10">
-                  <IconPackage className="h-9 w-9" />
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-950/10">
+                  <IconPackage className="h-7 w-7" />
                 </span>
-                <span className="mt-4 text-2xl font-extrabold">
+                <span className="mt-3 text-xl font-extrabold">
                   קיבלתי חבילה מכץ
                 </span>
-                <span className="mt-2 text-base font-medium text-blue-950/80">
+                <span className="mt-1.5 text-sm font-medium text-blue-950/80">
                   לעדכן שהחבילה הגיעה ולסיים את הטיפול
                 </span>
               </div>
