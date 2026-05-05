@@ -49,6 +49,61 @@ function IconArrowRight(props: { className?: string }) {
   )
 }
 
+function IconShoppingBag(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M6 8h12l-1 13H7L6 8Z" />
+      <path d="M9 8a3 3 0 0 1 6 0" />
+    </svg>
+  )
+}
+
+function IconWrench(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4L15 12l-3-3 2.7-2.7Z" />
+    </svg>
+  )
+}
+
+function IconPackage(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M16.5 9.4 7.5 4.2" />
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+      <path d="M3.3 7.7 12 12.8l8.7-5.1" />
+      <path d="M12 22V12.8" />
+    </svg>
+  )
+}
+
 function IconHome(props: { className?: string }) {
   return (
     <svg
@@ -158,19 +213,19 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
   }
 
   return (
-    <div className="min-h-screen bg-blue-950 text-white">
-      <header className="sticky top-0 z-10 bg-blue-950">
+    <div className="min-h-screen bg-gradient-to-b from-blue-950 via-blue-950 to-indigo-950 text-white">
+      <header className="sticky top-0 z-10 bg-blue-950/90 backdrop-blur">
         <div className="mx-auto max-w-md px-4 py-4">
           <div className="flex items-start justify-between">
             <div className="text-start">
               <div className="flex items-center gap-2">
-                <span className="text-base font-semibold">
+                <span className="text-lg font-semibold">
                   היי {firstName || 'עובד'}
                 </span>
                 <button
                   type="button"
                   onClick={onLogout}
-                  className="inline-flex items-center justify-center rounded-lg bg-white/10 p-2 text-white hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+                  className="inline-flex items-center justify-center rounded-xl bg-white/10 p-2.5 text-white hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                   aria-label="התנתקות"
                   title="התנתקות"
                 >
@@ -178,7 +233,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 </button>
               </div>
 
-              <div className="mt-1 text-sm text-white/85">
+              <div className="mt-1.5 text-sm text-white/85">
                 <span>סניף: </span>
                 <button
                   type="button"
@@ -198,25 +253,53 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
       </header>
 
       {tab === 'home' ? (
-        <main className="mx-auto max-w-md px-4 pb-24 pt-6">
+        <main className="mx-auto max-w-md px-4 pb-28 pt-6">
           <div className="space-y-4">
             <button
               type="button"
-              className="w-full rounded-2xl bg-white/10 px-5 py-6 text-lg font-semibold shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              className="w-full rounded-3xl bg-white px-6 py-6 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
             >
-              הזמנת פריט
+              <div className="flex flex-col items-center text-center">
+                <span className="grid h-16 w-16 place-items-center rounded-2xl bg-blue-950/10">
+                  <IconShoppingBag className="h-9 w-9" />
+                </span>
+                <span className="mt-4 text-2xl font-extrabold">הזמנת פריט</span>
+                <span className="mt-2 text-base font-medium text-blue-950/80">
+                  להזמין פריט עבור לקוח במהירות ובקלות
+                </span>
+              </div>
             </button>
+
             <button
               type="button"
-              className="w-full rounded-2xl bg-white/10 px-5 py-6 text-lg font-semibold shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              className="w-full rounded-3xl bg-white px-6 py-6 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
             >
-              שליחה למעבדה
+              <div className="flex flex-col items-center text-center">
+                <span className="grid h-16 w-16 place-items-center rounded-2xl bg-blue-950/10">
+                  <IconWrench className="h-9 w-9" />
+                </span>
+                <span className="mt-4 text-2xl font-extrabold">שליחה למעבדה</span>
+                <span className="mt-2 text-base font-medium text-blue-950/80">
+                  לפתוח פנייה ולשלוח פריט לתיקון / בדיקה
+                </span>
+              </div>
             </button>
+
             <button
               type="button"
-              className="w-full rounded-2xl bg-white/10 px-5 py-6 text-lg font-semibold shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              className="w-full rounded-3xl bg-white px-6 py-6 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
             >
-              קיבלתי חבילה מכץ
+              <div className="flex flex-col items-center text-center">
+                <span className="grid h-16 w-16 place-items-center rounded-2xl bg-blue-950/10">
+                  <IconPackage className="h-9 w-9" />
+                </span>
+                <span className="mt-4 text-2xl font-extrabold">
+                  קיבלתי חבילה מכץ
+                </span>
+                <span className="mt-2 text-base font-medium text-blue-950/80">
+                  לעדכן שהחבילה הגיעה ולסיים את הטיפול
+                </span>
+              </div>
             </button>
           </div>
         </main>
@@ -234,12 +317,12 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             type="button"
             onClick={() => setTab('home')}
             className={[
-              'flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
               tab === 'home' ? 'text-white' : 'text-white/75 hover:text-white',
             ].join(' ')}
             aria-current={tab === 'home' ? 'page' : undefined}
           >
-            <IconHome className="h-5 w-5" />
+            <IconHome className="h-6 w-6" />
             <span className="text-xs font-semibold">בית</span>
           </button>
 
@@ -247,12 +330,12 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             type="button"
             onClick={() => setTab('report')}
             className={[
-              'flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
               tab === 'report' ? 'text-white' : 'text-white/75 hover:text-white',
             ].join(' ')}
             aria-current={tab === 'report' ? 'page' : undefined}
           >
-            <IconReport className="h-5 w-5" />
+            <IconReport className="h-6 w-6" />
             <span className="text-xs font-semibold">דיווח</span>
           </button>
 
@@ -260,12 +343,12 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             type="button"
             onClick={() => setTab('tracking')}
             className={[
-              'flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
               tab === 'tracking' ? 'text-white' : 'text-white/75 hover:text-white',
             ].join(' ')}
             aria-current={tab === 'tracking' ? 'page' : undefined}
           >
-            <IconTracking className="h-5 w-5" />
+            <IconTracking className="h-6 w-6" />
             <span className="text-xs font-semibold">מעקב</span>
           </button>
 
@@ -273,12 +356,12 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             type="button"
             onClick={() => setTab('info')}
             className={[
-              'flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
               tab === 'info' ? 'text-white' : 'text-white/75 hover:text-white',
             ].join(' ')}
             aria-current={tab === 'info' ? 'page' : undefined}
           >
-            <IconInfo className="h-5 w-5" />
+            <IconInfo className="h-6 w-6" />
             <span className="text-xs font-semibold">מידע</span>
           </button>
         </div>
