@@ -21,7 +21,7 @@ const BRANCHES = [
   'השרון נתניה',
 ] as const
 
-const LS_EMPLOYEE_NAME = 'myshop4.employee.fullName'
+const LS_EMPLOYEE_NAME = 'myshop4.employee.name'
 const LS_EMPLOYEE_BRANCH = 'myshop4.employee.branch'
 
 export default function EmployeeDetailsScreen({
