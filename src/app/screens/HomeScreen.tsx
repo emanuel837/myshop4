@@ -2,7 +2,7 @@ import { useState } from 'react'
 import InfoScreen from './InfoScreen'
 import ReportScreen from './ReportScreen'
 import TrackingScreen from './TrackingScreen'
-import { getAirtableLink } from '../../lib/links'
+import { getAirtableLink, getLabFormUrl } from '../../lib/links'
 
 type HomeScreenProps = {
   onLogout: () => void
@@ -297,7 +297,13 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             <button
               type="button"
               onClick={() => {
-                setUnavailableMessage('הפעולה אינה זמינה עבור הסניף שלך')
+                const href = getLabFormUrl(branch)
+                if (!href) {
+                  setUnavailableMessage('הפעולה אינה זמינה עבור הסניף שלך')
+                  return
+                }
+                setUnavailableMessage(null)
+                window.open(href, '_blank', 'noopener,noreferrer')
               }}
               className="w-full rounded-3xl bg-white px-5 py-4 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
             >

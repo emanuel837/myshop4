@@ -1,4 +1,4 @@
-import { getAirtableLink } from '../../lib/links'
+import { getLabFormUrl } from '../../lib/links'
 
 type ActionItem = {
   title: string
@@ -100,7 +100,7 @@ function ActionCard({
           onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
           return
         }
-        const href = getAirtableLink('trackLab', branch)
+        const href = getLabFormUrl(branch)
         if (!href) {
           onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
           return

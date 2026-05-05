@@ -54,6 +54,9 @@ export type LinkActionKey =
   | 'pickupOrder'
   | 'trackLab'
 
+const LAB_FORM_URL =
+  'https://airtable.com/appZdzUZAvVj25hm9/shrArLPPwSRpYAMDu'
+
 const REPORT_MISSING_ONLINE: Record<BranchName, string> = {
   'טיב טוב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrmQVERqhkXImAqW',
   'שטינר אורתופדיקה': 'https://airtable.com/appyGTA8v9mY4WcmQ/shruS9JK2bomcyCXz',
@@ -153,5 +156,12 @@ export function getAirtableLink(
     case 'trackLab':
       return TRACK_LAB[branch]
   }
+}
+
+export function getLabFormUrl(branch: string): string | undefined {
+  if (!isBranchName(branch)) return undefined
+  return `${LAB_FORM_URL}?prefill_%D7%A1%D7%A0%D7%99%D7%A3=${encodeURIComponent(
+    branch,
+  )}`
 }
 
