@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import InfoScreen from './InfoScreen'
+import ReportScreen from './ReportScreen'
+import TrackingScreen from './TrackingScreen'
 
 type HomeScreenProps = {
   onLogout: () => void
@@ -304,9 +306,9 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
           </div>
         </main>
       ) : tab === 'report' ? (
-        <InfoScreen title="דיווח" />
+        <ReportScreen />
       ) : tab === 'tracking' ? (
-        <InfoScreen title="מעקב" />
+        <TrackingScreen />
       ) : (
         <InfoScreen title="מידע" />
       )}
