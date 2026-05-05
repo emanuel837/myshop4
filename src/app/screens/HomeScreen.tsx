@@ -2,6 +2,7 @@ import { useState } from 'react'
 import InfoScreen from './InfoScreen'
 import ReportScreen from './ReportScreen'
 import TrackingScreen from './TrackingScreen'
+import { getAirtableLink } from '../../lib/links'
 
 type HomeScreenProps = {
   onLogout: () => void
@@ -204,6 +205,9 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
 
   const [isBranchModalOpen, setIsBranchModalOpen] = useState(false)
   const [tab, setTab] = useState<TabKey>('home')
+  const [unavailableMessage, setUnavailableMessage] = useState<string | null>(
+    null,
+  )
   const firstName = getFirstName(employeeName)
 
   function persistBranch(nextBranch: string) {
@@ -258,8 +262,25 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
       {tab === 'home' ? (
         <main className="mx-auto max-w-md px-4 pb-24 pt-4">
           <div className="space-y-3">
+            {unavailableMessage ? (
+              <p
+                role="alert"
+                className="rounded-2xl bg-white/10 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/10"
+              >
+                {unavailableMessage}
+              </p>
+            ) : null}
             <button
               type="button"
+              onClick={() => {
+                const href = getAirtableLink('orderItem', branch)
+                if (!href) {
+                  setUnavailableMessage('הפעולה אינה זמינה עבור הסניף שלך')
+                  return
+                }
+                setUnavailableMessage(null)
+                window.open(href, '_blank', 'noopener,noreferrer')
+              }}
               className="w-full rounded-3xl bg-white px-5 py-4 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
             >
               <div className="flex flex-col items-center text-center">
@@ -275,6 +296,9 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
 
             <button
               type="button"
+              onClick={() => {
+                setUnavailableMessage('הפעולה אינה זמינה עבור הסניף שלך')
+              }}
               className="w-full rounded-3xl bg-white px-5 py-4 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
             >
               <div className="flex flex-col items-center text-center">
@@ -290,6 +314,15 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
 
             <button
               type="button"
+              onClick={() => {
+                const href = getAirtableLink('receivedPackage', branch)
+                if (!href) {
+                  setUnavailableMessage('הפעולה אינה זמינה עבור הסניף שלך')
+                  return
+                }
+                setUnavailableMessage(null)
+                window.open(href, '_blank', 'noopener,noreferrer')
+              }}
               className="w-full rounded-3xl bg-white px-5 py-4 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
             >
               <div className="flex flex-col items-center text-center">
@@ -307,9 +340,9 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
           </div>
         </main>
       ) : tab === 'report' ? (
-        <ReportScreen />
+        <ReportScreen branch={branch} onUnavailable={setUnavailableMessage} />
       ) : tab === 'tracking' ? (
-        <TrackingScreen />
+        <TrackingScreen branch={branch} onUnavailable={setUnavailableMessage} />
       ) : (
         <InfoScreen title="מידע" />
       )}

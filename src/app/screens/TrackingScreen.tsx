@@ -1,7 +1,9 @@
+import { getAirtableLink } from '../../lib/links'
+
 type ActionItem = {
   title: string
   subtitle: string
-  href: string
+  action: 'trackWarehouse' | 'trackLab' | 'trackTransfers'
 }
 
 function IconArrowRight(props: { className?: string }) {
@@ -79,21 +81,32 @@ function IconArrows(props: { className?: string }) {
   )
 }
 
-function openExternal(href: string) {
-  window.open(href, '_blank', 'noopener,noreferrer')
-}
-
 function ActionCard({
   item,
   icon,
+  branch,
+  onUnavailable,
 }: {
   item: ActionItem
   icon: React.ReactNode
+  branch: string
+  onUnavailable: (message: string) => void
 }) {
   return (
     <button
       type="button"
-      onClick={() => openExternal(item.href)}
+      onClick={() => {
+        if (item.action !== 'trackLab') {
+          onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
+          return
+        }
+        const href = getAirtableLink('trackLab', branch)
+        if (!href) {
+          onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
+          return
+        }
+        window.open(href, '_blank', 'noopener,noreferrer')
+      }}
       className="w-full rounded-3xl bg-white/10 px-5 py-5 text-start shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
     >
       <div className="flex flex-row items-center gap-4">
@@ -120,29 +133,52 @@ const ITEMS: ActionItem[] = [
   {
     title: 'מעקב הזמנות מהמחסן',
     subtitle: 'ראה סטטוס הזמנות',
-    href: '#',
+    action: 'trackWarehouse',
   },
   {
     title: 'מעקב בדיקת מעבדה',
     subtitle: 'ראה סטטוס תיקונים',
-    href: '#',
+    action: 'trackLab',
   },
   {
     title: 'מעקב הזמנות סניף מסניף',
     subtitle: 'ראה סטטוס העברות',
-    href: '#',
+    action: 'trackTransfers',
   },
 ]
 
-export default function TrackingScreen() {
+type TrackingScreenProps = {
+  branch: string
+  onUnavailable: (message: string | null) => void
+}
+
+export default function TrackingScreen({
+  branch,
+  onUnavailable,
+}: TrackingScreenProps) {
   return (
     <main className="mx-auto max-w-md px-4 pb-28 pt-6">
       <h2 className="text-xl font-extrabold text-white">מעקב</h2>
 
       <div className="mt-4 space-y-3">
-        <ActionCard item={ITEMS[0]} icon={<IconBoxes className="h-6 w-6" />} />
-        <ActionCard item={ITEMS[1]} icon={<IconWrench className="h-6 w-6" />} />
-        <ActionCard item={ITEMS[2]} icon={<IconArrows className="h-6 w-6" />} />
+        <ActionCard
+          item={ITEMS[0]}
+          branch={branch}
+          onUnavailable={(m) => onUnavailable(m)}
+          icon={<IconBoxes className="h-6 w-6" />}
+        />
+        <ActionCard
+          item={ITEMS[1]}
+          branch={branch}
+          onUnavailable={(m) => onUnavailable(m)}
+          icon={<IconWrench className="h-6 w-6" />}
+        />
+        <ActionCard
+          item={ITEMS[2]}
+          branch={branch}
+          onUnavailable={(m) => onUnavailable(m)}
+          icon={<IconArrows className="h-6 w-6" />}
+        />
       </div>
     </main>
   )
