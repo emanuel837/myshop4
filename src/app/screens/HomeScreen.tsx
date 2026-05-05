@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import InfoScreen from './InfoScreen'
 
 type HomeScreenProps = {
   onLogout: () => void
@@ -23,6 +24,8 @@ const BRANCHES = [
   'קניון נס ציונה',
   'השרון נתניה',
 ] as const
+
+type TabKey = 'home' | 'report' | 'tracking' | 'info'
 
 function getFirstName(fullName: string) {
   return fullName.trim().split(/\s+/).filter(Boolean)[0] ?? ''
@@ -64,7 +67,7 @@ function IconHome(props: { className?: string }) {
   )
 }
 
-function IconTag(props: { className?: string }) {
+function IconReport(props: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -76,13 +79,14 @@ function IconTag(props: { className?: string }) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M20.6 13.3 13.3 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z" />
-      <path d="M7.5 7.5h.01" />
+      <path d="M7 2h10a2 2 0 0 1 2 2v16l-4-2-3 2-3-2-4 2V4a2 2 0 0 1 2-2Z" />
+      <path d="M9 6h6" />
+      <path d="M9 10h6" />
     </svg>
   )
 }
 
-function IconTruck(props: { className?: string }) {
+function IconTracking(props: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -94,16 +98,14 @@ function IconTruck(props: { className?: string }) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M10 17h4V5H2v12h2" />
-      <path d="M14 17h1a3 3 0 1 0 0-6h-1" />
-      <path d="M18 17h2v-5l-3-3h-3" />
-      <path d="M6.5 20a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
-      <path d="M17.5 20a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
+      <path d="M12 22a2 2 0 0 0 2-2c0-1.5-2-3-2-3s-2 1.5-2 3a2 2 0 0 0 2 2Z" />
+      <path d="M12 17V3" />
+      <path d="M7 8l5-5 5 5" />
     </svg>
   )
 }
 
-function IconHeadphones(props: { className?: string }) {
+function IconInfo(props: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -115,111 +117,15 @@ function IconHeadphones(props: { className?: string }) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M4 12a8 8 0 0 1 16 0" />
-      <path d="M4 12v6a2 2 0 0 0 2 2h2v-7H6a2 2 0 0 0-2 2Z" />
-      <path d="M20 12v6a2 2 0 0 1-2 2h-2v-7h2a2 2 0 0 1 2 2Z" />
-    </svg>
-  )
-}
-
-function IconUsers(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-      <path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
-      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-    </svg>
-  )
-}
-
-function IconTransfer(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M7 7h14l-4-4" />
-      <path d="M17 17H3l4 4" />
-      <path d="M21 7v6" />
-      <path d="M3 17v-6" />
-    </svg>
-  )
-}
-
-function IconBox(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M21 8V21H3V8" />
-      <path d="M3 8l9-5 9 5" />
-      <path d="M12 3v18" />
-    </svg>
-  )
-}
-
-function IconPackage(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M16.5 9.4 7.5 4.2" />
-      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-      <path d="M3.3 7.7 12 12.8l8.7-5.1" />
-      <path d="M12 22V12.8" />
-    </svg>
-  )
-}
-
-function IconWrench(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4L15 12l-3-3 2.7-2.7Z" />
+      <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" />
+      <path d="M12 10v6" />
+      <path d="M12 7h.01" />
     </svg>
   )
 }
 
 export default function HomeScreen({ onLogout }: HomeScreenProps) {
-  const [employeeName, setEmployeeName] = useState(() => {
+  const [employeeName] = useState(() => {
     try {
       return localStorage.getItem(LS_EMPLOYEE_NAME) ?? ''
     } catch {
@@ -239,6 +145,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
   })
 
   const [isBranchModalOpen, setIsBranchModalOpen] = useState(false)
+  const [tab, setTab] = useState<TabKey>('home')
   const firstName = getFirstName(employeeName)
 
   function persistBranch(nextBranch: string) {
@@ -256,20 +163,9 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
         <div className="mx-auto max-w-md px-4 py-4">
           <div className="flex items-start justify-between">
             <div className="text-start">
-              <button
-                type="button"
-                onClick={() => setIsBranchModalOpen(true)}
-                className="inline-flex items-center gap-2 rounded-lg px-1 py-1 text-sm font-medium text-white/90 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
-              >
-                <span className="truncate">{branch || 'בחרו סניף'}</span>
-              </button>
-            </div>
-
-            <div className="text-end">
-              <h1 className="text-2xl font-semibold tracking-tight">myShop 4</h1>
-              <div className="mt-2 flex items-center justify-end gap-2">
-                <span className="text-sm font-semibold text-white/90">
-                  {firstName || 'עובד'}
+              <div className="flex items-center gap-2">
+                <span className="text-base font-semibold">
+                  היי {firstName || 'עובד'}
                 </span>
                 <button
                   type="button"
@@ -281,91 +177,67 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                   <IconArrowRight className="h-5 w-5" />
                 </button>
               </div>
+
+              <div className="mt-1 text-sm text-white/85">
+                <span>סניף: </span>
+                <button
+                  type="button"
+                  onClick={() => setIsBranchModalOpen(true)}
+                  className="font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+                >
+                  {branch || 'בחרו סניף'}
+                </button>
+              </div>
+            </div>
+
+            <div className="text-end">
+              <h1 className="text-2xl font-semibold tracking-tight">myShop 4</h1>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="mx-auto max-w-md px-4 pb-24 pt-5">
-        <section>
-          <h2 className="text-lg font-semibold text-white">פעולות מהירות</h2>
-          <div className="mt-4 grid grid-cols-2 gap-3">
+      {tab === 'home' ? (
+        <main className="mx-auto max-w-md px-4 pb-24 pt-6">
+          <div className="space-y-4">
             <button
               type="button"
-              className="rounded-2xl bg-white/10 p-4 text-start shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              className="w-full rounded-2xl bg-white/10 px-5 py-6 text-lg font-semibold shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-base font-semibold">
-                  הזמנה מסניף אחר
-                </span>
-                <IconTransfer className="h-6 w-6 text-white/90" />
-              </div>
+              הזמנת פריט
             </button>
-
             <button
               type="button"
-              className="rounded-2xl bg-white/10 p-4 text-start shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              className="w-full rounded-2xl bg-white/10 px-5 py-6 text-lg font-semibold shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-base font-semibold">הזמנה מהמחסן</span>
-                <IconBox className="h-6 w-6 text-white/90" />
-              </div>
+              שליחה למעבדה
             </button>
-
             <button
               type="button"
-              className="rounded-2xl bg-white/10 p-4 text-start shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              className="w-full rounded-2xl bg-white/10 px-5 py-6 text-lg font-semibold shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-base font-semibold">קבלת חבילה מכץ</span>
-                <IconPackage className="h-6 w-6 text-white/90" />
-              </div>
-            </button>
-
-            <button
-              type="button"
-              className="rounded-2xl bg-white/10 p-4 text-start shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-base font-semibold">טופס מעבדה</span>
-                <IconWrench className="h-6 w-6 text-white/90" />
-              </div>
+              קיבלתי חבילה מכץ
             </button>
           </div>
-        </section>
-
-        <section className="mt-8">
-          <h2 className="text-lg font-semibold text-white">טבלאות ונתונים</h2>
-          <div className="mt-4 overflow-hidden rounded-2xl bg-white/10 ring-1 ring-white/10">
-            {[
-              'קמפיינים פעילים',
-              'הזמנות מהמחסנים',
-              'סטטוס מעבדה',
-            ].map((label, idx, arr) => (
-              <button
-                key={label}
-                type="button"
-                className={[
-                  'flex w-full items-center justify-between px-4 py-4 text-start hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
-                  idx !== arr.length - 1 ? 'border-b border-white/10' : '',
-                ].join(' ')}
-              >
-                <span className="text-base font-semibold">{label}</span>
-                <span className="text-white/70" aria-hidden="true">
-                  ›
-                </span>
-              </button>
-            ))}
-          </div>
-        </section>
-      </main>
+        </main>
+      ) : tab === 'report' ? (
+        <InfoScreen title="דיווח" />
+      ) : tab === 'tracking' ? (
+        <InfoScreen title="מעקב" />
+      ) : (
+        <InfoScreen title="מידע" />
+      )}
 
       <nav className="fixed bottom-0 left-0 right-0 border-t border-white/10 bg-blue-950/95 backdrop-blur">
-        <div className="mx-auto grid max-w-md grid-cols-5 px-2 py-2">
+        <div className="mx-auto grid max-w-md grid-cols-4 px-2 py-2">
           <button
             type="button"
-            className="flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-            aria-current="page"
+            onClick={() => setTab('home')}
+            className={[
+              'flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+              tab === 'home' ? 'text-white' : 'text-white/75 hover:text-white',
+            ].join(' ')}
+            aria-current={tab === 'home' ? 'page' : undefined}
           >
             <IconHome className="h-5 w-5" />
             <span className="text-xs font-semibold">בית</span>
@@ -373,34 +245,41 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
 
           <button
             type="button"
-            className="flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 text-white/75 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+            onClick={() => setTab('report')}
+            className={[
+              'flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+              tab === 'report' ? 'text-white' : 'text-white/75 hover:text-white',
+            ].join(' ')}
+            aria-current={tab === 'report' ? 'page' : undefined}
           >
-            <IconTag className="h-5 w-5" />
-            <span className="text-xs font-semibold">שיווק</span>
+            <IconReport className="h-5 w-5" />
+            <span className="text-xs font-semibold">דיווח</span>
           </button>
 
           <button
             type="button"
-            className="flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 text-white/75 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+            onClick={() => setTab('tracking')}
+            className={[
+              'flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+              tab === 'tracking' ? 'text-white' : 'text-white/75 hover:text-white',
+            ].join(' ')}
+            aria-current={tab === 'tracking' ? 'page' : undefined}
           >
-            <IconTruck className="h-5 w-5" />
-            <span className="text-xs font-semibold">תפעול</span>
+            <IconTracking className="h-5 w-5" />
+            <span className="text-xs font-semibold">מעקב</span>
           </button>
 
           <button
             type="button"
-            className="flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 text-white/75 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+            onClick={() => setTab('info')}
+            className={[
+              'flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+              tab === 'info' ? 'text-white' : 'text-white/75 hover:text-white',
+            ].join(' ')}
+            aria-current={tab === 'info' ? 'page' : undefined}
           >
-            <IconHeadphones className="h-5 w-5" />
-            <span className="text-xs font-semibold">שירות</span>
-          </button>
-
-          <button
-            type="button"
-            className="flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 text-white/75 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-          >
-            <IconUsers className="h-5 w-5" />
-            <span className="text-xs font-semibold">סניפים</span>
+            <IconInfo className="h-5 w-5" />
+            <span className="text-xs font-semibold">מידע</span>
           </button>
         </div>
       </nav>
