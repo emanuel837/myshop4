@@ -3,10 +3,17 @@ import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  build: {
+    // Avoid terser hanging during closeBundle in some environments.
+    minify: 'esbuild',
+  },
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'sw.ts',
       includeAssets: [
         'icons/icon-192.png',
         'icons/icon-512.png',
