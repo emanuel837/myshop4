@@ -4,7 +4,6 @@ type ActionItem = {
   title: string
   subtitle: string
   action:
-    | 'reportMissingOnline'
     | 'orderItem'
     | 'receivedPackage'
     | 'pickupOrder'
@@ -24,25 +23,6 @@ function IconArrowRight(props: { className?: string }) {
     >
       <path d="M5 12h14" />
       <path d="m13 5 7 7-7 7" />
-    </svg>
-  )
-}
-
-function IconClipboard(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
-      <path d="M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2" />
-      <path d="M9 3h6v2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V3Z" />
     </svg>
   )
 }
@@ -151,12 +131,45 @@ function ActionCard({
   )
 }
 
+function MissingReportCard({
+  branch,
+  onUnavailable,
+}: {
+  branch: string
+  onUnavailable: (message: string) => void
+}) {
+  return (
+    <section className="rounded-3xl bg-white/10 px-5 py-5 shadow-sm ring-1 ring-white/10">
+      <h3 className="text-lg font-extrabold text-white">דיווח על חוסר</h3>
+
+      <div className="mt-4 grid grid-cols-2 gap-3">
+        <button
+          type="button"
+          onClick={() => {
+            const href = getAirtableLink('reportMissingOnline', branch)
+            if (!href) {
+              onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
+              return
+            }
+            window.open(href, '_blank', 'noopener,noreferrer')
+          }}
+          className="min-h-20 rounded-2xl bg-white px-3 py-4 text-center text-base font-extrabold text-blue-950 shadow-sm ring-1 ring-white/30 hover:bg-white/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+        >
+          הזמנות אתר
+        </button>
+
+        <a
+          href="#"
+          className="grid min-h-20 place-items-center rounded-2xl bg-white px-3 py-4 text-center text-base font-extrabold text-blue-950 shadow-sm ring-1 ring-white/30 hover:bg-white/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+        >
+          הזמנות סניפים
+        </a>
+      </div>
+    </section>
+  )
+}
+
 const ITEMS: ActionItem[] = [
-  {
-    title: 'דיווח על חוסר',
-    subtitle: 'דווח על פריט חסר במלאי',
-    action: 'reportMissingOnline',
-  },
   {
     title: 'הזמנת פריט',
     subtitle: 'הזמן פריט מהמחסן או מסניף',
@@ -185,26 +198,24 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
       <h2 className="text-xl font-extrabold text-white">דיווח</h2>
 
       <div className="mt-4 space-y-3">
-        <ActionCard
-          item={ITEMS[0]}
+        <MissingReportCard
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconClipboard className="h-6 w-6" />}
         />
         <ActionCard
-          item={ITEMS[1]}
+          item={ITEMS[0]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
           icon={<IconShoppingBag className="h-6 w-6" />}
         />
         <ActionCard
-          item={ITEMS[2]}
+          item={ITEMS[1]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
           icon={<IconPackage className="h-6 w-6" />}
         />
         <ActionCard
-          item={ITEMS[3]}
+          item={ITEMS[2]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
           icon={<IconTruck className="h-6 w-6" />}
