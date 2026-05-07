@@ -6,6 +6,9 @@ type ActionItem = {
   action:
     | 'orderItem'
     | 'orderEquipment'
+    | 'checkPhoto'
+    | 'branchIssue'
+    | 'hotModel'
     | 'receivedPackage'
     | 'pickupOrder'
 }
@@ -62,6 +65,62 @@ function IconShoppingCart(props: { className?: string }) {
       <path d="M6 6 5.3 3H3" />
       <path d="M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" />
       <path d="M18 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" />
+    </svg>
+  )
+}
+
+function IconCreditCard(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M3 10h18" />
+      <path d="M7 15h4" />
+    </svg>
+  )
+}
+
+function IconAlert(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 9v4" />
+      <path d="M12 17h.01" />
+      <path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" />
+    </svg>
+  )
+}
+
+function IconFire(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 22c4 0 7-3 7-7 0-3-2-5.5-4-7 .2 2-1 3.5-2.2 4.2C13.2 8.7 11.2 5.3 8 3c.4 4-3 6.2-3 11 0 4.5 3 8 7 8Z" />
+      <path d="M10 18c0-1.7 1.3-2.7 2.6-3.7.1 1.3.8 2.1 1.4 2.7 0 1.7-1.2 3-2.7 3A2.8 2.8 0 0 1 10 18Z" />
     </svg>
   )
 }
@@ -219,6 +278,21 @@ const ITEMS: ActionItem[] = [
     subtitle: 'הזמן ציוד לסניף',
     action: 'orderEquipment',
   },
+  {
+    title: "צילום צ'ק",
+    subtitle: "שלח צילום של צ'ק",
+    action: 'checkPhoto',
+  },
+  {
+    title: 'דיווח על תקלה בסניף',
+    subtitle: 'דווח על תקלה טכנית בסניף',
+    action: 'branchIssue',
+  },
+  {
+    title: 'דגם חם 🔥',
+    subtitle: 'דווח על מוצר עם ביקוש גבוה',
+    action: 'hotModel',
+  },
 ]
 
 type ReportScreenProps = {
@@ -259,6 +333,24 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
           icon={<IconShoppingCart className="h-6 w-6" />}
+        />
+        <ActionCard
+          item={ITEMS[4]}
+          branch={branch}
+          onUnavailable={(m) => onUnavailable(m)}
+          icon={<IconCreditCard className="h-6 w-6" />}
+        />
+        <ActionCard
+          item={ITEMS[5]}
+          branch={branch}
+          onUnavailable={(m) => onUnavailable(m)}
+          icon={<IconAlert className="h-6 w-6" />}
+        />
+        <ActionCard
+          item={ITEMS[6]}
+          branch={branch}
+          onUnavailable={(m) => onUnavailable(m)}
+          icon={<IconFire className="h-6 w-6" />}
         />
       </div>
     </main>

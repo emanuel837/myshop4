@@ -52,6 +52,9 @@ export type LinkActionKey =
   | 'reportMissingOffline'
   | 'orderItem'
   | 'orderEquipment'
+  | 'checkPhoto'
+  | 'branchIssue'
+  | 'hotModel'
   | 'receivedPackage'
   | 'pickupOrder'
   | 'trackLab'
@@ -64,6 +67,15 @@ const PICKUP_ORDER_FORM_URL =
 
 const EQUIPMENT_ORDER_URL =
   'https://airtable.com/appZdzUZAvVj25hm9/shrT50X5ooKiFYX0j'
+
+const CHECK_PHOTO_URL =
+  'https://airtable.com/appZdzUZAvVj25hm9/pagSvqx2CmgjUlJX3/form'
+
+const BRANCH_ISSUE_URL =
+  'https://airtable.com/appMi9L7QDrJZ00cz/pagzat7HTp3YZUlIR/form'
+
+const HOT_MODEL_URL =
+  'https://airtable.com/appMi9L7QDrJZ00cz/pagal5LlJdq5yhn6y/form'
 
 const REPORT_MISSING_ONLINE: Record<BranchName, string> = {
   'טיב טוב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrmQVERqhkXImAqW',
@@ -157,6 +169,17 @@ export function getAirtableLink(
   action: LinkActionKey,
   branch: string,
 ): string | undefined {
+  switch (action) {
+    case 'orderEquipment':
+      return EQUIPMENT_ORDER_URL
+    case 'checkPhoto':
+      return CHECK_PHOTO_URL
+    case 'branchIssue':
+      return BRANCH_ISSUE_URL
+    case 'hotModel':
+      return HOT_MODEL_URL
+  }
+
   if (!isBranchName(branch)) return undefined
 
   switch (action) {
@@ -166,8 +189,6 @@ export function getAirtableLink(
       return REPORT_MISSING_OFFLINE[branch]
     case 'orderItem':
       return ORDER_ITEM[branch]
-    case 'orderEquipment':
-      return EQUIPMENT_ORDER_URL
     case 'receivedPackage':
       return RECEIVED_PACKAGE[branch]
     case 'pickupOrder':
