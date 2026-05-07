@@ -1,24 +1,25 @@
 import { useMemo, useState } from 'react'
 
-const BRANCHES = [
-  'טיב טוב',
-  'שטינר אורתופדיקה',
-  'קניון הזהב',
-  'כפר סבא',
-  'ירושלים',
-  'קריון',
-  'אסף סנטר',
-  'קניון אורות',
-  'קניון מרום',
-  "דודג' סנטר",
-  'חוצות המפרץ',
-  'קניון בת ים',
-  'קניון נס ציונה',
-  'השרון נתניה',
+const BRANCHES: { name: string; phone: string | null }[] = [
+  { name: 'טיב טוב', phone: '03-6728725' },
+  { name: 'שטינר אורתופדיקה', phone: '03-6955883' },
+  { name: 'קניון הזהב', phone: null },
+  { name: 'כפר סבא', phone: '09-7657635' },
+  { name: 'ירושלים', phone: '02-5370040' },
+  { name: 'קריון', phone: '04-8744020' },
+  { name: 'אסף סנטר', phone: '08-9201565' },
+  { name: 'קניון אורות', phone: null },
+  { name: 'קניון מרום', phone: null },
+  { name: "דודג' סנטר", phone: null },
+  { name: 'חוצות המפרץ', phone: '04-8403441' },
+  { name: 'קניון בת ים', phone: '074-7580208' },
+  { name: 'קניון נס ציונה', phone: '08-9229810' },
+  { name: 'השרון נתניה', phone: '072-2044901' },
 ] as const
 
-const PHONE_PLACEHOLDER = '000-0000000'
-const PHONE_PLACEHOLDER_TEL = '0000000000'
+function getTelHref(phone: string) {
+  return `tel:${phone.replace(/\D/g, '')}`
+}
 
 function IconPhone(props: { className?: string }) {
   return (
@@ -43,7 +44,7 @@ export default function BranchesScreen() {
   const filteredBranches = useMemo(() => {
     const query = search.trim()
     if (!query) return BRANCHES
-    return BRANCHES.filter((branch) => branch.includes(query))
+    return BRANCHES.filter((branch) => branch.name.includes(query))
   }, [search])
 
   return (
@@ -67,9 +68,8 @@ export default function BranchesScreen() {
       <div className="mt-4 space-y-3">
         {filteredBranches.length > 0 ? (
           filteredBranches.map((branch) => (
-            <a
-              key={branch}
-              href={`tel:${PHONE_PLACEHOLDER_TEL}`}
+            <div
+              key={branch.name}
               className="block rounded-3xl bg-white/10 px-5 py-4 shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
             >
               <div className="flex flex-row items-center gap-4">
@@ -79,18 +79,33 @@ export default function BranchesScreen() {
 
                 <div className="min-w-0 flex-1 text-right">
                   <div className="text-lg font-extrabold text-white">
-                    {branch}
+                    {branch.name}
                   </div>
-                  <div className="mt-1 text-sm font-medium text-white/75">
-                    {PHONE_PLACEHOLDER}
-                  </div>
+                  {branch.phone ? (
+                    <a
+                      href={getTelHref(branch.phone)}
+                      className="mt-1 inline-block text-sm font-medium text-white/75 underline decoration-white/30 underline-offset-4 hover:text-white hover:decoration-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                    >
+                      {branch.phone}
+                    </a>
+                  ) : (
+                    <div className="mt-1 text-sm font-medium text-white/50">
+                      אין מספר זמין
+                    </div>
+                  )}
                 </div>
 
-                <div className="flex-none text-sm font-extrabold text-white/85">
-                  התקשר
-                </div>
+                {branch.phone ? (
+                  <a
+                    href={getTelHref(branch.phone)}
+                    className="flex-none rounded-xl bg-white/10 px-3 py-2 text-sm font-extrabold text-white/85 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                    aria-label={`התקשר אל ${branch.name}`}
+                  >
+                    התקשר
+                  </a>
+                ) : null}
               </div>
-            </a>
+            </div>
           ))
         ) : (
           <p className="rounded-2xl bg-white/10 px-4 py-3 text-sm font-semibold text-white/80 ring-1 ring-white/10">
