@@ -49,6 +49,7 @@ export const BRANCH_IDS: Record<BranchName, BranchId> = {
 
 export type LinkActionKey =
   | 'reportMissingOnline'
+  | 'reportMissingOffline'
   | 'orderItem'
   | 'receivedPackage'
   | 'pickupOrder'
@@ -75,6 +76,23 @@ const REPORT_MISSING_ONLINE: Record<BranchName, string> = {
   'קניון בת ים': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrwQ8xhB74QP9ZND',
   'קניון נס ציונה': 'https://airtable.com/appyGTA8v9mY4WcmQ/shruEpqVGBt3hnSkV',
   'השרון נתניה': 'https://airtable.com/appyGTA8v9mY4WcmQ/shroOlESUTCCVhvO7',
+}
+
+const REPORT_MISSING_OFFLINE: Record<BranchName, string> = {
+  'טיב טוב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr0hrMLagnzorPy1',
+  'שטינר אורתופדיקה': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrUv2AjCfJp2WY35',
+  'קניון הזהב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrKxG7SlYt8rHt1B',
+  'כפר סבא': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrf8jpJ6mayLI1c8',
+  ירושלים: 'https://airtable.com/appyGTA8v9mY4WcmQ/shrxgmRoaqilvs5BF',
+  קריון: 'https://airtable.com/appyGTA8v9mY4WcmQ/shr3nQBuwippLvK5s',
+  'אסף סנטר': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrau6FjMlQRnV5Jk',
+  'קניון אורות': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrGbaUK7FrqZoSrA',
+  'קניון מרום': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrUQsPKnLS7krjiR',
+  "דודג' סנטר": 'https://airtable.com/appyGTA8v9mY4WcmQ/shrieEeBe1P8v69dC',
+  'חוצות המפרץ': 'https://airtable.com/appyGTA8v9mY4WcmQ/shry36dp8HLQj1xNm',
+  'קניון בת ים': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrapk7hxt6IywSff',
+  'קניון נס ציונה': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr3JxM96jk3ekS1H',
+  'השרון נתניה': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr6dKBi1lpqLbhvM',
 }
 
 const ORDER_ITEM: Record<BranchName, string> = {
@@ -140,6 +158,8 @@ export function getAirtableLink(
   switch (action) {
     case 'reportMissingOnline':
       return REPORT_MISSING_ONLINE[branch]
+    case 'reportMissingOffline':
+      return REPORT_MISSING_OFFLINE[branch]
     case 'orderItem':
       return ORDER_ITEM[branch]
     case 'receivedPackage':

@@ -96,7 +96,6 @@ export default function InfoScreen({
               label="אתר הלב הכחול"
               href="https://www.blueheart.co.il"
             />
-            <LinkRow label="מדריך למוכר" href="#" />
           </div>
         </SectionCard>
 

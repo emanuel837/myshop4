@@ -158,12 +158,20 @@ function MissingReportCard({
           הזמנות אתר
         </button>
 
-        <a
-          href="#"
+        <button
+          type="button"
+          onClick={() => {
+            const href = getAirtableLink('reportMissingOffline', branch)
+            if (!href) {
+              onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
+              return
+            }
+            window.open(href, '_blank', 'noopener,noreferrer')
+          }}
           className="grid min-h-20 place-items-center rounded-2xl bg-white px-3 py-4 text-center text-base font-extrabold text-blue-950 shadow-sm ring-1 ring-white/30 hover:bg-white/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
         >
           הזמנות סניפים
-        </a>
+        </button>
       </div>
     </section>
   )
