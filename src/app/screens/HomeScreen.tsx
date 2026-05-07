@@ -350,7 +350,11 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
       ) : tab === 'tracking' ? (
         <TrackingScreen branch={branch} onUnavailable={setUnavailableMessage} />
       ) : (
-        <InfoScreen title="מידע" />
+        <InfoScreen
+          employeeName={employeeName}
+          branch={branch}
+          onChangeBranch={() => setIsBranchModalOpen(true)}
+        />
       )}
 
       <nav className="fixed bottom-0 left-0 right-0 border-t border-white/10 bg-blue-950/95 backdrop-blur">
