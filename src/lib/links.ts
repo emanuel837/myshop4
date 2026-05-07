@@ -57,6 +57,9 @@ export type LinkActionKey =
 const LAB_FORM_URL =
   'https://airtable.com/appZdzUZAvVj25hm9/shrArLPPwSRpYAMDu'
 
+const PICKUP_ORDER_FORM_URL =
+  'https://airtable.com/appBawqi4kZnr8rtL/pagVF3qscSTQ8J2aV/form'
+
 const REPORT_MISSING_ONLINE: Record<BranchName, string> = {
   'טיב טוב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrmQVERqhkXImAqW',
   'שטינר אורתופדיקה': 'https://airtable.com/appyGTA8v9mY4WcmQ/shruS9JK2bomcyCXz',
@@ -124,16 +127,6 @@ const TRACK_LAB: Partial<Record<BranchName, string>> = {
   'השרון נתניה': 'https://airtable.com/appZdzUZAvVj25hm9/shrlUI7c7SLeBhusE',
 }
 
-const PICKUP_ORDER: Partial<Record<BranchName, string>> = {
-  'טיב טוב': 'https://airtable.com/appBawqi4kZnr8rtL/shrRE2UqOkAvaNb4M',
-  'שטינר אורתופדיקה': 'https://airtable.com/appBawqi4kZnr8rtL/shrZruwyT00QIvfsU',
-  'קניון הזהב': 'https://airtable.com/appBawqi4kZnr8rtL/shr4VhpSKjj8pIJMB',
-  'כפר סבא': 'https://airtable.com/appBawqi4kZnr8rtL/shr6gqu5ovkqcN9Km',
-  ירושלים: 'https://airtable.com/appBawqi4kZnr8rtL/shr1GVNWFQVYF0Au1',
-  קריון: 'https://airtable.com/appBawqi4kZnr8rtL/shrpcwCob3ZNa2jVH',
-  'אסף סנטר': 'https://airtable.com/appBawqi4kZnr8rtL/shriv5qbsReZxvcHS',
-}
-
 export function isBranchName(value: string): value is BranchName {
   return Object.prototype.hasOwnProperty.call(BRANCH_IDS, value)
 }
@@ -152,7 +145,9 @@ export function getAirtableLink(
     case 'receivedPackage':
       return RECEIVED_PACKAGE[branch]
     case 'pickupOrder':
-      return PICKUP_ORDER[branch]
+      return `${PICKUP_ORDER_FORM_URL}?prefill_%D7%A1%D7%A0%D7%99%D7%A3=${encodeURIComponent(
+        branch,
+      )}`
     case 'trackLab':
       return TRACK_LAB[branch]
   }

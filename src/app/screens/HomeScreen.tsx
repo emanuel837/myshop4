@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import BranchesScreen from './BranchesScreen'
 import InfoScreen from './InfoScreen'
 import ReportScreen from './ReportScreen'
 import TrackingScreen from './TrackingScreen'
@@ -28,7 +29,7 @@ const BRANCHES = [
   'השרון נתניה',
 ] as const
 
-type TabKey = 'home' | 'report' | 'tracking' | 'info'
+type TabKey = 'home' | 'report' | 'tracking' | 'branches' | 'info'
 
 function getFirstName(fullName: string) {
   return fullName.trim().split(/\s+/).filter(Boolean)[0] ?? ''
@@ -179,6 +180,30 @@ function IconInfo(props: { className?: string }) {
       <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" />
       <path d="M12 10v6" />
       <path d="M12 7h.01" />
+    </svg>
+  )
+}
+
+function IconBranches(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M8 21V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v16" />
+      <path d="M4 21h16" />
+      <path d="M9 7h1" />
+      <path d="M14 7h1" />
+      <path d="M9 11h1" />
+      <path d="M14 11h1" />
+      <path d="M9 15h1" />
+      <path d="M14 15h1" />
     </svg>
   )
 }
@@ -349,6 +374,8 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
         <ReportScreen branch={branch} onUnavailable={setUnavailableMessage} />
       ) : tab === 'tracking' ? (
         <TrackingScreen branch={branch} onUnavailable={setUnavailableMessage} />
+      ) : tab === 'branches' ? (
+        <BranchesScreen />
       ) : (
         <InfoScreen
           employeeName={employeeName}
@@ -358,7 +385,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
       )}
 
       <nav className="fixed bottom-0 left-0 right-0 border-t border-white/10 bg-blue-950/95 backdrop-blur">
-        <div className="mx-auto grid max-w-md grid-cols-4 px-2 py-2">
+        <div className="mx-auto grid max-w-md grid-cols-5 px-2 py-2">
           <button
             type="button"
             onClick={() => setTab('home')}
@@ -409,6 +436,21 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
           >
             <IconInfo className="h-6 w-6" />
             <span className="text-xs font-semibold">מידע</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setTab('branches')}
+            className={[
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+              tab === 'branches'
+                ? 'text-white'
+                : 'text-white/75 hover:text-white',
+            ].join(' ')}
+            aria-current={tab === 'branches' ? 'page' : undefined}
+          >
+            <IconBranches className="h-6 w-6" />
+            <span className="text-xs font-semibold">סניפים</span>
           </button>
         </div>
       </nav>
