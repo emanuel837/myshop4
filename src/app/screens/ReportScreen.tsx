@@ -5,6 +5,7 @@ type ActionItem = {
   subtitle: string
   action:
     | 'orderItem'
+    | 'orderEquipment'
     | 'receivedPackage'
     | 'pickupOrder'
 }
@@ -41,6 +42,26 @@ function IconShoppingBag(props: { className?: string }) {
     >
       <path d="M6 8h12l-1 13H7L6 8Z" />
       <path d="M9 8a3 3 0 0 1 6 0" />
+    </svg>
+  )
+}
+
+function IconShoppingCart(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M6 6h15l-2 8H8L6 6Z" />
+      <path d="M6 6 5.3 3H3" />
+      <path d="M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" />
+      <path d="M18 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" />
     </svg>
   )
 }
@@ -193,6 +214,11 @@ const ITEMS: ActionItem[] = [
     subtitle: 'בקש איסוף חבילה',
     action: 'pickupOrder',
   },
+  {
+    title: 'הזמנת ציוד',
+    subtitle: 'הזמן ציוד לסניף',
+    action: 'orderEquipment',
+  },
 ]
 
 type ReportScreenProps = {
@@ -227,6 +253,12 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
           icon={<IconTruck className="h-6 w-6" />}
+        />
+        <ActionCard
+          item={ITEMS[3]}
+          branch={branch}
+          onUnavailable={(m) => onUnavailable(m)}
+          icon={<IconShoppingCart className="h-6 w-6" />}
         />
       </div>
     </main>

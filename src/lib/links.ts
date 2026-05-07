@@ -51,6 +51,7 @@ export type LinkActionKey =
   | 'reportMissingOnline'
   | 'reportMissingOffline'
   | 'orderItem'
+  | 'orderEquipment'
   | 'receivedPackage'
   | 'pickupOrder'
   | 'trackLab'
@@ -60,6 +61,9 @@ const LAB_FORM_URL =
 
 const PICKUP_ORDER_FORM_URL =
   'https://airtable.com/appBawqi4kZnr8rtL/pagVF3qscSTQ8J2aV/form'
+
+const EQUIPMENT_ORDER_URL =
+  'https://airtable.com/appZdzUZAvVj25hm9/shrT50X5ooKiFYX0j'
 
 const REPORT_MISSING_ONLINE: Record<BranchName, string> = {
   'טיב טוב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrmQVERqhkXImAqW',
@@ -162,6 +166,8 @@ export function getAirtableLink(
       return REPORT_MISSING_OFFLINE[branch]
     case 'orderItem':
       return ORDER_ITEM[branch]
+    case 'orderEquipment':
+      return EQUIPMENT_ORDER_URL
     case 'receivedPackage':
       return RECEIVED_PACKAGE[branch]
     case 'pickupOrder':
