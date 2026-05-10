@@ -64,7 +64,7 @@ export type LinkActionKey =
   | 'trackLab'
 
 const LAB_FORM_URL =
-  'https://airtable.com/appZdzUZAvVj25hm9/shrArLPPwSRpYAMDu'
+  'https://airtable.com/appZdzUZAvVj25hm9/pagm4eaXE9bdrgHoy/form'
 
 const PICKUP_ORDER_FORM_URL =
   'https://airtable.com/appBawqi4kZnr8rtL/pagVF3qscSTQ8J2aV/form'
@@ -239,10 +239,7 @@ export function getAirtableLink(
   }
 }
 
-export function getLabFormUrl(branch: string): string | undefined {
-  if (!isBranchName(branch)) return undefined
-  return `${LAB_FORM_URL}?prefill_%D7%A1%D7%A0%D7%99%D7%A3=${encodeURIComponent(
-    branch,
-  )}`
+export function getLabFormUrl(_branch: string): string {
+  return LAB_FORM_URL
 }
 

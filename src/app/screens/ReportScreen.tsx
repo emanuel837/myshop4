@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { getAirtableLink } from '../../lib/links'
 
 type ActionItem = {
@@ -30,6 +31,23 @@ function IconArrowRight(props: { className?: string }) {
     >
       <path d="M5 12h14" />
       <path d="m13 5 7 7-7 7" />
+    </svg>
+  )
+}
+
+function IconChevronDown(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m6 9 6 6 6-6" />
     </svg>
   )
 }
@@ -318,7 +336,7 @@ function MissingReportCard({
   )
 }
 
-const ITEMS: ActionItem[] = [
+const MAIN_ITEMS: ActionItem[] = [
   {
     title: 'הזמנת פריט',
     subtitle: 'הזמן פריט מהמחסן או מסניף',
@@ -335,14 +353,17 @@ const ITEMS: ActionItem[] = [
     action: 'pickupOrder',
   },
   {
-    title: 'הזמנת ציוד',
-    subtitle: 'הזמן ציוד לסניף',
-    action: 'orderEquipment',
+    title: 'דגם חם 🔥',
+    subtitle: 'דווח על מוצר עם ביקוש גבוה',
+    action: 'hotModel',
   },
+]
+
+const ADDITIONAL_ITEMS: ActionItem[] = [
   {
-    title: 'הזנת טופס ייצור מדרסים',
-    subtitle: 'הזן טופס ייצור מדרסים ללקוח',
-    action: 'insoleProductionForm',
+    title: "צילום צ'ק",
+    subtitle: "שלח צילום של צ'ק",
+    action: 'checkPhoto',
   },
   {
     title: 'צילום נראות הסניף',
@@ -350,26 +371,105 @@ const ITEMS: ActionItem[] = [
     action: 'branchVisibilityPhoto',
   },
   {
+    title: 'הזנת טופס ייצור מדרסים',
+    subtitle: 'הזן טופס ייצור מדרסים ללקוח',
+    action: 'insoleProductionForm',
+  },
+  {
+    title: 'הזמנת ציוד',
+    subtitle: 'הזמן ציוד לסניף',
+    action: 'orderEquipment',
+  },
+  {
     title: 'משלוח עד הבית',
     subtitle: 'שלח הזמנה עד הבית של הלקוח',
     action: 'homeDelivery',
-  },
-  {
-    title: "צילום צ'ק",
-    subtitle: "שלח צילום של צ'ק",
-    action: 'checkPhoto',
   },
   {
     title: 'דיווח על תקלה',
     subtitle: 'דווח על תקלה בסניף',
     action: 'branchIssue',
   },
-  {
-    title: 'דגם חם 🔥',
-    subtitle: 'דווח על מוצר עם ביקוש גבוה',
-    action: 'hotModel',
-  },
 ]
+
+function getActionIcon(action: ActionItem['action']) {
+  switch (action) {
+    case 'orderItem':
+      return <IconShoppingBag className="h-6 w-6" />
+    case 'receivedPackage':
+      return <IconPackage className="h-6 w-6" />
+    case 'pickupOrder':
+      return <IconTruck className="h-6 w-6" />
+    case 'orderEquipment':
+      return <IconShoppingCart className="h-6 w-6" />
+    case 'insoleProductionForm':
+      return <IconFileText className="h-6 w-6" />
+    case 'branchVisibilityPhoto':
+      return <IconCamera className="h-6 w-6" />
+    case 'homeDelivery':
+      return <IconHome className="h-6 w-6" />
+    case 'checkPhoto':
+      return <IconCreditCard className="h-6 w-6" />
+    case 'branchIssue':
+      return <IconAlert className="h-6 w-6" />
+    case 'hotModel':
+      return <IconFire className="h-6 w-6" />
+  }
+}
+
+function AdditionalReportsModal({
+  branch,
+  onClose,
+  onUnavailable,
+}: {
+  branch: string
+  onClose: () => void
+  onUnavailable: (message: string) => void
+}) {
+  return (
+    <div
+      className="fixed inset-0 z-20"
+      role="dialog"
+      aria-modal="true"
+      aria-label="דיווחים נוספים"
+    >
+      <button
+        type="button"
+        className="absolute inset-0 bg-black/50"
+        onClick={onClose}
+        aria-label="סגירה"
+      />
+      <div className="absolute bottom-0 left-0 right-0 mx-auto max-w-md rounded-t-3xl bg-blue-950 p-4 shadow-2xl ring-1 ring-white/10">
+        <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-white/20" />
+        <div className="flex items-center justify-between">
+          <h3 className="text-base font-semibold">דיווחים נוספים</h3>
+          <button
+            type="button"
+            className="rounded-lg px-3 py-2 text-sm font-medium text-white/90 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+            onClick={onClose}
+          >
+            סגור
+          </button>
+        </div>
+
+        <div className="mt-3 max-h-[65vh] space-y-3 overflow-auto pb-2">
+          {ADDITIONAL_ITEMS.map((item) => (
+            <ActionCard
+              key={item.action}
+              item={item}
+              branch={branch}
+              onUnavailable={(message) => {
+                onClose()
+                onUnavailable(message)
+              }}
+              icon={getActionIcon(item.action)}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
 
 type ReportScreenProps = {
   branch: string
@@ -377,6 +477,8 @@ type ReportScreenProps = {
 }
 
 export default function ReportScreen({ branch, onUnavailable }: ReportScreenProps) {
+  const [isAdditionalOpen, setIsAdditionalOpen] = useState(false)
+
   return (
     <main className="mx-auto max-w-md px-4 pb-28 pt-6">
       <h2 className="text-xl font-extrabold text-white">דיווח</h2>
@@ -387,66 +489,62 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
           onUnavailable={(m) => onUnavailable(m)}
         />
         <ActionCard
-          item={ITEMS[0]}
+          item={MAIN_ITEMS[0]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconShoppingBag className="h-6 w-6" />}
+          icon={getActionIcon(MAIN_ITEMS[0].action)}
         />
         <ActionCard
-          item={ITEMS[1]}
+          item={MAIN_ITEMS[1]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconPackage className="h-6 w-6" />}
+          icon={getActionIcon(MAIN_ITEMS[1].action)}
         />
         <ActionCard
-          item={ITEMS[2]}
+          item={MAIN_ITEMS[2]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconTruck className="h-6 w-6" />}
+          icon={getActionIcon(MAIN_ITEMS[2].action)}
         />
         <ActionCard
-          item={ITEMS[3]}
+          item={MAIN_ITEMS[3]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconShoppingCart className="h-6 w-6" />}
+          icon={getActionIcon(MAIN_ITEMS[3].action)}
         />
-        <ActionCard
-          item={ITEMS[4]}
-          branch={branch}
-          onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconFileText className="h-6 w-6" />}
-        />
-        <ActionCard
-          item={ITEMS[5]}
-          branch={branch}
-          onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconCamera className="h-6 w-6" />}
-        />
-        <ActionCard
-          item={ITEMS[6]}
-          branch={branch}
-          onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconHome className="h-6 w-6" />}
-        />
-        <ActionCard
-          item={ITEMS[7]}
-          branch={branch}
-          onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconCreditCard className="h-6 w-6" />}
-        />
-        <ActionCard
-          item={ITEMS[8]}
-          branch={branch}
-          onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconAlert className="h-6 w-6" />}
-        />
-        <ActionCard
-          item={ITEMS[9]}
-          branch={branch}
-          onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconFire className="h-6 w-6" />}
-        />
+        <button
+          type="button"
+          onClick={() => setIsAdditionalOpen(true)}
+          className="w-full rounded-3xl bg-white/10 px-5 py-5 text-start shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+        >
+          <div className="flex flex-row items-center gap-4">
+            <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-white/10 text-white">
+              <IconFileText className="h-6 w-6" />
+            </div>
+
+            <div className="min-w-0 flex-1 text-right">
+              <div className="text-lg font-extrabold text-white">
+                דיווחים נוספים
+              </div>
+              <div className="mt-1 text-sm font-medium text-white/75">
+                פתיחת פעולות נוספות
+              </div>
+            </div>
+
+            <div className="flex-none text-white/85" aria-hidden="true">
+              <IconChevronDown className="h-5 w-5" />
+            </div>
+          </div>
+        </button>
       </div>
+
+      {isAdditionalOpen ? (
+        <AdditionalReportsModal
+          branch={branch}
+          onClose={() => setIsAdditionalOpen(false)}
+          onUnavailable={(m) => onUnavailable(m)}
+        />
+      ) : null}
     </main>
   )
 }
