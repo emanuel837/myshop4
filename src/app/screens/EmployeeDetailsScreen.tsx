@@ -70,16 +70,16 @@ export default function EmployeeDetailsScreen({
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <header className="bg-blue-950 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-blue-50/70 to-white">
+      <header className="border-b border-blue-100 bg-white/95 text-blue-950 shadow-sm shadow-blue-950/5">
         <div className="mx-auto max-w-md px-4 py-6">
           <h1 className="text-3xl font-semibold tracking-tight">myShop 4</h1>
         </div>
       </header>
 
       <main className="mx-auto max-w-md px-4 py-8">
-        <section className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-          <h2 className="text-2xl font-semibold text-slate-900">פרטי העובד</h2>
+        <section className="rounded-[28px] border border-blue-100 bg-white p-6 shadow-[0_14px_35px_rgba(15,23,42,0.08)]">
+          <h2 className="text-2xl font-extrabold text-blue-950">פרטי העובד</h2>
 
           <form
             className="mt-6 space-y-5"
@@ -105,7 +105,7 @@ export default function EmployeeDetailsScreen({
                   setFullName(e.target.value)
                   setError(null)
                 }}
-                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-4 text-xl text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-blue-700 focus:ring-4 focus:ring-blue-700/15"
+                className="w-full rounded-2xl border border-blue-100 bg-white px-4 py-4 text-xl text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
                 placeholder="לדוגמה: ישראל ישראלי"
               />
             </div>
@@ -125,7 +125,7 @@ export default function EmployeeDetailsScreen({
                   setBranch(e.target.value)
                   setError(null)
                 }}
-                className="w-full appearance-none rounded-xl border border-slate-300 bg-white px-4 py-4 text-xl text-slate-900 shadow-sm outline-none focus:border-blue-700 focus:ring-4 focus:ring-blue-700/15"
+                className="w-full appearance-none rounded-2xl border border-blue-100 bg-white px-4 py-4 text-xl text-slate-900 shadow-sm outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
               >
                 <option value="" disabled>
                   בחרו סניף…
@@ -150,7 +150,7 @@ export default function EmployeeDetailsScreen({
             <button
               type="submit"
               disabled={!canSubmit}
-              className="w-full rounded-xl bg-blue-950 px-4 py-4 text-xl font-semibold text-white shadow-sm hover:bg-blue-900 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-900/25"
+              className="w-full rounded-2xl bg-blue-600 px-4 py-4 text-xl font-extrabold text-white shadow-lg shadow-blue-600/20 hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/20"
             >
               כניסה למערכת
             </button>

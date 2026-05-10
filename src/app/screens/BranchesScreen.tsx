@@ -66,7 +66,7 @@ export default function BranchesScreen() {
 
   return (
     <main className="mx-auto max-w-md px-4 pb-28 pt-6">
-      <h2 className="text-xl font-extrabold text-white">סניפים</h2>
+      <h2 className="text-xl font-extrabold text-blue-950">סניפים</h2>
 
       <div className="mt-4">
         <label className="sr-only" htmlFor="branch-search">
@@ -77,7 +77,7 @@ export default function BranchesScreen() {
           type="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-base font-semibold text-white outline-none placeholder:text-white/55 focus:border-white/40 focus:ring-4 focus:ring-white/10"
+          className="w-full rounded-2xl border border-blue-100 bg-white px-4 py-3 text-base font-semibold text-slate-950 shadow-sm outline-none placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
           placeholder="חיפוש לפי שם סניף"
         />
       </div>
@@ -87,26 +87,26 @@ export default function BranchesScreen() {
           filteredBranches.map((branch) => (
             <div
               key={branch.name}
-              className="block rounded-3xl bg-white/10 px-5 py-4 shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              className="block rounded-[24px] border border-blue-100 bg-white px-5 py-4 shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-blue-200 hover:shadow-[0_16px_34px_rgba(37,99,235,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
             >
               <div className="flex flex-row items-center gap-4">
-                <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-white/10 text-white">
+                <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
                   <IconPhone className="h-6 w-6" />
                 </div>
 
                 <div className="min-w-0 flex-1 text-right">
-                  <div className="text-lg text-white">
+                  <div className="text-lg text-blue-950">
                     <BranchDisplayName name={branch.name} />
                   </div>
                   {branch.phone ? (
                     <a
                       href={getTelHref(branch.phone)}
-                      className="mt-1 inline-block text-sm font-medium text-white/75 underline decoration-white/30 underline-offset-4 hover:text-white hover:decoration-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                      className="mt-1 inline-block text-sm font-medium text-slate-500 underline decoration-blue-200 underline-offset-4 hover:text-blue-700 hover:decoration-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
                     >
                       {branch.phone}
                     </a>
                   ) : (
-                    <div className="mt-1 text-sm font-medium text-white/50">
+                    <div className="mt-1 text-sm font-medium text-slate-400">
                       אין מספר זמין
                     </div>
                   )}
@@ -115,7 +115,7 @@ export default function BranchesScreen() {
                 {branch.phone ? (
                   <a
                     href={getTelHref(branch.phone)}
-                    className="flex-none rounded-xl bg-white/10 px-3 py-2 text-sm font-extrabold text-white/85 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                    className="flex-none rounded-xl bg-blue-600 px-3 py-2 text-sm font-extrabold text-white shadow-md shadow-blue-600/20 hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
                     aria-label={`התקשר אל ${branch.name}`}
                   >
                     התקשר
@@ -125,7 +125,7 @@ export default function BranchesScreen() {
             </div>
           ))
         ) : (
-          <p className="rounded-2xl bg-white/10 px-4 py-3 text-sm font-semibold text-white/80 ring-1 ring-white/10">
+          <p className="rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-slate-500 ring-1 ring-blue-100">
             לא נמצאו סניפים
           </p>
         )}

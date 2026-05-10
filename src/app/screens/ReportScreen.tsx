@@ -288,22 +288,22 @@ function ActionCard({
         }
         window.open(href, '_blank', 'noopener,noreferrer')
       }}
-      className="w-full rounded-3xl bg-white/10 px-5 py-5 text-start shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+      className="w-full rounded-[24px] border border-blue-100 bg-white px-5 py-5 text-start shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-blue-200 hover:shadow-[0_16px_34px_rgba(37,99,235,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
     >
       {/* Force LTR row so "left" is visually left even in RTL UI */}
       <div className="flex flex-row items-center gap-4">
-        <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-white/10 text-white">
+        <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
           {icon}
         </div>
 
         <div className="min-w-0 flex-1 text-right">
-          <div className="text-lg font-extrabold text-white">{item.title}</div>
-          <div className="mt-1 text-sm font-medium text-white/75">
+          <div className="text-lg font-extrabold text-slate-950">{item.title}</div>
+          <div className="mt-1 text-sm font-medium text-slate-500">
             {item.subtitle}
           </div>
         </div>
 
-        <div className="flex-none text-white/85" aria-hidden="true">
+        <div className="flex-none text-blue-500" aria-hidden="true">
           <IconArrowRight className="h-5 w-5" />
         </div>
       </div>
@@ -319,7 +319,7 @@ function MissingReportCard({
   onUnavailable: (message: string) => void
 }) {
   return (
-    <section className="rounded-3xl bg-white/10 px-5 py-5 shadow-sm ring-1 ring-white/10">
+    <section className="rounded-[24px] border border-blue-100 bg-gradient-to-br from-blue-600 to-blue-700 px-5 py-5 shadow-[0_14px_32px_rgba(37,99,235,0.24)]">
       <h3 className="text-lg font-extrabold text-white">דיווח על חוסר</h3>
 
       <div className="mt-4 grid grid-cols-2 gap-3">
@@ -333,7 +333,7 @@ function MissingReportCard({
             }
             window.open(href, '_blank', 'noopener,noreferrer')
           }}
-          className="min-h-20 rounded-2xl bg-white px-3 py-4 text-center text-base font-extrabold text-blue-950 shadow-sm ring-1 ring-white/30 hover:bg-white/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+          className="min-h-20 rounded-2xl bg-white px-3 py-4 text-center text-base font-extrabold text-blue-700 shadow-sm ring-1 ring-blue-100 hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
         >
           הזמנות אתר
         </button>
@@ -348,7 +348,7 @@ function MissingReportCard({
             }
             window.open(href, '_blank', 'noopener,noreferrer')
           }}
-          className="grid min-h-20 place-items-center rounded-2xl bg-white px-3 py-4 text-center text-base font-extrabold text-blue-950 shadow-sm ring-1 ring-white/30 hover:bg-white/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+          className="grid min-h-20 place-items-center rounded-2xl bg-white px-3 py-4 text-center text-base font-extrabold text-blue-700 shadow-sm ring-1 ring-blue-100 hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
         >
           הזמנות סניפים
         </button>
@@ -463,17 +463,17 @@ function AdditionalReportsModal({
     >
       <button
         type="button"
-        className="absolute inset-0 bg-black/50"
+            className="absolute inset-0 bg-slate-950/40"
         onClick={onClose}
         aria-label="סגירה"
       />
-      <div className="absolute bottom-0 left-0 right-0 mx-auto max-w-md rounded-t-3xl bg-blue-950 p-4 shadow-2xl ring-1 ring-white/10">
-        <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-white/20" />
+      <div className="absolute bottom-0 left-0 right-0 mx-auto max-w-md rounded-t-[28px] bg-white p-4 text-slate-950 shadow-2xl ring-1 ring-blue-100">
+        <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-blue-100" />
         <div className="flex items-center justify-between">
           <h3 className="text-base font-semibold">דיווחים נוספים</h3>
           <button
             type="button"
-            className="rounded-lg px-3 py-2 text-sm font-medium text-white/90 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+            className="rounded-lg px-3 py-2 text-sm font-medium text-slate-500 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
             onClick={onClose}
           >
             סגור
@@ -509,7 +509,7 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
 
   return (
     <main className="mx-auto max-w-md px-4 pb-28 pt-6">
-      <h2 className="text-xl font-extrabold text-white">דיווח</h2>
+      <h2 className="text-xl font-extrabold text-blue-950">דיווח</h2>
 
       <div className="mt-4 space-y-3">
         <MissingReportCard
@@ -549,23 +549,23 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
         <button
           type="button"
           onClick={() => setIsAdditionalOpen(true)}
-          className="w-full rounded-3xl bg-white/10 px-5 py-5 text-start shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+          className="w-full rounded-[24px] border border-blue-100 bg-white px-5 py-5 text-start shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-blue-200 hover:shadow-[0_16px_34px_rgba(37,99,235,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
         >
           <div className="flex flex-row items-center gap-4">
-            <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-white/10 text-white">
+            <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
               <IconFileText className="h-6 w-6" />
             </div>
 
             <div className="min-w-0 flex-1 text-right">
-              <div className="text-lg font-extrabold text-white">
+              <div className="text-lg font-extrabold text-slate-950">
                 דיווחים נוספים
               </div>
-              <div className="mt-1 text-sm font-medium text-white/75">
+              <div className="mt-1 text-sm font-medium text-slate-500">
                 פתיחת פעולות נוספות
               </div>
             </div>
 
-            <div className="flex-none text-white/85" aria-hidden="true">
+            <div className="flex-none text-blue-500" aria-hidden="true">
               <IconChevronDown className="h-5 w-5" />
             </div>
           </div>

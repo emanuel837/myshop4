@@ -88,21 +88,21 @@ function ActionCard({
         }
         window.open(href, '_blank', 'noopener,noreferrer')
       }}
-      className="w-full rounded-3xl bg-white/10 px-5 py-5 text-start shadow-sm ring-1 ring-white/10 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+      className="w-full rounded-[24px] border border-blue-100 bg-white px-5 py-5 text-start shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-blue-200 hover:shadow-[0_16px_34px_rgba(37,99,235,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
     >
       <div className="flex flex-row items-center gap-4">
-        <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-white/10 text-white">
+        <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
           {icon}
         </div>
 
         <div className="min-w-0 flex-1 text-right">
-          <div className="text-lg font-extrabold text-white">{item.title}</div>
-          <div className="mt-1 text-sm font-medium text-white/75">
+          <div className="text-lg font-extrabold text-slate-950">{item.title}</div>
+          <div className="mt-1 text-sm font-medium text-slate-500">
             {item.subtitle}
           </div>
         </div>
 
-        <div className="flex-none text-white/85" aria-hidden="true">
+        <div className="flex-none text-blue-500" aria-hidden="true">
           <IconArrowRight className="h-5 w-5" />
         </div>
       </div>
@@ -139,7 +139,7 @@ export default function TrackingScreen({
 }: TrackingScreenProps) {
   return (
     <main className="mx-auto max-w-md px-4 pb-28 pt-6">
-      <h2 className="text-xl font-extrabold text-white">מעקב</h2>
+      <h2 className="text-xl font-extrabold text-blue-950">מעקב</h2>
 
       <div className="mt-4 space-y-3">
         <ActionCard

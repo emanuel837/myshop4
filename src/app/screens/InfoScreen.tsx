@@ -30,8 +30,8 @@ function SectionCard({
   children: React.ReactNode
 }) {
   return (
-    <section className="rounded-3xl bg-white/10 p-5 shadow-sm ring-1 ring-white/10">
-      <h3 className="text-lg font-extrabold text-white">{title}</h3>
+    <section className="rounded-[24px] border border-blue-100 bg-white p-5 shadow-[0_12px_28px_rgba(15,23,42,0.07)]">
+      <h3 className="text-lg font-extrabold text-blue-950">{title}</h3>
       <div className="mt-4">{children}</div>
     </section>
   )
@@ -39,9 +39,9 @@ function SectionCard({
 
 function DetailRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between gap-4 rounded-2xl bg-white/10 px-4 py-3">
-      <span className="text-sm font-medium text-white/75">{label}</span>
-      <span className="min-w-0 text-left text-base font-extrabold text-white">
+    <div className="flex items-center justify-between gap-4 rounded-2xl bg-slate-50 px-4 py-3 ring-1 ring-blue-100">
+      <span className="text-sm font-medium text-slate-500">{label}</span>
+      <span className="min-w-0 text-left text-base font-extrabold text-blue-950">
         {value || 'לא הוגדר'}
       </span>
     </div>
@@ -54,12 +54,12 @@ function LinkRow({ label, href }: { label: string; href: string }) {
       href={href}
       target={href === '#' ? undefined : '_blank'}
       rel={href === '#' ? undefined : 'noopener noreferrer'}
-      className="flex w-full flex-row items-center gap-4 rounded-2xl bg-white/10 px-4 py-4 text-start hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+      className="flex w-full flex-row items-center gap-4 rounded-2xl bg-slate-50 px-4 py-4 text-start ring-1 ring-blue-100 hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
     >
-      <span className="min-w-0 flex-1 text-base font-extrabold text-white">
+      <span className="min-w-0 flex-1 text-base font-extrabold text-blue-950">
         {label}
       </span>
-      <span className="flex-none text-white/85" aria-hidden="true">
+      <span className="flex-none text-blue-500" aria-hidden="true">
         <IconArrowRight className="h-5 w-5" />
       </span>
     </a>
@@ -73,7 +73,7 @@ export default function InfoScreen({
 }: InfoScreenProps) {
   return (
     <main className="mx-auto max-w-md px-4 pb-28 pt-6">
-      <h2 className="text-xl font-extrabold text-white">מידע</h2>
+      <h2 className="text-xl font-extrabold text-blue-950">מידע</h2>
 
       <div className="mt-4 space-y-3">
         <SectionCard title="פרטי העובד שלי">
@@ -83,7 +83,7 @@ export default function InfoScreen({
             <button
               type="button"
               onClick={onChangeBranch}
-              className="w-full rounded-2xl bg-white px-4 py-3 text-base font-extrabold text-blue-950 shadow-sm ring-1 ring-white/30 hover:bg-white/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+              className="w-full rounded-2xl bg-blue-600 px-4 py-3 text-base font-extrabold text-white shadow-lg shadow-blue-600/20 hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/20"
             >
               החלפת סניף
             </button>
@@ -100,11 +100,11 @@ export default function InfoScreen({
         </SectionCard>
 
         <SectionCard title="גרסה">
-          <div className="rounded-2xl bg-white/10 px-4 py-4">
-            <p className="text-base font-extrabold text-white">
+          <div className="rounded-2xl bg-slate-50 px-4 py-4 ring-1 ring-blue-100">
+            <p className="text-base font-extrabold text-blue-950">
               myShop 4 | גרסה 4.0
             </p>
-            <p className="mt-1 text-sm font-medium text-white/70">
+            <p className="mt-1 text-sm font-medium text-slate-500">
               פותח עבור רשת הלב הכחול
             </p>
           </div>

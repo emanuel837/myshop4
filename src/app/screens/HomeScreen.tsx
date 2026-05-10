@@ -245,8 +245,8 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-950 via-blue-950 to-indigo-950 text-white">
-      <header className="sticky top-0 z-10 bg-blue-950/90 backdrop-blur">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-blue-50/70 to-white text-slate-950">
+      <header className="sticky top-0 z-10 border-b border-blue-100 bg-white/95 shadow-sm shadow-blue-950/5 backdrop-blur">
         <div className="mx-auto max-w-md px-4 py-3">
           <div className="flex items-start justify-between">
             <div className="text-start">
@@ -257,7 +257,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 <button
                   type="button"
                   onClick={onLogout}
-                  className="inline-flex items-center justify-center rounded-xl bg-white/10 p-2 text-white hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+                  className="inline-flex items-center justify-center rounded-xl bg-blue-50 p-2 text-blue-700 hover:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
                   aria-label="התנתקות"
                   title="התנתקות"
                 >
@@ -265,12 +265,12 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 </button>
               </div>
 
-              <div className="mt-1 text-xs text-white/85">
+              <div className="mt-1 text-xs text-slate-500">
                 <span>סניף: </span>
                 <button
                   type="button"
                   onClick={() => setIsBranchModalOpen(true)}
-                  className="font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+                  className="font-semibold text-blue-700 underline decoration-blue-300 underline-offset-4 hover:decoration-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
                 >
                   {branch || 'בחרו סניף'}
                 </button>
@@ -290,7 +290,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             {unavailableMessage ? (
               <p
                 role="alert"
-                className="rounded-2xl bg-white/10 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/10"
+                className="rounded-2xl bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-800 ring-1 ring-blue-100"
               >
                 {unavailableMessage}
               </p>
@@ -306,10 +306,10 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 setUnavailableMessage(null)
                 window.open(href, '_blank', 'noopener,noreferrer')
               }}
-              className="w-full rounded-3xl bg-white px-5 py-4 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+              className="w-full rounded-[28px] border border-blue-100 bg-white px-5 py-5 text-blue-950 shadow-[0_14px_35px_rgba(15,23,42,0.08)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
             >
               <div className="flex flex-col items-center text-center">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-950/10">
+                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/25">
                   <IconShoppingBag className="h-7 w-7" />
                 </span>
                 <span className="mt-3 text-xl font-extrabold">הזמנת פריט</span>
@@ -330,10 +330,10 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 setUnavailableMessage(null)
                 window.open(href, '_blank', 'noopener,noreferrer')
               }}
-              className="w-full rounded-3xl bg-white px-5 py-4 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+              className="w-full rounded-[28px] border border-purple-100 bg-white px-5 py-5 text-blue-950 shadow-[0_14px_35px_rgba(15,23,42,0.08)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-purple-500/15"
             >
               <div className="flex flex-col items-center text-center">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-950/10">
+                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-lg shadow-purple-600/25">
                   <IconWrench className="h-7 w-7" />
                 </span>
                 <span className="mt-3 text-xl font-extrabold">שליחה למעבדה</span>
@@ -354,10 +354,10 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 setUnavailableMessage(null)
                 window.open(href, '_blank', 'noopener,noreferrer')
               }}
-              className="w-full rounded-3xl bg-white px-5 py-4 text-blue-950 shadow-lg shadow-black/10 ring-1 ring-white/30 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+              className="w-full rounded-[28px] border border-blue-100 bg-white px-5 py-5 text-blue-950 shadow-[0_14px_35px_rgba(15,23,42,0.08)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
             >
               <div className="flex flex-col items-center text-center">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-950/10">
+                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
                   <IconPackage className="h-7 w-7" />
                 </span>
                 <span className="mt-3 text-xl font-extrabold">
@@ -384,14 +384,16 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
         />
       )}
 
-      <nav className="fixed bottom-0 left-0 right-0 border-t border-white/10 bg-blue-950/95 backdrop-blur">
+      <nav className="fixed bottom-0 left-0 right-0 border-t border-blue-100 bg-white/95 shadow-[0_-12px_30px_rgba(15,23,42,0.08)] backdrop-blur">
         <div className="mx-auto grid max-w-md grid-cols-5 px-2 py-2">
           <button
             type="button"
             onClick={() => setTab('home')}
             className={[
-              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
-              tab === 'home' ? 'text-white' : 'text-white/75 hover:text-white',
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30',
+              tab === 'home'
+                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25'
+                : 'text-slate-500 hover:text-blue-700',
             ].join(' ')}
             aria-current={tab === 'home' ? 'page' : undefined}
           >
@@ -403,8 +405,10 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             type="button"
             onClick={() => setTab('report')}
             className={[
-              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
-              tab === 'report' ? 'text-white' : 'text-white/75 hover:text-white',
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30',
+              tab === 'report'
+                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25'
+                : 'text-slate-500 hover:text-blue-700',
             ].join(' ')}
             aria-current={tab === 'report' ? 'page' : undefined}
           >
@@ -416,8 +420,10 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             type="button"
             onClick={() => setTab('tracking')}
             className={[
-              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
-              tab === 'tracking' ? 'text-white' : 'text-white/75 hover:text-white',
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30',
+              tab === 'tracking'
+                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25'
+                : 'text-slate-500 hover:text-blue-700',
             ].join(' ')}
             aria-current={tab === 'tracking' ? 'page' : undefined}
           >
@@ -429,8 +435,10 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             type="button"
             onClick={() => setTab('info')}
             className={[
-              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
-              tab === 'info' ? 'text-white' : 'text-white/75 hover:text-white',
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30',
+              tab === 'info'
+                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25'
+                : 'text-slate-500 hover:text-blue-700',
             ].join(' ')}
             aria-current={tab === 'info' ? 'page' : undefined}
           >
@@ -442,10 +450,10 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             type="button"
             onClick={() => setTab('branches')}
             className={[
-              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30',
               tab === 'branches'
-                ? 'text-white'
-                : 'text-white/75 hover:text-white',
+                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25'
+                : 'text-slate-500 hover:text-blue-700',
             ].join(' ')}
             aria-current={tab === 'branches' ? 'page' : undefined}
           >
@@ -464,24 +472,24 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
         >
           <button
             type="button"
-            className="absolute inset-0 bg-black/50"
+            className="absolute inset-0 bg-slate-950/40"
             onClick={() => setIsBranchModalOpen(false)}
             aria-label="סגירה"
           />
-          <div className="absolute bottom-0 left-0 right-0 mx-auto max-w-md rounded-t-3xl bg-blue-950 p-4 shadow-2xl ring-1 ring-white/10">
-            <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-white/20" />
+          <div className="absolute bottom-0 left-0 right-0 mx-auto max-w-md rounded-t-[28px] bg-white p-4 text-slate-950 shadow-2xl ring-1 ring-blue-100">
+            <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-blue-100" />
             <div className="flex items-center justify-between">
               <h3 className="text-base font-semibold">בחירת סניף</h3>
               <button
                 type="button"
-                className="rounded-lg px-3 py-2 text-sm font-medium text-white/90 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-500 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
                 onClick={() => setIsBranchModalOpen(false)}
               >
                 סגור
               </button>
             </div>
 
-            <div className="mt-3 max-h-[55vh] overflow-auto rounded-2xl bg-white/10 ring-1 ring-white/10">
+            <div className="mt-3 max-h-[55vh] overflow-auto rounded-2xl bg-slate-50 ring-1 ring-blue-100">
               {BRANCHES.map((b) => {
                 const active = b === branch
                 return (
@@ -493,13 +501,13 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                       setIsBranchModalOpen(false)
                     }}
                     className={[
-                      'flex w-full items-center justify-between px-4 py-4 text-start hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60',
-                      active ? 'bg-white/10' : '',
+                      'flex w-full items-center justify-between px-4 py-4 text-start hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30',
+                      active ? 'bg-blue-50 text-blue-700' : '',
                     ].join(' ')}
                   >
                     <span className="text-sm font-semibold">{b}</span>
                     {active ? (
-                      <span className="text-xs font-semibold text-white/80">
+                        <span className="text-xs font-semibold text-blue-700">
                         נבחר
                       </span>
                     ) : null}
