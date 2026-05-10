@@ -38,6 +38,23 @@ function IconPhone(props: { className?: string }) {
   )
 }
 
+function BranchDisplayName({ name }: { name: string }) {
+  const separator = ' - '
+  const separatorIndex = name.indexOf(separator)
+
+  if (separatorIndex === -1) return <span className="font-extrabold">{name}</span>
+
+  const branchName = name.slice(0, separatorIndex)
+  const cityName = name.slice(separatorIndex + separator.length)
+
+  return (
+    <>
+      <span className="font-extrabold">{branchName}</span>
+      <span className="font-normal"> - {cityName}</span>
+    </>
+  )
+}
+
 export default function BranchesScreen() {
   const [search, setSearch] = useState('')
 
@@ -78,8 +95,8 @@ export default function BranchesScreen() {
                 </div>
 
                 <div className="min-w-0 flex-1 text-right">
-                  <div className="text-lg font-extrabold text-white">
-                    {branch.name}
+                  <div className="text-lg text-white">
+                    <BranchDisplayName name={branch.name} />
                   </div>
                   {branch.phone ? (
                     <a

@@ -1,9 +1,9 @@
-import { getAirtableLink, getLabFormUrl } from '../../lib/links'
+import { getAirtableLink } from '../../lib/links'
 
 type ActionItem = {
   title: string
   subtitle: string
-  action: 'trackOrders' | 'trackLab' | 'sendLab' | 'receivedPackage'
+  action: 'trackOrders' | 'trackLab' | 'receivedPackage'
 }
 
 function IconArrowRight(props: { className?: string }) {
@@ -81,9 +81,7 @@ function ActionCard({
             ? getAirtableLink('trackOrders', branch)
             : item.action === 'trackLab'
               ? getAirtableLink('trackLab', branch)
-              : item.action === 'receivedPackage'
-                ? getAirtableLink('receivedPackage', branch)
-                : getLabFormUrl(branch)
+              : getAirtableLink('receivedPackage', branch)
         if (!href) {
           onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
           return
@@ -124,11 +122,6 @@ const ITEMS: ActionItem[] = [
     action: 'trackLab',
   },
   {
-    title: 'שליחה למעבדה',
-    subtitle: 'שלח פריט לבדיקה או תיקון',
-    action: 'sendLab',
-  },
-  {
     title: 'קבלת חבילה מכץ',
     subtitle: 'תעד קבלת חבילה',
     action: 'receivedPackage',
@@ -163,12 +156,6 @@ export default function TrackingScreen({
         />
         <ActionCard
           item={ITEMS[2]}
-          branch={branch}
-          onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconWrench className="h-6 w-6" />}
-        />
-        <ActionCard
-          item={ITEMS[3]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
           icon={<IconBoxes className="h-6 w-6" />}

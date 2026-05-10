@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getAirtableLink } from '../../lib/links'
+import { getAirtableLink, getLabFormUrl } from '../../lib/links'
 
 type ActionItem = {
   title: string
@@ -15,6 +15,7 @@ type ActionItem = {
     | 'hotModel'
     | 'receivedPackage'
     | 'pickupOrder'
+    | 'sendLab'
 }
 
 function IconArrowRight(props: { className?: string }) {
@@ -204,6 +205,23 @@ function IconFileText(props: { className?: string }) {
   )
 }
 
+function IconWrench(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4L15 12l-3-3 2.7-2.7Z" />
+    </svg>
+  )
+}
+
 function IconPackage(props: { className?: string }) {
   return (
     <svg
@@ -260,7 +278,10 @@ function ActionCard({
     <button
       type="button"
       onClick={() => {
-        const href = getAirtableLink(item.action, branch)
+        const href =
+          item.action === 'sendLab'
+            ? getLabFormUrl(branch)
+            : getAirtableLink(item.action, branch)
         if (!href) {
           onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
           return
@@ -353,6 +374,11 @@ const MAIN_ITEMS: ActionItem[] = [
     action: 'pickupOrder',
   },
   {
+    title: 'שליחה למעבדה',
+    subtitle: 'שלח פריט לבדיקה או תיקון',
+    action: 'sendLab',
+  },
+  {
     title: 'דגם חם 🔥',
     subtitle: 'דווח על מוצר עם ביקוש גבוה',
     action: 'hotModel',
@@ -400,6 +426,8 @@ function getActionIcon(action: ActionItem['action']) {
       return <IconPackage className="h-6 w-6" />
     case 'pickupOrder':
       return <IconTruck className="h-6 w-6" />
+    case 'sendLab':
+      return <IconWrench className="h-6 w-6" />
     case 'orderEquipment':
       return <IconShoppingCart className="h-6 w-6" />
     case 'insoleProductionForm':
@@ -511,6 +539,12 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
           icon={getActionIcon(MAIN_ITEMS[3].action)}
+        />
+        <ActionCard
+          item={MAIN_ITEMS[4]}
+          branch={branch}
+          onUnavailable={(m) => onUnavailable(m)}
+          icon={getActionIcon(MAIN_ITEMS[4].action)}
         />
         <button
           type="button"
