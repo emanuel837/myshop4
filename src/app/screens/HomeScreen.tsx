@@ -279,9 +279,9 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
 
             <div className="flex justify-center pt-0.5">
               <img
-                src="/Logo_Blue_Heart_HQ.png"
-                alt="Blue Heart"
-                className="h-8 w-auto object-contain"
+                src="/logo_halev_hakachol__1_.png"
+                alt="הלב הכחול"
+                className="h-9 w-auto object-contain"
               />
             </div>
 

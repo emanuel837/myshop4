@@ -38,6 +38,13 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
 
       <main className="mx-auto max-w-md px-4 py-8">
         <section className="rounded-[28px] border border-[#233667]/15 bg-white p-6 shadow-[0_14px_35px_rgba(15,23,42,0.08)]">
+          <div className="mb-5 flex justify-center">
+            <img
+              src="/logo_halev_hakachol__1_.png"
+              alt="הלב הכחול"
+              className="h-9 w-auto object-contain"
+            />
+          </div>
           <h2 className="text-2xl font-extrabold text-[#233667]">{greeting}</h2>
           <p className="mt-2 text-base text-slate-600">
             הזינו קוד גישה בן 4 ספרות
