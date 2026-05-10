@@ -72,6 +72,8 @@ function ActionCard({
   branch: string
   onUnavailable: (message: string) => void
 }) {
+  const iconTone = getActionIconTone(item.action)
+
   return (
     <button
       type="button"
@@ -91,7 +93,7 @@ function ActionCard({
       className="w-full rounded-[24px] border border-blue-100 bg-white px-5 py-5 text-start shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-blue-200 hover:shadow-[0_16px_34px_rgba(37,99,235,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
     >
       <div className="flex flex-row items-center gap-4">
-        <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
+        <div className={`grid h-12 w-12 flex-none place-items-center rounded-2xl ring-1 ${iconTone}`}>
           {icon}
         </div>
 
@@ -127,6 +129,17 @@ const ITEMS: ActionItem[] = [
     action: 'receivedPackage',
   },
 ]
+
+function getActionIconTone(action: ActionItem['action']) {
+  switch (action) {
+    case 'trackLab':
+      return 'bg-purple-50 text-purple-600 ring-purple-100'
+    case 'receivedPackage':
+      return 'bg-emerald-50 text-emerald-600 ring-emerald-100'
+    case 'trackOrders':
+      return 'bg-blue-50 text-blue-700 ring-blue-100'
+  }
+}
 
 type TrackingScreenProps = {
   branch: string

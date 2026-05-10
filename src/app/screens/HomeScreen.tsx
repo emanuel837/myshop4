@@ -270,7 +270,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 <button
                   type="button"
                   onClick={() => setIsBranchModalOpen(true)}
-                  className="font-semibold text-blue-700 underline decoration-blue-300 underline-offset-4 hover:decoration-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
+                  className="font-normal text-slate-600 underline decoration-blue-300 underline-offset-4 hover:text-blue-700 hover:decoration-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
                 >
                   {branch || 'בחרו סניף'}
                 </button>
@@ -333,7 +333,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
               className="w-full rounded-[28px] border border-purple-100 bg-white px-5 py-5 text-blue-950 shadow-[0_14px_35px_rgba(15,23,42,0.08)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-purple-500/15"
             >
               <div className="flex flex-col items-center text-center">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-lg shadow-purple-600/25">
+                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-purple-50 text-purple-600 shadow-lg shadow-purple-600/10 ring-1 ring-purple-100">
                   <IconWrench className="h-7 w-7" />
                 </span>
                 <span className="mt-3 text-xl font-extrabold">שליחה למעבדה</span>
@@ -357,7 +357,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
               className="w-full rounded-[28px] border border-blue-100 bg-white px-5 py-5 text-blue-950 shadow-[0_14px_35px_rgba(15,23,42,0.08)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
             >
               <div className="flex flex-col items-center text-center">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
+                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-emerald-50 text-emerald-600 ring-1 ring-emerald-100">
                   <IconPackage className="h-7 w-7" />
                 </span>
                 <span className="mt-3 text-xl font-extrabold">
@@ -437,8 +437,8 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             className={[
               'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30',
               tab === 'info'
-                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25'
-                : 'text-slate-500 hover:text-blue-700',
+                ? 'bg-slate-700 text-white shadow-lg shadow-slate-700/20'
+                : 'text-slate-500 hover:text-slate-700',
             ].join(' ')}
             aria-current={tab === 'info' ? 'page' : undefined}
           >

@@ -274,6 +274,8 @@ function ActionCard({
   branch: string
   onUnavailable: (message: string) => void
 }) {
+  const iconTone = getActionIconTone(item.action)
+
   return (
     <button
       type="button"
@@ -292,7 +294,7 @@ function ActionCard({
     >
       {/* Force LTR row so "left" is visually left even in RTL UI */}
       <div className="flex flex-row items-center gap-4">
-        <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
+        <div className={`grid h-12 w-12 flex-none place-items-center rounded-2xl ring-1 ${iconTone}`}>
           {icon}
         </div>
 
@@ -319,8 +321,13 @@ function MissingReportCard({
   onUnavailable: (message: string) => void
 }) {
   return (
-    <section className="rounded-[24px] border border-blue-100 bg-gradient-to-br from-blue-600 to-blue-700 px-5 py-5 shadow-[0_14px_32px_rgba(37,99,235,0.24)]">
-      <h3 className="text-lg font-extrabold text-white">דיווח על חוסר</h3>
+    <section className="rounded-[24px] border border-rose-100 bg-white px-5 py-5 shadow-[0_14px_32px_rgba(127,29,29,0.10)]">
+      <div className="flex flex-row items-center gap-3">
+        <div className="grid h-12 w-12 flex-none place-items-center rounded-full bg-rose-50 text-rose-900 ring-1 ring-rose-100">
+          <IconAlert className="h-6 w-6" />
+        </div>
+        <h3 className="text-lg font-extrabold text-slate-950">דיווח על חוסר</h3>
+      </div>
 
       <div className="mt-4 grid grid-cols-2 gap-3">
         <button
@@ -333,7 +340,7 @@ function MissingReportCard({
             }
             window.open(href, '_blank', 'noopener,noreferrer')
           }}
-          className="min-h-20 rounded-2xl bg-white px-3 py-4 text-center text-base font-extrabold text-blue-700 shadow-sm ring-1 ring-blue-100 hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+          className="min-h-20 rounded-2xl bg-rose-50 px-3 py-4 text-center text-base font-extrabold text-rose-900 shadow-sm ring-1 ring-rose-100 hover:bg-rose-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-500/15"
         >
           הזמנות אתר
         </button>
@@ -348,7 +355,7 @@ function MissingReportCard({
             }
             window.open(href, '_blank', 'noopener,noreferrer')
           }}
-          className="grid min-h-20 place-items-center rounded-2xl bg-white px-3 py-4 text-center text-base font-extrabold text-blue-700 shadow-sm ring-1 ring-blue-100 hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+          className="grid min-h-20 place-items-center rounded-2xl bg-rose-50 px-3 py-4 text-center text-base font-extrabold text-rose-900 shadow-sm ring-1 ring-rose-100 hover:bg-rose-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-500/15"
         >
           הזמנות סניפים
         </button>
@@ -418,6 +425,27 @@ const ADDITIONAL_ITEMS: ActionItem[] = [
   },
 ]
 
+function getActionIconTone(action: ActionItem['action']) {
+  switch (action) {
+    case 'receivedPackage':
+    case 'pickupOrder':
+    case 'homeDelivery':
+      return 'bg-emerald-50 text-emerald-600 ring-emerald-100'
+    case 'sendLab':
+      return 'bg-purple-50 text-purple-600 ring-purple-100'
+    case 'branchIssue':
+      return 'bg-rose-50 text-rose-900 ring-rose-100'
+    case 'orderEquipment':
+    case 'insoleProductionForm':
+    case 'branchVisibilityPhoto':
+    case 'checkPhoto':
+      return 'bg-slate-100 text-slate-600 ring-slate-200'
+    case 'orderItem':
+    case 'hotModel':
+      return 'bg-blue-50 text-blue-700 ring-blue-100'
+  }
+}
+
 function getActionIcon(action: ActionItem['action']) {
   switch (action) {
     case 'orderItem':
@@ -463,7 +491,7 @@ function AdditionalReportsModal({
     >
       <button
         type="button"
-            className="absolute inset-0 bg-slate-950/40"
+        className="absolute inset-0 bg-slate-950/40"
         onClick={onClose}
         aria-label="סגירה"
       />
@@ -473,10 +501,11 @@ function AdditionalReportsModal({
           <h3 className="text-base font-semibold">דיווחים נוספים</h3>
           <button
             type="button"
-            className="rounded-lg px-3 py-2 text-sm font-medium text-slate-500 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
+            className="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-xl font-semibold leading-none text-slate-600 hover:bg-slate-200 hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500/30"
             onClick={onClose}
+            aria-label="סגירת דיווחים נוספים"
           >
-            סגור
+            ×
           </button>
         </div>
 
@@ -552,7 +581,7 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
           className="w-full rounded-[24px] border border-blue-100 bg-white px-5 py-5 text-start shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-blue-200 hover:shadow-[0_16px_34px_rgba(37,99,235,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
         >
           <div className="flex flex-row items-center gap-4">
-            <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
+            <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-slate-100 text-slate-600 ring-1 ring-slate-200">
               <IconFileText className="h-6 w-6" />
             </div>
 
@@ -565,7 +594,7 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
               </div>
             </div>
 
-            <div className="flex-none text-blue-500" aria-hidden="true">
+            <div className="flex-none text-slate-500" aria-hidden="true">
               <IconChevronDown className="h-5 w-5" />
             </div>
           </div>
