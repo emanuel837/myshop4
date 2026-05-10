@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import BranchesScreen from './BranchesScreen'
 import InfoScreen from './InfoScreen'
 import ReportScreen from './ReportScreen'
 import TrackingScreen from './TrackingScreen'
-import { getAirtableLink, getLabFormUrl } from '../../lib/links'
+import { getAirtableLink, getLabFormUrl, type LinkActionKey } from '../../lib/links'
 
 type HomeScreenProps = {
   onLogout: () => void
@@ -31,6 +31,30 @@ const BRANCHES = [
 
 type TabKey = 'home' | 'report' | 'tracking' | 'branches' | 'info'
 
+type SearchAction = {
+  title: string
+  action: LinkActionKey | 'sendLab'
+}
+
+const SEARCH_ACTIONS: SearchAction[] = [
+  { title: 'הזמנת פריט', action: 'orderItem' },
+  { title: 'שליחה למעבדה', action: 'sendLab' },
+  { title: 'קיבלתי חבילה מכץ', action: 'receivedPackage' },
+  { title: 'דיווח על חוסר - הזמנות אתר', action: 'reportMissingOnline' },
+  { title: 'דיווח על חוסר - הזמנות סניפים', action: 'reportMissingOffline' },
+  { title: 'הזמנת איסוף', action: 'pickupOrder' },
+  { title: 'מעקב אחר הזמנות', action: 'trackOrders' },
+  { title: 'מעקב בדיקת מעבדה', action: 'trackLab' },
+  { title: 'קבלת חבילה מכץ', action: 'receivedPackage' },
+  { title: "צילום צ'ק", action: 'checkPhoto' },
+  { title: 'צילום נראות הסניף', action: 'branchVisibilityPhoto' },
+  { title: 'הזנת טופס ייצור מדרסים', action: 'insoleProductionForm' },
+  { title: 'הזמנת ציוד', action: 'orderEquipment' },
+  { title: 'משלוח עד הבית', action: 'homeDelivery' },
+  { title: 'דיווח על תקלה', action: 'branchIssue' },
+  { title: 'דגם חם', action: 'hotModel' },
+]
+
 function getFirstName(fullName: string) {
   return fullName.trim().split(/\s+/).filter(Boolean)[0] ?? ''
 }
@@ -49,6 +73,24 @@ function IconArrowRight(props: { className?: string }) {
     >
       <path d="M5 12h14" />
       <path d="m13 5 7 7-7 7" />
+    </svg>
+  )
+}
+
+function IconSearch(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m21 21-4.3-4.3" />
+      <path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z" />
     </svg>
   )
 }
@@ -230,10 +272,33 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
 
   const [isBranchModalOpen, setIsBranchModalOpen] = useState(false)
   const [tab, setTab] = useState<TabKey>('home')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const searchRef = useRef<HTMLDivElement | null>(null)
   const [unavailableMessage, setUnavailableMessage] = useState<string | null>(
     null,
   )
   const firstName = getFirstName(employeeName)
+  const filteredSearchActions = useMemo(() => {
+    const query = searchQuery.trim()
+    if (!query) return []
+
+    return SEARCH_ACTIONS.filter((item) => item.title.includes(query))
+  }, [searchQuery])
+
+  useEffect(() => {
+    function closeSearchOnOutsideClick(event: PointerEvent) {
+      const target = event.target
+      if (!(target instanceof Node)) return
+      if (searchRef.current?.contains(target)) return
+      setIsSearchOpen(false)
+    }
+
+    document.addEventListener('pointerdown', closeSearchOnOutsideClick)
+    return () => {
+      document.removeEventListener('pointerdown', closeSearchOnOutsideClick)
+    }
+  }, [])
 
   function persistBranch(nextBranch: string) {
     setBranch(nextBranch)
@@ -242,6 +307,33 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
     } catch {
       // ignore
     }
+  }
+
+  function getSearchActionHref(item: SearchAction) {
+    if (item.action === 'sendLab') {
+      const href = getLabFormUrl(branch)
+      return branch
+        ? `${href}?prefill_%D7%A1%D7%A0%D7%99%D7%A3=${encodeURIComponent(
+            branch,
+          )}`
+        : href
+    }
+
+    return getAirtableLink(item.action, branch)
+  }
+
+  function openSearchAction(item: SearchAction) {
+    const href = getSearchActionHref(item)
+    setSearchQuery('')
+    setIsSearchOpen(false)
+
+    if (!href) {
+      setUnavailableMessage('הפעולה אינה זמינה עבור הסניף שלך')
+      return
+    }
+
+    setUnavailableMessage(null)
+    window.open(href, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -295,6 +387,64 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
       {tab === 'home' ? (
         <main className="mx-auto max-w-md px-4 pb-24 pt-4">
           <div className="space-y-3">
+            <div ref={searchRef} className="relative z-10">
+              <label className="sr-only" htmlFor="home-action-search">
+                חיפוש פעולה
+              </label>
+              <div className="relative">
+                <span
+                  className="pointer-events-none absolute inset-y-0 right-4 grid place-items-center text-[#233667]"
+                  aria-hidden="true"
+                >
+                  <IconSearch className="h-5 w-5" />
+                </span>
+                <input
+                  id="home-action-search"
+                  type="search"
+                  dir="rtl"
+                  value={searchQuery}
+                  onFocus={() => {
+                    if (searchQuery.trim()) setIsSearchOpen(true)
+                  }}
+                  onChange={(event) => {
+                    setSearchQuery(event.target.value)
+                    setIsSearchOpen(true)
+                  }}
+                  className="w-full rounded-2xl border border-[#233667]/15 bg-white py-3 pl-4 pr-12 text-base font-semibold text-slate-950 shadow-[0_2px_8px_rgba(35,54,103,0.08)] outline-none placeholder:text-slate-400 focus:border-[#233667] focus:ring-4 focus:ring-[#233667]/10"
+                  placeholder="חפש פעולה..."
+                />
+              </div>
+
+              {isSearchOpen && searchQuery.trim() ? (
+                <div className="absolute left-0 right-0 top-full mt-2 max-h-80 space-y-2 overflow-auto rounded-[24px] border border-[#233667]/15 bg-white p-2 shadow-[0_2px_8px_rgba(35,54,103,0.08)]">
+                  {filteredSearchActions.length > 0 ? (
+                    filteredSearchActions.map((item) => (
+                      <button
+                        key={`${item.title}-${item.action}`}
+                        type="button"
+                        onClick={() => openSearchAction(item)}
+                        className="flex w-full flex-row items-center gap-3 rounded-2xl border border-[#233667]/15 bg-white px-4 py-3 text-start shadow-[0_2px_8px_rgba(35,54,103,0.08)] transition-transform duration-100 hover:bg-[#233667]/5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/20"
+                      >
+                        <span className="min-w-0 flex-1 text-base font-extrabold text-slate-950">
+                          {item.title}
+                        </span>
+                        <span
+                          className="flex-none text-[#233667]"
+                          aria-hidden="true"
+                        >
+                          <IconArrowRight className="h-5 w-5" />
+                        </span>
+                      </button>
+                    ))
+                  ) : (
+                    <p className="rounded-2xl px-4 py-3 text-sm font-semibold text-slate-500">
+                      לא נמצאו תוצאות
+                    </p>
+                  )}
+                </div>
+              ) : null}
+            </div>
+
             {unavailableMessage ? (
               <p
                 role="alert"
