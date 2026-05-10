@@ -159,7 +159,7 @@ const RECEIVED_PACKAGE: Record<BranchName, string> = {
 }
 
 const TRACK_ORDERS: Record<BranchName, string> = {
-  'טיב טוב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrc3RDwCu3HIPTLD',
+  'טיב טוב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrc3RDwCu3HlPTLD',
   'שטינר אורתופדיקה': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr4rhxzUNv5535NW',
   'קניון הזהב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrK8uPttUXtnaJVH',
   'כפר סבא': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrc26KRaYqrfscoT',
