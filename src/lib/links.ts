@@ -52,6 +52,7 @@ export type LinkActionKey =
   | 'reportMissingOffline'
   | 'orderItem'
   | 'orderEquipment'
+  | 'insoleProductionForm'
   | 'branchVisibilityPhoto'
   | 'homeDelivery'
   | 'checkPhoto'
@@ -59,6 +60,7 @@ export type LinkActionKey =
   | 'hotModel'
   | 'receivedPackage'
   | 'pickupOrder'
+  | 'trackOrders'
   | 'trackLab'
 
 const LAB_FORM_URL =
@@ -69,6 +71,9 @@ const PICKUP_ORDER_FORM_URL =
 
 const EQUIPMENT_ORDER_URL =
   'https://airtable.com/appZdzUZAvVj25hm9/shrT50X5ooKiFYX0j'
+
+const INSOLE_PRODUCTION_FORM_URL =
+  'https://airtable.com/app65F930r3ynYmAm/pagf8mlP0DsNm8gdI/form'
 
 const BRANCH_VISIBILITY_PHOTO_URL =
   'https://airtable.com/appMi9L7QDrJZ00cz/pagCGMJYj8vjY6sxd/form'
@@ -180,6 +185,8 @@ export function getAirtableLink(
   switch (action) {
     case 'orderEquipment':
       return EQUIPMENT_ORDER_URL
+    case 'insoleProductionForm':
+      return INSOLE_PRODUCTION_FORM_URL
     case 'branchVisibilityPhoto':
       return BRANCH_VISIBILITY_PHOTO_URL
     case 'homeDelivery':
@@ -207,6 +214,8 @@ export function getAirtableLink(
       return `${PICKUP_ORDER_FORM_URL}?prefill_%D7%A1%D7%A0%D7%99%D7%A3=${encodeURIComponent(
         branch,
       )}`
+    case 'trackOrders':
+      return RECEIVED_PACKAGE[branch]
     case 'trackLab':
       return TRACK_LAB[branch]
   }

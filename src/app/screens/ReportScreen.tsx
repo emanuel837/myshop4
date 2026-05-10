@@ -6,6 +6,7 @@ type ActionItem = {
   action:
     | 'orderItem'
     | 'orderEquipment'
+    | 'insoleProductionForm'
     | 'branchVisibilityPhoto'
     | 'homeDelivery'
     | 'checkPhoto'
@@ -164,6 +165,27 @@ function IconHome(props: { className?: string }) {
   )
 }
 
+function IconFileText(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7Z" />
+      <path d="M14 2v5h5" />
+      <path d="M9 13h6" />
+      <path d="M9 17h6" />
+      <path d="M9 9h1" />
+    </svg>
+  )
+}
+
 function IconPackage(props: { className?: string }) {
   return (
     <svg
@@ -318,6 +340,11 @@ const ITEMS: ActionItem[] = [
     action: 'orderEquipment',
   },
   {
+    title: 'הזנת טופס ייצור מדרסים',
+    subtitle: 'הזן טופס ייצור מדרסים ללקוח',
+    action: 'insoleProductionForm',
+  },
+  {
     title: 'צילום נראות הסניף',
     subtitle: 'כל יום ראשון עד 12:00',
     action: 'branchVisibilityPhoto',
@@ -387,28 +414,34 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
           item={ITEMS[4]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconCamera className="h-6 w-6" />}
+          icon={<IconFileText className="h-6 w-6" />}
         />
         <ActionCard
           item={ITEMS[5]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconHome className="h-6 w-6" />}
+          icon={<IconCamera className="h-6 w-6" />}
         />
         <ActionCard
           item={ITEMS[6]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconCreditCard className="h-6 w-6" />}
+          icon={<IconHome className="h-6 w-6" />}
         />
         <ActionCard
           item={ITEMS[7]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconAlert className="h-6 w-6" />}
+          icon={<IconCreditCard className="h-6 w-6" />}
         />
         <ActionCard
           item={ITEMS[8]}
+          branch={branch}
+          onUnavailable={(m) => onUnavailable(m)}
+          icon={<IconAlert className="h-6 w-6" />}
+        />
+        <ActionCard
+          item={ITEMS[9]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
           icon={<IconFire className="h-6 w-6" />}

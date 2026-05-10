@@ -1,9 +1,9 @@
-import { getLabFormUrl } from '../../lib/links'
+import { getAirtableLink, getLabFormUrl } from '../../lib/links'
 
 type ActionItem = {
   title: string
   subtitle: string
-  action: 'trackWarehouse' | 'trackLab' | 'sendLab' | 'trackTransfers'
+  action: 'trackOrders' | 'trackLab' | 'sendLab'
 }
 
 function IconArrowRight(props: { className?: string }) {
@@ -61,26 +61,6 @@ function IconWrench(props: { className?: string }) {
   )
 }
 
-function IconArrows(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M7 7h14l-4-4" />
-      <path d="M17 17H3l4 4" />
-      <path d="M21 7v6" />
-      <path d="M3 17v-6" />
-    </svg>
-  )
-}
-
 function ActionCard({
   item,
   icon,
@@ -96,11 +76,10 @@ function ActionCard({
     <button
       type="button"
       onClick={() => {
-        if (item.action !== 'trackLab' && item.action !== 'sendLab') {
-          onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
-          return
-        }
-        const href = getLabFormUrl(branch)
+        const href =
+          item.action === 'trackOrders'
+            ? getAirtableLink('trackOrders', branch)
+            : getLabFormUrl(branch)
         if (!href) {
           onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
           return
@@ -131,9 +110,9 @@ function ActionCard({
 
 const ITEMS: ActionItem[] = [
   {
-    title: 'מעקב הזמנות מהמחסן',
+    title: 'מעקב אחר הזמנות',
     subtitle: 'ראה סטטוס הזמנות',
-    action: 'trackWarehouse',
+    action: 'trackOrders',
   },
   {
     title: 'מעקב בדיקת מעבדה',
@@ -144,11 +123,6 @@ const ITEMS: ActionItem[] = [
     title: 'שליחה למעבדה',
     subtitle: 'שלח פריט לבדיקה או תיקון',
     action: 'sendLab',
-  },
-  {
-    title: 'מעקב הזמנות סניף מסניף',
-    subtitle: 'ראה סטטוס העברות',
-    action: 'trackTransfers',
   },
 ]
 
@@ -183,12 +157,6 @@ export default function TrackingScreen({
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
           icon={<IconWrench className="h-6 w-6" />}
-        />
-        <ActionCard
-          item={ITEMS[3]}
-          branch={branch}
-          onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconArrows className="h-6 w-6" />}
         />
       </div>
     </main>
