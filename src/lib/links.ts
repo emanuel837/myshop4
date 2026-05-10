@@ -158,8 +158,26 @@ const RECEIVED_PACKAGE: Record<BranchName, string> = {
   'השרון נתניה': 'https://airtable.com/appBawqi4kZnr8rtL/shrg4zdyFkP314H7Y',
 }
 
-const TRACK_LAB: Partial<Record<BranchName, string>> = {
+const TRACK_ORDERS: Record<BranchName, string> = {
+  'טיב טוב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrc3RDwCu3HIPTLD',
+  'שטינר אורתופדיקה': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr4rhxzUNv5535NW',
+  'קניון הזהב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrK8uPttUXtnaJVH',
+  'כפר סבא': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrc26KRaYqrfscoT',
+  ירושלים: 'https://airtable.com/appyGTA8v9mY4WcmQ/shrAxyvkGxbyC5to8',
+  קריון: 'https://airtable.com/appyGTA8v9mY4WcmQ/shr72yVrLhcwNvyLH',
+  'אסף סנטר': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrDQBDZcaxNHPqRZ',
+  'קניון אורות': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr3pO1fYrCiZqSdM',
+  'קניון מרום': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrQlQ1riNoG3FG7P',
+  "דודג' סנטר": 'https://airtable.com/appyGTA8v9mY4WcmQ/shrLqLKeyoSmdEM40',
+  'חוצות המפרץ': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr16HOGM4d2kG9SD',
+  'קניון בת ים': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrShOUY4wk0jEuqx',
+  'קניון נס ציונה': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrH0zXXtDRLHdWh8',
+  'השרון נתניה': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrJg2DZMZRjhkmfb',
+}
+
+const TRACK_LAB: Record<BranchName, string> = {
   'טיב טוב': 'https://airtable.com/appZdzUZAvVj25hm9/shrOOuHF5XYjTXxh1',
+  'שטינר אורתופדיקה': 'https://airtable.com/appZdzUZAvVj25hm9/shrOOuHF5XYjTXxh1',
   'קניון הזהב': 'https://airtable.com/appZdzUZAvVj25hm9/shrx3MCOml3ORecHA',
   'כפר סבא': 'https://airtable.com/appZdzUZAvVj25hm9/shragbzEZkmfGQdGK',
   ירושלים: 'https://airtable.com/appZdzUZAvVj25hm9/shr1GGXkV0JT1O3ZC',
@@ -215,7 +233,7 @@ export function getAirtableLink(
         branch,
       )}`
     case 'trackOrders':
-      return RECEIVED_PACKAGE[branch]
+      return TRACK_ORDERS[branch]
     case 'trackLab':
       return TRACK_LAB[branch]
   }
