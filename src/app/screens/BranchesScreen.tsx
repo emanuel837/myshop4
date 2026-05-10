@@ -77,7 +77,7 @@ export default function BranchesScreen() {
           type="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-2xl border border-[#233667]/15 bg-white px-4 py-3 text-base font-semibold text-slate-950 shadow-sm outline-none placeholder:text-slate-400 focus:border-[#233667] focus:ring-4 focus:ring-[#233667]/10"
+          className="w-full rounded-2xl border border-[#233667]/15 bg-white px-4 py-3 text-base font-semibold text-slate-950 shadow-[0_2px_8px_rgba(35,54,103,0.08)] outline-none placeholder:text-slate-400 focus:border-[#233667] focus:ring-4 focus:ring-[#233667]/10"
           placeholder="חיפוש לפי שם סניף"
         />
       </div>
@@ -87,7 +87,7 @@ export default function BranchesScreen() {
           filteredBranches.map((branch) => (
             <div
               key={branch.name}
-              className="block rounded-[24px] border border-[#233667]/15 bg-white px-5 py-4 shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-[#233667]/25 hover:shadow-[0_16px_34px_rgba(35,54,103,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/15"
+              className="block rounded-[24px] border border-[#233667]/15 bg-white px-5 py-4 shadow-[0_2px_8px_rgba(35,54,103,0.08)] hover:border-[#233667]/25 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/15"
             >
               <div className="flex flex-row items-center gap-4">
                 <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-[#233667]/10 text-[#233667] ring-1 ring-[#233667]/15">
@@ -115,7 +115,7 @@ export default function BranchesScreen() {
                 {branch.phone ? (
                   <a
                     href={getTelHref(branch.phone)}
-                    className="flex-none rounded-xl bg-[#233667] px-3 py-2 text-sm font-extrabold text-white shadow-md shadow-[#233667]/20 hover:bg-[#1b2a50] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/30"
+                    className="flex-none rounded-xl bg-[#233667] px-3 py-2 text-sm font-extrabold text-white shadow-[0_2px_8px_rgba(35,54,103,0.08)] transition-transform duration-100 hover:bg-[#1b2a50] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/30"
                     aria-label={`התקשר אל ${branch.name}`}
                   >
                     התקשר
@@ -125,7 +125,7 @@ export default function BranchesScreen() {
             </div>
           ))
         ) : (
-          <p className="rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-slate-500 ring-1 ring-[#233667]/15">
+          <p className="rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-slate-500 shadow-[0_2px_8px_rgba(35,54,103,0.08)] ring-1 ring-[#233667]/15">
             לא נמצאו סניפים
           </p>
         )}

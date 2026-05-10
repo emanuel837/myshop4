@@ -90,7 +90,7 @@ function ActionCard({
         }
         window.open(href, '_blank', 'noopener,noreferrer')
       }}
-      className="w-full rounded-[24px] border border-[#233667]/15 bg-white px-5 py-5 text-start shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-[#233667]/25 hover:shadow-[0_16px_34px_rgba(35,54,103,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/15"
+      className="w-full rounded-[24px] border border-[#233667]/15 bg-white px-5 py-5 text-start shadow-[0_2px_8px_rgba(35,54,103,0.08)] transition-transform duration-100 hover:border-[#233667]/25 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/15"
     >
       <div className="flex flex-row items-center gap-4">
         <div className={`grid h-12 w-12 flex-none place-items-center rounded-2xl ring-1 ${iconTone}`}>

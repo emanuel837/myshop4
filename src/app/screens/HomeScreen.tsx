@@ -245,7 +245,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-[#233667]/5 to-white text-slate-950">
+    <div className="min-h-screen bg-gradient-to-b from-white to-[#f0f4f8] text-slate-950">
       <header className="sticky top-0 z-10 border-b border-[#233667]/15 bg-white/95 shadow-sm shadow-[#233667]/5 backdrop-blur">
         <div className="mx-auto max-w-md px-4 py-3">
           <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-3">

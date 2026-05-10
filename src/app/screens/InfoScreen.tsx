@@ -30,7 +30,7 @@ function SectionCard({
   children: React.ReactNode
 }) {
   return (
-    <section className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_12px_28px_rgba(15,23,42,0.07)]">
+    <section className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_2px_8px_rgba(35,54,103,0.08)]">
       <h3 className="text-lg font-extrabold text-slate-800">{title}</h3>
       <div className="mt-4">{children}</div>
     </section>
@@ -39,7 +39,7 @@ function SectionCard({
 
 function DetailRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between gap-4 rounded-2xl bg-slate-50 px-4 py-3 ring-1 ring-slate-200">
+    <div className="flex items-center justify-between gap-4 rounded-2xl bg-slate-50 px-4 py-3 shadow-[0_2px_8px_rgba(35,54,103,0.08)] ring-1 ring-slate-200">
       <span className="text-sm font-medium text-slate-500">{label}</span>
       <span className="min-w-0 text-left text-base font-extrabold text-slate-800">
         {value || 'לא הוגדר'}
@@ -54,7 +54,7 @@ function LinkRow({ label, href }: { label: string; href: string }) {
       href={href}
       target={href === '#' ? undefined : '_blank'}
       rel={href === '#' ? undefined : 'noopener noreferrer'}
-      className="flex w-full flex-row items-center gap-4 rounded-2xl bg-slate-50 px-4 py-4 text-start ring-1 ring-slate-200 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500/30"
+      className="flex w-full flex-row items-center gap-4 rounded-2xl bg-slate-50 px-4 py-4 text-start shadow-[0_2px_8px_rgba(35,54,103,0.08)] ring-1 ring-slate-200 transition-transform duration-100 hover:bg-slate-100 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500/30"
     >
       <span className="min-w-0 flex-1 text-base font-extrabold text-slate-800">
         {label}
@@ -83,7 +83,7 @@ export default function InfoScreen({
             <button
               type="button"
               onClick={onChangeBranch}
-              className="w-full rounded-2xl bg-slate-700 px-4 py-3 text-base font-extrabold text-white shadow-lg shadow-slate-700/15 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-500/20"
+              className="w-full rounded-2xl bg-slate-700 px-4 py-3 text-base font-extrabold text-white shadow-[0_2px_8px_rgba(35,54,103,0.08)] transition-transform duration-100 hover:bg-slate-800 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-500/20"
             >
               החלפת סניף
             </button>
@@ -100,7 +100,7 @@ export default function InfoScreen({
         </SectionCard>
 
         <SectionCard title="גרסה">
-          <div className="rounded-2xl bg-slate-50 px-4 py-4 ring-1 ring-slate-200">
+          <div className="rounded-2xl bg-slate-50 px-4 py-4 shadow-[0_2px_8px_rgba(35,54,103,0.08)] ring-1 ring-slate-200">
             <p className="text-base font-extrabold text-slate-800">
               myShop 4 | גרסה 4.0
             </p>

@@ -70,7 +70,7 @@ export default function EmployeeDetailsScreen({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-[#233667]/5 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-white to-[#f0f4f8]">
       <header className="border-b border-[#233667]/15 bg-white/95 text-[#233667] shadow-sm shadow-[#233667]/5">
         <div className="mx-auto max-w-md px-4 py-6">
           <h1 className="text-3xl font-semibold tracking-tight">myShop 4</h1>
