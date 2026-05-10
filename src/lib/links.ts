@@ -1,20 +1,22 @@
 export type BranchName =
+  | 'ביאליק 4 - רמת גן'
+  | 'שטיינר - אבן גבירול 46 תל אביב'
   | 'קניון הזהב - ראשון לציון'
-  | 'קניון הקריון - קריית ביאליק'
-  | "דודג' סנטר - נוף הגליל"
-  | 'חוצות המפרץ - חיפה אאוטלט'
   | 'רוטשילד 61 - כפר סבא'
+  | 'קניון התחנה המרכזית - ירושלים'
+  | 'קניון הקריון - קריית ביאליק'
   | 'אסף סנטר - באר יעקב'
   | 'קניון אורות - אור עקיבא'
-  | 'קניותר - נס ציונה'
-  | 'ביאליק 4 - רמת גן (טיב טוב)'
-  | 'קניון התחנה המרכזית - ירושלים'
   | 'קניון מרום - רמת גן'
+  | "דודג' סנטר - נוף הגליל"
+  | 'חוצות המפרץ - חיפה אאוטלט'
   | 'קניון ביג פאשן - בת ים'
+  | 'קניותר - נס ציונה'
   | 'קניון השרון - נתניה'
 
 export type BranchId =
   | 2
+  | 3
   | 6
   | 7
   | 10
@@ -29,18 +31,19 @@ export type BranchId =
   | 39
 
 export const BRANCH_IDS: Record<BranchName, BranchId> = {
+  'ביאליק 4 - רמת גן': 2,
+  'שטיינר - אבן גבירול 46 תל אביב': 3,
   'קניון הזהב - ראשון לציון': 6,
-  'קניון הקריון - קריית ביאליק': 15,
-  "דודג' סנטר - נוף הגליל": 26,
-  'חוצות המפרץ - חיפה אאוטלט': 27,
   'רוטשילד 61 - כפר סבא': 7,
+  'קניון התחנה המרכזית - ירושלים': 10,
+  'קניון הקריון - קריית ביאליק': 15,
   'אסף סנטר - באר יעקב': 16,
   'קניון אורות - אור עקיבא': 21,
-  'קניותר - נס ציונה': 38,
-  'ביאליק 4 - רמת גן (טיב טוב)': 2,
-  'קניון התחנה המרכזית - ירושלים': 10,
   'קניון מרום - רמת גן': 25,
+  "דודג' סנטר - נוף הגליל": 26,
+  'חוצות המפרץ - חיפה אאוטלט': 27,
   'קניון ביג פאשן - בת ים': 37,
+  'קניותר - נס ציונה': 38,
   'קניון השרון - נתניה': 39,
 }
 
@@ -88,7 +91,8 @@ const HOT_MODEL_URL =
   'https://airtable.com/appMi9L7QDrJZ00cz/pagal5LlJdq5yhn6y/form'
 
 const REPORT_MISSING_ONLINE: Record<BranchName, string> = {
-  'ביאליק 4 - רמת גן (טיב טוב)': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrmQVERqhkXImAqW',
+  'ביאליק 4 - רמת גן': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrmQVERqhkXImAqW',
+  'שטיינר - אבן גבירול 46 תל אביב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shruS9JK2bomcyCXz',
   'קניון הזהב - ראשון לציון': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr9iWZiBprfFDWtU',
   'רוטשילד 61 - כפר סבא': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrigVAIOq04vbasi',
   'קניון התחנה המרכזית - ירושלים': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrD9DwjkmqODuPkF',
@@ -104,7 +108,8 @@ const REPORT_MISSING_ONLINE: Record<BranchName, string> = {
 }
 
 const REPORT_MISSING_OFFLINE: Record<BranchName, string> = {
-  'ביאליק 4 - רמת גן (טיב טוב)': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr0hrMLagnzorPy1',
+  'ביאליק 4 - רמת גן': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr0hrMLagnzorPy1',
+  'שטיינר - אבן גבירול 46 תל אביב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrUv2AjCfJp2WY35',
   'קניון הזהב - ראשון לציון': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrKxG7SlYt8rHt1B',
   'רוטשילד 61 - כפר סבא': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrf8jpJ6mayLI1c8',
   'קניון התחנה המרכזית - ירושלים': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrxgmRoaqilvs5BF',
@@ -120,7 +125,8 @@ const REPORT_MISSING_OFFLINE: Record<BranchName, string> = {
 }
 
 const ORDER_ITEM: Record<BranchName, string> = {
-  'ביאליק 4 - רמת גן (טיב טוב)': 'https://airtable.com/appyGTA8v9mY4WcmQ/pagTK72N5z1PXE2uq/form',
+  'ביאליק 4 - רמת גן': 'https://airtable.com/appyGTA8v9mY4WcmQ/pagTK72N5z1PXE2uq/form',
+  'שטיינר - אבן גבירול 46 תל אביב': 'https://airtable.com/appyGTA8v9mY4WcmQ/pagwc1WVkpEB5t8vc/form',
   'קניון הזהב - ראשון לציון': 'https://airtable.com/appyGTA8v9mY4WcmQ/pagFyOTXOhE4Y6BWg/form',
   'רוטשילד 61 - כפר סבא': 'https://airtable.com/appyGTA8v9mY4WcmQ/pag0ZtkMTZIpKDjPE/form',
   'קניון התחנה המרכזית - ירושלים': 'https://airtable.com/appyGTA8v9mY4WcmQ/pagvLhhhbHg9sbYdN/form',
@@ -136,7 +142,8 @@ const ORDER_ITEM: Record<BranchName, string> = {
 }
 
 const RECEIVED_PACKAGE: Record<BranchName, string> = {
-  'ביאליק 4 - רמת גן (טיב טוב)': 'https://airtable.com/appBawqi4kZnr8rtL/shrA4hMkvjFcZqsxQ',
+  'ביאליק 4 - רמת גן': 'https://airtable.com/appBawqi4kZnr8rtL/shrA4hMkvjFcZqsxQ',
+  'שטיינר - אבן גבירול 46 תל אביב': 'https://airtable.com/appBawqi4kZnr8rtL/shrzJOm5HM3fMMGvs',
   'קניון הזהב - ראשון לציון': 'https://airtable.com/appBawqi4kZnr8rtL/shreY9RppZvNOleoR',
   'רוטשילד 61 - כפר סבא': 'https://airtable.com/appBawqi4kZnr8rtL/shrWWfqFKhbaqI6IW',
   'קניון התחנה המרכזית - ירושלים': 'https://airtable.com/appBawqi4kZnr8rtL/shrB0T1V3zqtv2WjB',
@@ -152,7 +159,8 @@ const RECEIVED_PACKAGE: Record<BranchName, string> = {
 }
 
 const TRACK_ORDERS: Record<BranchName, string> = {
-  'ביאליק 4 - רמת גן (טיב טוב)': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrc3RDwCu3HlPTLD',
+  'ביאליק 4 - רמת גן': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrc3RDwCu3HlPTLD',
+  'שטיינר - אבן גבירול 46 תל אביב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr4rhxzUNv5535NW',
   'קניון הזהב - ראשון לציון': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrK8uPttUXtnaJVH',
   'רוטשילד 61 - כפר סבא': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrc26KRaYqrfscoT',
   'קניון התחנה המרכזית - ירושלים': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrAxyvkGxbyC5to8',
@@ -168,7 +176,8 @@ const TRACK_ORDERS: Record<BranchName, string> = {
 }
 
 const TRACK_LAB: Record<BranchName, string> = {
-  'ביאליק 4 - רמת גן (טיב טוב)': 'https://airtable.com/appZdzUZAvVj25hm9/shrOOuHF5XYjTXxh1',
+  'ביאליק 4 - רמת גן': 'https://airtable.com/appZdzUZAvVj25hm9/shrOOuHF5XYjTXxh1',
+  'שטיינר - אבן גבירול 46 תל אביב': 'https://airtable.com/appZdzUZAvVj25hm9/shrOOuHF5XYjTXxh1',
   'קניון הזהב - ראשון לציון': 'https://airtable.com/appZdzUZAvVj25hm9/shrx3MCOml3ORecHA',
   'רוטשילד 61 - כפר סבא': 'https://airtable.com/appZdzUZAvVj25hm9/shragbzEZkmfGQdGK',
   'קניון התחנה המרכזית - ירושלים': 'https://airtable.com/appZdzUZAvVj25hm9/shr1GGXkV0JT1O3ZC',
