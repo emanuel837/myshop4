@@ -66,7 +66,7 @@ export default function BranchesScreen() {
 
   return (
     <main className="mx-auto max-w-md px-4 pb-28 pt-6">
-      <h2 className="text-xl font-extrabold text-blue-950">סניפים</h2>
+      <h2 className="text-xl font-extrabold text-[#233667]">סניפים</h2>
 
       <div className="mt-4">
         <label className="sr-only" htmlFor="branch-search">
@@ -77,7 +77,7 @@ export default function BranchesScreen() {
           type="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-2xl border border-blue-100 bg-white px-4 py-3 text-base font-semibold text-slate-950 shadow-sm outline-none placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+          className="w-full rounded-2xl border border-[#233667]/15 bg-white px-4 py-3 text-base font-semibold text-slate-950 shadow-sm outline-none placeholder:text-slate-400 focus:border-[#233667] focus:ring-4 focus:ring-[#233667]/10"
           placeholder="חיפוש לפי שם סניף"
         />
       </div>
@@ -87,21 +87,21 @@ export default function BranchesScreen() {
           filteredBranches.map((branch) => (
             <div
               key={branch.name}
-              className="block rounded-[24px] border border-blue-100 bg-white px-5 py-4 shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-blue-200 hover:shadow-[0_16px_34px_rgba(37,99,235,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
+              className="block rounded-[24px] border border-[#233667]/15 bg-white px-5 py-4 shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-[#233667]/25 hover:shadow-[0_16px_34px_rgba(35,54,103,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/15"
             >
               <div className="flex flex-row items-center gap-4">
-                <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100">
+                <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-[#233667]/10 text-[#233667] ring-1 ring-[#233667]/15">
                   <IconPhone className="h-6 w-6" />
                 </div>
 
                 <div className="min-w-0 flex-1 text-right">
-                  <div className="text-lg text-blue-950">
+                  <div className="text-lg text-[#233667]">
                     <BranchDisplayName name={branch.name} />
                   </div>
                   {branch.phone ? (
                     <a
                       href={getTelHref(branch.phone)}
-                      className="mt-1 inline-block text-sm font-medium text-slate-500 underline decoration-blue-200 underline-offset-4 hover:text-blue-700 hover:decoration-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
+                      className="mt-1 inline-block text-sm font-medium text-slate-500 underline decoration-[#233667]/20 underline-offset-4 hover:text-[#233667] hover:decoration-[#233667] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/30"
                     >
                       {branch.phone}
                     </a>
@@ -115,7 +115,7 @@ export default function BranchesScreen() {
                 {branch.phone ? (
                   <a
                     href={getTelHref(branch.phone)}
-                    className="flex-none rounded-xl bg-blue-600 px-3 py-2 text-sm font-extrabold text-white shadow-md shadow-blue-600/20 hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
+                    className="flex-none rounded-xl bg-[#233667] px-3 py-2 text-sm font-extrabold text-white shadow-md shadow-[#233667]/20 hover:bg-[#1b2a50] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/30"
                     aria-label={`התקשר אל ${branch.name}`}
                   >
                     התקשר
@@ -125,7 +125,7 @@ export default function BranchesScreen() {
             </div>
           ))
         ) : (
-          <p className="rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-slate-500 ring-1 ring-blue-100">
+          <p className="rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-slate-500 ring-1 ring-[#233667]/15">
             לא נמצאו סניפים
           </p>
         )}

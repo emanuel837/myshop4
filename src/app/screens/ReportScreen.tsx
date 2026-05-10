@@ -290,7 +290,7 @@ function ActionCard({
         }
         window.open(href, '_blank', 'noopener,noreferrer')
       }}
-      className="w-full rounded-[24px] border border-blue-100 bg-white px-5 py-5 text-start shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-blue-200 hover:shadow-[0_16px_34px_rgba(37,99,235,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
+      className="w-full rounded-[24px] border border-[#233667]/15 bg-white px-5 py-5 text-start shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-[#233667]/25 hover:shadow-[0_16px_34px_rgba(35,54,103,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/15"
     >
       {/* Force LTR row so "left" is visually left even in RTL UI */}
       <div className="flex flex-row items-center gap-4">
@@ -305,7 +305,7 @@ function ActionCard({
           </div>
         </div>
 
-        <div className="flex-none text-blue-500" aria-hidden="true">
+        <div className="flex-none text-[#233667]" aria-hidden="true">
           <IconArrowRight className="h-5 w-5" />
         </div>
       </div>
@@ -367,27 +367,27 @@ function MissingReportCard({
 const MAIN_ITEMS: ActionItem[] = [
   {
     title: 'הזמנת פריט',
-    subtitle: 'הזמן פריט מהמחסן או מסניף',
+    subtitle: 'להזמין פריט מהמחסן או מסניף אחר',
     action: 'orderItem',
   },
   {
     title: 'קבלת חבילה מכץ',
-    subtitle: 'תעד קבלת משלוח',
+    subtitle: 'לעדכן קבלת חבילה',
     action: 'receivedPackage',
   },
   {
     title: 'הזמנת איסוף',
-    subtitle: 'בקש איסוף חבילה',
+    subtitle: 'הזמנת איסוף מהסניף',
     action: 'pickupOrder',
   },
   {
     title: 'שליחה למעבדה',
-    subtitle: 'שלח פריט לבדיקה או תיקון',
+    subtitle: 'שליחת פריט לבדיקת מעבדה',
     action: 'sendLab',
   },
   {
     title: 'דגם חם 🔥',
-    subtitle: 'דווח על מוצר עם ביקוש גבוה',
+    subtitle: 'לדווח על מוצר עם ביקוש גבוה',
     action: 'hotModel',
   },
 ]
@@ -395,7 +395,7 @@ const MAIN_ITEMS: ActionItem[] = [
 const ADDITIONAL_ITEMS: ActionItem[] = [
   {
     title: "צילום צ'ק",
-    subtitle: "שלח צילום של צ'ק",
+    subtitle: "שליחת צילום של צ'ק",
     action: 'checkPhoto',
   },
   {
@@ -405,22 +405,22 @@ const ADDITIONAL_ITEMS: ActionItem[] = [
   },
   {
     title: 'הזנת טופס ייצור מדרסים',
-    subtitle: 'הזן טופס ייצור מדרסים ללקוח',
+    subtitle: 'הזנת טופס לייצור מדרסים ללקוח',
     action: 'insoleProductionForm',
   },
   {
     title: 'הזמנת ציוד',
-    subtitle: 'הזמן ציוד לסניף',
+    subtitle: 'להזמין ציוד לסניף',
     action: 'orderEquipment',
   },
   {
     title: 'משלוח עד הבית',
-    subtitle: 'שלח הזמנה עד הבית של הלקוח',
+    subtitle: 'שליחת הזמנה עד הבית של הלקוח',
     action: 'homeDelivery',
   },
   {
     title: 'דיווח על תקלה',
-    subtitle: 'דווח על תקלה בסניף',
+    subtitle: 'לדווח על תקלה בסניף',
     action: 'branchIssue',
   },
 ]
@@ -443,9 +443,9 @@ function getActionIconTone(action: ActionItem['action']) {
     case 'checkPhoto':
       return 'bg-slate-100 text-slate-600 ring-slate-200'
     case 'orderItem':
-      return 'bg-blue-50 text-blue-700 ring-blue-100'
+      return 'bg-[#233667]/10 text-[#233667] ring-[#233667]/15'
     case 'hotModel':
-      return 'bg-blue-50 text-blue-700 ring-blue-100'
+      return 'bg-[#233667]/10 text-[#233667] ring-[#233667]/15'
   }
 }
 
@@ -498,8 +498,8 @@ function AdditionalReportsModal({
         onClick={onClose}
         aria-label="סגירה"
       />
-      <div className="absolute bottom-0 left-0 right-0 mx-auto max-w-md rounded-t-[28px] bg-white p-4 text-slate-950 shadow-2xl ring-1 ring-blue-100">
-        <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-blue-100" />
+      <div className="absolute bottom-0 left-0 right-0 mx-auto max-w-md rounded-t-[28px] bg-white p-4 text-slate-950 shadow-2xl ring-1 ring-[#233667]/15">
+        <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-[#233667]/15" />
         <div className="flex items-center justify-between">
           <h3 className="text-base font-semibold">דיווחים נוספים</h3>
           <button
@@ -541,7 +541,7 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
 
   return (
     <main className="mx-auto max-w-md px-4 pb-28 pt-6">
-      <h2 className="text-xl font-extrabold text-blue-950">דיווח</h2>
+      <h2 className="text-xl font-extrabold text-[#233667]">דיווח</h2>
 
       <div className="mt-4 space-y-3">
         <MissingReportCard
@@ -581,7 +581,7 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
         <button
           type="button"
           onClick={() => setIsAdditionalOpen(true)}
-          className="w-full rounded-[24px] border border-blue-100 bg-white px-5 py-5 text-start shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-blue-200 hover:shadow-[0_16px_34px_rgba(37,99,235,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
+          className="w-full rounded-[24px] border border-[#233667]/15 bg-white px-5 py-5 text-start shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-[#233667]/25 hover:shadow-[0_16px_34px_rgba(35,54,103,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/15"
         >
           <div className="flex flex-row items-center gap-4">
             <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-gradient-to-br from-slate-600 to-slate-700 text-white shadow-lg shadow-slate-700/20 ring-1 ring-slate-400">

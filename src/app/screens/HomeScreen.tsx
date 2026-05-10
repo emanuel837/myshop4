@@ -245,8 +245,8 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-blue-50/70 to-white text-slate-950">
-      <header className="sticky top-0 z-10 border-b border-blue-100 bg-white/95 shadow-sm shadow-blue-950/5 backdrop-blur">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-[#233667]/5 to-white text-slate-950">
+      <header className="sticky top-0 z-10 border-b border-[#233667]/15 bg-white/95 shadow-sm shadow-[#233667]/5 backdrop-blur">
         <div className="mx-auto max-w-md px-4 py-3">
           <div className="flex items-start justify-between">
             <div className="text-start">
@@ -257,7 +257,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 <button
                   type="button"
                   onClick={onLogout}
-                  className="inline-flex items-center justify-center rounded-xl bg-blue-50 p-2 text-blue-700 hover:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
+                  className="inline-flex items-center justify-center rounded-xl bg-[#233667]/10 p-2 text-[#233667] hover:bg-[#233667]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/40"
                   aria-label="התנתקות"
                   title="התנתקות"
                 >
@@ -270,7 +270,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 <button
                   type="button"
                   onClick={() => setIsBranchModalOpen(true)}
-                  className="font-normal text-slate-600 underline decoration-blue-300 underline-offset-4 hover:text-blue-700 hover:decoration-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
+                  className="font-normal text-slate-600 underline decoration-[#233667]/30 underline-offset-4 hover:text-[#233667] hover:decoration-[#233667] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/40"
                 >
                   {branch || 'בחרו סניף'}
                 </button>
@@ -290,7 +290,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             {unavailableMessage ? (
               <p
                 role="alert"
-                className="rounded-2xl bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-800 ring-1 ring-blue-100"
+                className="rounded-2xl bg-[#233667]/10 px-4 py-2 text-sm font-semibold text-[#233667] ring-1 ring-[#233667]/15"
               >
                 {unavailableMessage}
               </p>
@@ -306,14 +306,14 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 setUnavailableMessage(null)
                 window.open(href, '_blank', 'noopener,noreferrer')
               }}
-              className="w-full rounded-[28px] border border-blue-100 bg-white px-5 py-5 text-blue-950 shadow-[0_14px_35px_rgba(15,23,42,0.08)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
+              className="w-full rounded-[28px] border border-[#233667]/15 bg-white px-5 py-5 text-[#233667] shadow-[0_14px_35px_rgba(15,23,42,0.08)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/15"
             >
               <div className="flex flex-col items-center text-center">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-blue-50 text-blue-700 shadow-lg shadow-blue-600/10 ring-1 ring-blue-100">
+                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-[#233667]/10 text-[#233667] shadow-lg shadow-[#233667]/10 ring-1 ring-[#233667]/15">
                   <IconShoppingBag className="h-7 w-7" />
                 </span>
                 <span className="mt-3 text-xl font-extrabold">הזמנת פריט</span>
-                <span className="mt-1.5 text-sm font-medium text-blue-950/80">
+                <span className="mt-1.5 text-sm font-medium text-[#233667]/80">
                   להזמין פריט עבור לקוח במהירות ובקלות
                 </span>
               </div>
@@ -330,14 +330,14 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 setUnavailableMessage(null)
                 window.open(href, '_blank', 'noopener,noreferrer')
               }}
-              className="w-full rounded-[28px] border border-purple-100 bg-white px-5 py-5 text-blue-950 shadow-[0_14px_35px_rgba(15,23,42,0.08)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-purple-500/15"
+              className="w-full rounded-[28px] border border-purple-100 bg-white px-5 py-5 text-[#233667] shadow-[0_14px_35px_rgba(15,23,42,0.08)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-purple-500/15"
             >
               <div className="flex flex-col items-center text-center">
                 <span className="grid h-14 w-14 place-items-center rounded-2xl bg-purple-50 text-purple-600 shadow-lg shadow-purple-600/10 ring-1 ring-purple-100">
                   <IconWrench className="h-7 w-7" />
                 </span>
                 <span className="mt-3 text-xl font-extrabold">שליחה למעבדה</span>
-                <span className="mt-1.5 text-sm font-medium text-blue-950/80">
+                <span className="mt-1.5 text-sm font-medium text-[#233667]/80">
                   לפתוח פנייה ולשלוח פריט לתיקון / בדיקה
                 </span>
               </div>
@@ -354,7 +354,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 setUnavailableMessage(null)
                 window.open(href, '_blank', 'noopener,noreferrer')
               }}
-              className="w-full rounded-[28px] border border-blue-100 bg-white px-5 py-5 text-blue-950 shadow-[0_14px_35px_rgba(15,23,42,0.08)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
+              className="w-full rounded-[28px] border border-[#233667]/15 bg-white px-5 py-5 text-[#233667] shadow-[0_14px_35px_rgba(15,23,42,0.08)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/15"
             >
               <div className="flex flex-col items-center text-center">
                 <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-600/25">
@@ -363,7 +363,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 <span className="mt-3 text-xl font-extrabold">
                   קיבלתי חבילה מכץ
                 </span>
-                <span className="mt-1.5 text-sm font-medium text-blue-950/80">
+                <span className="mt-1.5 text-sm font-medium text-[#233667]/80">
                   לעדכן שהחבילה הגיעה ולסיים את הטיפול
                 </span>
               </div>
@@ -384,16 +384,16 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
         />
       )}
 
-      <nav className="fixed bottom-0 left-0 right-0 border-t border-blue-100 bg-white/95 shadow-[0_-12px_30px_rgba(15,23,42,0.08)] backdrop-blur">
+      <nav className="fixed bottom-0 left-0 right-0 border-t border-[#233667]/15 bg-white/95 shadow-[0_-12px_30px_rgba(15,23,42,0.08)] backdrop-blur">
         <div className="mx-auto grid max-w-md grid-cols-5 px-2 py-2">
           <button
             type="button"
             onClick={() => setTab('home')}
             className={[
-              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30',
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/30',
               tab === 'home'
-                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25'
-                : 'text-slate-500 hover:text-blue-700',
+                ? 'bg-[#233667] text-white shadow-lg shadow-[#233667]/25'
+                : 'text-slate-500 hover:text-[#233667]',
             ].join(' ')}
             aria-current={tab === 'home' ? 'page' : undefined}
           >
@@ -405,10 +405,10 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             type="button"
             onClick={() => setTab('report')}
             className={[
-              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30',
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/30',
               tab === 'report'
-                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25'
-                : 'text-slate-500 hover:text-blue-700',
+                ? 'bg-[#233667] text-white shadow-lg shadow-[#233667]/25'
+                : 'text-slate-500 hover:text-[#233667]',
             ].join(' ')}
             aria-current={tab === 'report' ? 'page' : undefined}
           >
@@ -420,10 +420,10 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             type="button"
             onClick={() => setTab('tracking')}
             className={[
-              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30',
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/30',
               tab === 'tracking'
-                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25'
-                : 'text-slate-500 hover:text-blue-700',
+                ? 'bg-[#233667] text-white shadow-lg shadow-[#233667]/25'
+                : 'text-slate-500 hover:text-[#233667]',
             ].join(' ')}
             aria-current={tab === 'tracking' ? 'page' : undefined}
           >
@@ -435,7 +435,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             type="button"
             onClick={() => setTab('info')}
             className={[
-              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30',
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/30',
               tab === 'info'
                 ? 'bg-slate-700 text-white shadow-lg shadow-slate-700/20'
                 : 'text-slate-500 hover:text-slate-700',
@@ -450,10 +450,10 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             type="button"
             onClick={() => setTab('branches')}
             className={[
-              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30',
+              'flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/30',
               tab === 'branches'
-                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25'
-                : 'text-slate-500 hover:text-blue-700',
+                ? 'bg-[#233667] text-white shadow-lg shadow-[#233667]/25'
+                : 'text-slate-500 hover:text-[#233667]',
             ].join(' ')}
             aria-current={tab === 'branches' ? 'page' : undefined}
           >
@@ -476,20 +476,20 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             onClick={() => setIsBranchModalOpen(false)}
             aria-label="סגירה"
           />
-          <div className="absolute bottom-0 left-0 right-0 mx-auto max-w-md rounded-t-[28px] bg-white p-4 text-slate-950 shadow-2xl ring-1 ring-blue-100">
-            <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-blue-100" />
+          <div className="absolute bottom-0 left-0 right-0 mx-auto max-w-md rounded-t-[28px] bg-white p-4 text-slate-950 shadow-2xl ring-1 ring-[#233667]/15">
+            <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-[#233667]/15" />
             <div className="flex items-center justify-between">
               <h3 className="text-base font-semibold">בחירת סניף</h3>
               <button
                 type="button"
-                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-500 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
+                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-500 hover:text-[#233667] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/30"
                 onClick={() => setIsBranchModalOpen(false)}
               >
                 סגור
               </button>
             </div>
 
-            <div className="mt-3 max-h-[55vh] overflow-auto rounded-2xl bg-slate-50 ring-1 ring-blue-100">
+            <div className="mt-3 max-h-[55vh] overflow-auto rounded-2xl bg-slate-50 ring-1 ring-[#233667]/15">
               {BRANCHES.map((b) => {
                 const active = b === branch
                 return (
@@ -501,13 +501,13 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                       setIsBranchModalOpen(false)
                     }}
                     className={[
-                      'flex w-full items-center justify-between px-4 py-4 text-start hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30',
-                      active ? 'bg-blue-50 text-blue-700' : '',
+                      'flex w-full items-center justify-between px-4 py-4 text-start hover:bg-[#233667]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/30',
+                      active ? 'bg-[#233667]/10 text-[#233667]' : '',
                     ].join(' ')}
                   >
                     <span className="text-sm font-semibold">{b}</span>
                     {active ? (
-                        <span className="text-xs font-semibold text-blue-700">
+                        <span className="text-xs font-semibold text-[#233667]">
                         נבחר
                       </span>
                     ) : null}

@@ -90,7 +90,7 @@ function ActionCard({
         }
         window.open(href, '_blank', 'noopener,noreferrer')
       }}
-      className="w-full rounded-[24px] border border-blue-100 bg-white px-5 py-5 text-start shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-blue-200 hover:shadow-[0_16px_34px_rgba(37,99,235,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
+      className="w-full rounded-[24px] border border-[#233667]/15 bg-white px-5 py-5 text-start shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-[#233667]/25 hover:shadow-[0_16px_34px_rgba(35,54,103,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/15"
     >
       <div className="flex flex-row items-center gap-4">
         <div className={`grid h-12 w-12 flex-none place-items-center rounded-2xl ring-1 ${iconTone}`}>
@@ -104,7 +104,7 @@ function ActionCard({
           </div>
         </div>
 
-        <div className="flex-none text-blue-500" aria-hidden="true">
+        <div className="flex-none text-[#233667]" aria-hidden="true">
           <IconArrowRight className="h-5 w-5" />
         </div>
       </div>
@@ -137,7 +137,7 @@ function getActionIconTone(action: ActionItem['action']) {
     case 'receivedPackage':
       return 'bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-600/25 ring-emerald-300'
     case 'trackOrders':
-      return 'bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/25 ring-blue-300'
+      return 'bg-gradient-to-br from-[#233667] to-[#1b2a50] text-white shadow-lg shadow-[#233667]/25 ring-[#233667]/30'
   }
 }
 
@@ -152,7 +152,7 @@ export default function TrackingScreen({
 }: TrackingScreenProps) {
   return (
     <main className="mx-auto max-w-md px-4 pb-28 pt-6">
-      <h2 className="text-xl font-extrabold text-blue-950">מעקב</h2>
+      <h2 className="text-xl font-extrabold text-[#233667]">מעקב</h2>
 
       <div className="mt-4 space-y-3">
         <ActionCard
