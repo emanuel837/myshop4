@@ -321,9 +321,9 @@ function MissingReportCard({
   onUnavailable: (message: string) => void
 }) {
   return (
-    <section className="rounded-[24px] border border-rose-100 bg-white px-5 py-5 shadow-[0_14px_32px_rgba(127,29,29,0.10)]">
+    <section className="rounded-[24px] border border-amber-200 bg-[#FFF9C4] px-5 py-5 shadow-[0_14px_32px_rgba(217,119,6,0.14)]">
       <div className="flex flex-row items-center gap-3">
-        <div className="grid h-12 w-12 flex-none place-items-center rounded-full bg-rose-50 text-rose-900 ring-1 ring-rose-100">
+        <div className="grid h-12 w-12 flex-none place-items-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-lg shadow-orange-500/25 ring-1 ring-amber-300">
           <IconAlert className="h-6 w-6" />
         </div>
         <h3 className="text-lg font-extrabold text-slate-950">דיווח על חוסר</h3>
@@ -340,7 +340,7 @@ function MissingReportCard({
             }
             window.open(href, '_blank', 'noopener,noreferrer')
           }}
-          className="min-h-20 rounded-2xl bg-rose-50 px-3 py-4 text-center text-base font-extrabold text-rose-900 shadow-sm ring-1 ring-rose-100 hover:bg-rose-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-500/15"
+          className="min-h-20 rounded-2xl bg-white px-3 py-4 text-center text-base font-extrabold text-amber-900 shadow-sm ring-1 ring-amber-200 hover:bg-amber-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-500/15"
         >
           הזמנות אתר
         </button>
@@ -355,7 +355,7 @@ function MissingReportCard({
             }
             window.open(href, '_blank', 'noopener,noreferrer')
           }}
-          className="grid min-h-20 place-items-center rounded-2xl bg-rose-50 px-3 py-4 text-center text-base font-extrabold text-rose-900 shadow-sm ring-1 ring-rose-100 hover:bg-rose-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-500/15"
+          className="grid min-h-20 place-items-center rounded-2xl bg-white px-3 py-4 text-center text-base font-extrabold text-amber-900 shadow-sm ring-1 ring-amber-200 hover:bg-amber-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-500/15"
         >
           הזמנות סניפים
         </button>
