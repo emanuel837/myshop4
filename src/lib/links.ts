@@ -8,7 +8,7 @@ export type BranchName =
   | 'אסף סנטר - באר יעקב'
   | 'קניון אורות - אור עקיבא'
   | 'קניון מרום - רמת גן'
-  | "דודג' סנטר - נוף הגליל"
+  | 'עופר סנטר - נוף הגליל'
   | 'חוצות המפרץ - חיפה אאוטלט'
   | 'קניון ביג פאשן - בת ים'
   | 'קניותר - נס ציונה'
@@ -40,7 +40,7 @@ export const BRANCH_IDS: Record<BranchName, BranchId> = {
   'אסף סנטר - באר יעקב': 16,
   'קניון אורות - אור עקיבא': 21,
   'קניון מרום - רמת גן': 25,
-  "דודג' סנטר - נוף הגליל": 26,
+  'עופר סנטר - נוף הגליל': 26,
   'חוצות המפרץ - חיפה אאוטלט': 27,
   'קניון ביג פאשן - בת ים': 37,
   'קניותר - נס ציונה': 38,
@@ -100,7 +100,7 @@ const REPORT_MISSING_ONLINE: Record<BranchName, string> = {
   'אסף סנטר - באר יעקב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrCZxG6XjJ4SnA1Y',
   'קניון אורות - אור עקיבא': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrEMrGDuDr9t0JQz',
   'קניון מרום - רמת גן': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrZGZB9rG32mi1PT',
-  "דודג' סנטר - נוף הגליל": 'https://airtable.com/appyGTA8v9mY4WcmQ/shrz0ehdc1teTCjlO',
+  'עופר סנטר - נוף הגליל': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrz0ehdc1teTCjlO',
   'חוצות המפרץ - חיפה אאוטלט': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrtwIERnloRQnSl5',
   'קניון ביג פאשן - בת ים': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrwQ8xhB74QP9ZND',
   'קניותר - נס ציונה': 'https://airtable.com/appyGTA8v9mY4WcmQ/shruEpqVGBt3hnSkV',
@@ -117,7 +117,7 @@ const REPORT_MISSING_OFFLINE: Record<BranchName, string> = {
   'אסף סנטר - באר יעקב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrau6FjMlQRnV5Jk',
   'קניון אורות - אור עקיבא': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrGbaUK7FrqZoSrA',
   'קניון מרום - רמת גן': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrUQsPKnLS7krjiR',
-  "דודג' סנטר - נוף הגליל": 'https://airtable.com/appyGTA8v9mY4WcmQ/shrieEeBe1P8v69dC',
+  'עופר סנטר - נוף הגליל': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrieEeBe1P8v69dC',
   'חוצות המפרץ - חיפה אאוטלט': 'https://airtable.com/appyGTA8v9mY4WcmQ/shry36dp8HLQj1xNm',
   'קניון ביג פאשן - בת ים': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrapk7hxt6IywSff',
   'קניותר - נס ציונה': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr3JxM96jk3ekS1H',
@@ -134,7 +134,7 @@ const ORDER_ITEM: Record<BranchName, string> = {
   'אסף סנטר - באר יעקב': 'https://airtable.com/appyGTA8v9mY4WcmQ/pagKDB4vqdZlBdmtj/form',
   'קניון אורות - אור עקיבא': 'https://airtable.com/appyGTA8v9mY4WcmQ/pagUh51bquI7WvHJa/form',
   'קניון מרום - רמת גן': 'https://airtable.com/appyGTA8v9mY4WcmQ/pagYLiZ0m863Cfabb/form',
-  "דודג' סנטר - נוף הגליל": 'https://airtable.com/appyGTA8v9mY4WcmQ/pagUHAUdV25MvMmrQ/form',
+  'עופר סנטר - נוף הגליל': 'https://airtable.com/appyGTA8v9mY4WcmQ/pagUHAUdV25MvMmrQ/form',
   'חוצות המפרץ - חיפה אאוטלט': 'https://airtable.com/appyGTA8v9mY4WcmQ/pagOQ0i9jZjJ2bkuh/form',
   'קניון ביג פאשן - בת ים': 'https://airtable.com/appyGTA8v9mY4WcmQ/pagHnSwU0waY5eb3P/form',
   'קניותר - נס ציונה': 'https://airtable.com/appyGTA8v9mY4WcmQ/pagbzIPCKg5oUFpMX/form',
@@ -151,7 +151,7 @@ const RECEIVED_PACKAGE: Record<BranchName, string> = {
   'אסף סנטר - באר יעקב': 'https://airtable.com/appBawqi4kZnr8rtL/shrBbt0KFWL4mJNGi',
   'קניון אורות - אור עקיבא': 'https://airtable.com/appBawqi4kZnr8rtL/shr3iSysY5Qlb2auf',
   'קניון מרום - רמת גן': 'https://airtable.com/appBawqi4kZnr8rtL/shruDcZDoTfctk9K2',
-  "דודג' סנטר - נוף הגליל": 'https://airtable.com/appBawqi4kZnr8rtL/shrmePtMlE5jOkq5v',
+  'עופר סנטר - נוף הגליל': 'https://airtable.com/appBawqi4kZnr8rtL/shrmePtMlE5jOkq5v',
   'חוצות המפרץ - חיפה אאוטלט': 'https://airtable.com/appBawqi4kZnr8rtL/shrdlnyGKEMP5ZViI',
   'קניון ביג פאשן - בת ים': 'https://airtable.com/appBawqi4kZnr8rtL/shrDHyjUBLujra4G4',
   'קניותר - נס ציונה': 'https://airtable.com/appBawqi4kZnr8rtL/shrQTIt2lO51G3lp6',
@@ -168,7 +168,7 @@ const TRACK_ORDERS: Record<BranchName, string> = {
   'אסף סנטר - באר יעקב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrDQBDZcaxNHPqRZ',
   'קניון אורות - אור עקיבא': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr3pO1fYrCiZqSdM',
   'קניון מרום - רמת גן': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrQlQ1riNoG3FG7P',
-  "דודג' סנטר - נוף הגליל": 'https://airtable.com/appyGTA8v9mY4WcmQ/shrLqLKeyoSmdEM40',
+  'עופר סנטר - נוף הגליל': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrLqLKeyoSmdEM40',
   'חוצות המפרץ - חיפה אאוטלט': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr16HOGM4d2kG9SD',
   'קניון ביג פאשן - בת ים': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrShOUY4wk0jEuqx',
   'קניותר - נס ציונה': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrH0zXXtDRLHdWh8',
@@ -185,7 +185,7 @@ const TRACK_LAB: Record<BranchName, string> = {
   'אסף סנטר - באר יעקב': 'https://airtable.com/appZdzUZAvVj25hm9/shrJJvD7clZzqg4ck',
   'קניון אורות - אור עקיבא': 'https://airtable.com/appZdzUZAvVj25hm9/shrcxoQiNRWv3Xexb',
   'קניון מרום - רמת גן': 'https://airtable.com/appZdzUZAvVj25hm9/shrLrYsrMwqThj9bt',
-  "דודג' סנטר - נוף הגליל": 'https://airtable.com/appZdzUZAvVj25hm9/shrhgPLDypJa7Oj2K',
+  'עופר סנטר - נוף הגליל': 'https://airtable.com/appZdzUZAvVj25hm9/shrhgPLDypJa7Oj2K',
   'חוצות המפרץ - חיפה אאוטלט': 'https://airtable.com/appZdzUZAvVj25hm9/shrjcBVZPhQIMMx2b',
   'קניון ביג פאשן - בת ים': 'https://airtable.com/appZdzUZAvVj25hm9/shrP2Q0MFDwmyiDJr',
   'קניותר - נס ציונה': 'https://airtable.com/appZdzUZAvVj25hm9/shrBHInzSyq12AmMi',

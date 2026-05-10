@@ -428,11 +428,13 @@ const ADDITIONAL_ITEMS: ActionItem[] = [
 function getActionIconTone(action: ActionItem['action']) {
   switch (action) {
     case 'receivedPackage':
+      return 'bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-600/25 ring-emerald-300'
     case 'pickupOrder':
+      return 'bg-gradient-to-br from-orange-400 to-orange-500 text-white shadow-lg shadow-orange-500/25 ring-orange-300'
     case 'homeDelivery':
       return 'bg-emerald-50 text-emerald-600 ring-emerald-100'
     case 'sendLab':
-      return 'bg-purple-50 text-purple-600 ring-purple-100'
+      return 'bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-lg shadow-purple-600/25 ring-purple-300'
     case 'branchIssue':
       return 'bg-rose-50 text-rose-900 ring-rose-100'
     case 'orderEquipment':
@@ -441,6 +443,7 @@ function getActionIconTone(action: ActionItem['action']) {
     case 'checkPhoto':
       return 'bg-slate-100 text-slate-600 ring-slate-200'
     case 'orderItem':
+      return 'bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/25 ring-blue-300'
     case 'hotModel':
       return 'bg-blue-50 text-blue-700 ring-blue-100'
   }
@@ -581,7 +584,7 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
           className="w-full rounded-[24px] border border-blue-100 bg-white px-5 py-5 text-start shadow-[0_12px_28px_rgba(15,23,42,0.07)] hover:border-blue-200 hover:shadow-[0_16px_34px_rgba(37,99,235,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/15"
         >
           <div className="flex flex-row items-center gap-4">
-            <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-slate-100 text-slate-600 ring-1 ring-slate-200">
+            <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-gradient-to-br from-slate-600 to-slate-700 text-white shadow-lg shadow-slate-700/20 ring-1 ring-slate-400">
               <IconFileText className="h-6 w-6" />
             </div>
 

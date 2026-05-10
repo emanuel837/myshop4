@@ -135,7 +135,7 @@ function getActionIconTone(action: ActionItem['action']) {
     case 'trackLab':
       return 'bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-lg shadow-purple-600/25 ring-purple-300'
     case 'receivedPackage':
-      return 'bg-emerald-50 text-emerald-600 ring-emerald-100'
+      return 'bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-600/25 ring-emerald-300'
     case 'trackOrders':
       return 'bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/25 ring-blue-300'
   }
