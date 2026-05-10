@@ -79,6 +79,8 @@ function ActionCard({
         const href =
           item.action === 'trackOrders'
             ? getAirtableLink('trackOrders', branch)
+            : item.action === 'trackLab'
+              ? getAirtableLink('trackLab', branch)
             : getLabFormUrl(branch)
         if (!href) {
           onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
