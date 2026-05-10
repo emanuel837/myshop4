@@ -248,7 +248,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-[#233667]/5 to-white text-slate-950">
       <header className="sticky top-0 z-10 border-b border-[#233667]/15 bg-white/95 shadow-sm shadow-[#233667]/5 backdrop-blur">
         <div className="mx-auto max-w-md px-4 py-3">
-          <div className="flex items-start justify-between">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-3">
             <div className="text-start">
               <div className="flex items-center gap-2">
                 <span className="text-base font-semibold">
@@ -275,6 +275,14 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                   {branch || 'בחרו סניף'}
                 </button>
               </div>
+            </div>
+
+            <div className="flex justify-center pt-0.5">
+              <img
+                src="/Logo_Blue_Heart_HQ.png"
+                alt="Blue Heart"
+                className="h-8 w-auto object-contain"
+              />
             </div>
 
             <div className="text-end">
