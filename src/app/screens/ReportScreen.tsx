@@ -434,7 +434,7 @@ function getActionIconTone(action: ActionItem['action']) {
     case 'homeDelivery':
       return 'bg-emerald-50 text-emerald-600 ring-emerald-100'
     case 'sendLab':
-      return 'bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-lg shadow-purple-600/25 ring-purple-300'
+      return 'bg-purple-50 text-purple-600 ring-purple-100'
     case 'branchIssue':
       return 'bg-rose-50 text-rose-900 ring-rose-100'
     case 'orderEquipment':
@@ -443,7 +443,7 @@ function getActionIconTone(action: ActionItem['action']) {
     case 'checkPhoto':
       return 'bg-slate-100 text-slate-600 ring-slate-200'
     case 'orderItem':
-      return 'bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/25 ring-blue-300'
+      return 'bg-blue-50 text-blue-700 ring-blue-100'
     case 'hotModel':
       return 'bg-blue-50 text-blue-700 ring-blue-100'
   }
