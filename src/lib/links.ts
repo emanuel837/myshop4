@@ -52,6 +52,8 @@ export type LinkActionKey =
   | 'reportMissingOffline'
   | 'orderItem'
   | 'orderEquipment'
+  | 'branchVisibilityPhoto'
+  | 'homeDelivery'
   | 'checkPhoto'
   | 'branchIssue'
   | 'hotModel'
@@ -67,6 +69,12 @@ const PICKUP_ORDER_FORM_URL =
 
 const EQUIPMENT_ORDER_URL =
   'https://airtable.com/appZdzUZAvVj25hm9/shrT50X5ooKiFYX0j'
+
+const BRANCH_VISIBILITY_PHOTO_URL =
+  'https://airtable.com/appMi9L7QDrJZ00cz/pagCGMJYj8vjY6sxd/form'
+
+const HOME_DELIVERY_URL =
+  'https://airtable.com/app98qOm1Vin8vcZC/pagULIx4PCOvR0cdj/form'
 
 const CHECK_PHOTO_URL =
   'https://airtable.com/appZdzUZAvVj25hm9/pagSvqx2CmgjUlJX3/form'
@@ -172,6 +180,10 @@ export function getAirtableLink(
   switch (action) {
     case 'orderEquipment':
       return EQUIPMENT_ORDER_URL
+    case 'branchVisibilityPhoto':
+      return BRANCH_VISIBILITY_PHOTO_URL
+    case 'homeDelivery':
+      return HOME_DELIVERY_URL
     case 'checkPhoto':
       return CHECK_PHOTO_URL
     case 'branchIssue':

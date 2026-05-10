@@ -6,6 +6,8 @@ type ActionItem = {
   action:
     | 'orderItem'
     | 'orderEquipment'
+    | 'branchVisibilityPhoto'
+    | 'homeDelivery'
     | 'checkPhoto'
     | 'branchIssue'
     | 'hotModel'
@@ -121,6 +123,43 @@ function IconFire(props: { className?: string }) {
     >
       <path d="M12 22c4 0 7-3 7-7 0-3-2-5.5-4-7 .2 2-1 3.5-2.2 4.2C13.2 8.7 11.2 5.3 8 3c.4 4-3 6.2-3 11 0 4.5 3 8 7 8Z" />
       <path d="M10 18c0-1.7 1.3-2.7 2.6-3.7.1 1.3.8 2.1 1.4 2.7 0 1.7-1.2 3-2.7 3A2.8 2.8 0 0 1 10 18Z" />
+    </svg>
+  )
+}
+
+function IconCamera(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M14.5 4 16 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3l1.5-3h5Z" />
+      <path d="M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+    </svg>
+  )
+}
+
+function IconHome(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 10.5 12 3l9 7.5" />
+      <path d="M5 9.5V21h14V9.5" />
+      <path d="M9 21v-7h6v7" />
     </svg>
   )
 }
@@ -279,13 +318,23 @@ const ITEMS: ActionItem[] = [
     action: 'orderEquipment',
   },
   {
+    title: 'צילום נראות הסניף',
+    subtitle: 'כל יום ראשון עד 12:00',
+    action: 'branchVisibilityPhoto',
+  },
+  {
+    title: 'משלוח עד הבית',
+    subtitle: 'שלח הזמנה עד הבית של הלקוח',
+    action: 'homeDelivery',
+  },
+  {
     title: "צילום צ'ק",
     subtitle: "שלח צילום של צ'ק",
     action: 'checkPhoto',
   },
   {
-    title: 'דיווח על תקלה בסניף',
-    subtitle: 'דווח על תקלה טכנית בסניף',
+    title: 'דיווח על תקלה',
+    subtitle: 'דווח על תקלה בסניף',
     action: 'branchIssue',
   },
   {
@@ -338,16 +387,28 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
           item={ITEMS[4]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconCreditCard className="h-6 w-6" />}
+          icon={<IconCamera className="h-6 w-6" />}
         />
         <ActionCard
           item={ITEMS[5]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
-          icon={<IconAlert className="h-6 w-6" />}
+          icon={<IconHome className="h-6 w-6" />}
         />
         <ActionCard
           item={ITEMS[6]}
+          branch={branch}
+          onUnavailable={(m) => onUnavailable(m)}
+          icon={<IconCreditCard className="h-6 w-6" />}
+        />
+        <ActionCard
+          item={ITEMS[7]}
+          branch={branch}
+          onUnavailable={(m) => onUnavailable(m)}
+          icon={<IconAlert className="h-6 w-6" />}
+        />
+        <ActionCard
+          item={ITEMS[8]}
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
           icon={<IconFire className="h-6 w-6" />}
