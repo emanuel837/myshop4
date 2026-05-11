@@ -417,6 +417,11 @@ const MAIN_ITEMS: ActionItem[] = [
     action: 'sendLab',
   },
   {
+    titleKey: 'report.cancelOnlineOrder',
+    subtitleKey: 'report.cancelOnlineOrderSubtitle',
+    action: 'cancelOnlineOrder',
+  },
+  {
     titleKey: 'report.hotModel',
     subtitleKey: 'report.hotModelSubtitle',
     action: 'hotModel',
@@ -428,11 +433,6 @@ const ADDITIONAL_ITEMS: ActionItem[] = [
     titleKey: 'report.checkPhoto',
     subtitleKey: 'report.checkPhotoSubtitle',
     action: 'checkPhoto',
-  },
-  {
-    titleKey: 'report.cancelOnlineOrder',
-    subtitleKey: 'report.cancelOnlineOrderSubtitle',
-    action: 'cancelOnlineOrder',
   },
   {
     titleKey: 'report.storeAppearance',
