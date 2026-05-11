@@ -2,13 +2,16 @@ import type { AppLanguage } from './I18nProvider'
 
 const EN_REPLACEMENTS: Array<[string, string]> = [
   // Specific full-name mapping
-  ['ביאליק 4 - רמת גן', 'Tiv Tov - Ramat Gan'],
+  ['ביאליק 4 - רמת גן', 'Tiv Tov - Bialik 4, Ramat Gan'],
 
   // Substring mappings
   ['שטיינר', 'Shtainer Orthopedics'],
+  ['אבן גבירול 46 תל אביב', 'Ibn Gabirol 46, Tel Aviv'],
   ['קניון הזהב', 'Gold Mall'],
+  ['ראשון לציון', 'Rishon LeZion'],
   ['כפר סבא', 'Kfar Saba'],
   ['ירושלים', 'Jerusalem'],
+  ['קריית ביאליק', 'Kiryat Bialik'],
   ['קריון', 'Kiryon'],
   ['אסף סנטר', 'Asaf Center'],
   ['קניון אורות', 'Orot Mall'],
@@ -22,13 +25,16 @@ const EN_REPLACEMENTS: Array<[string, string]> = [
 
 const RU_REPLACEMENTS: Array<[string, string]> = [
   // Specific full-name mapping
-  ['ביאליק 4 - רמת גן', 'Тив Тов - Рамат Ган'],
+  ['ביאליק 4 - רמת גן', 'Тив Тов - Биалик 4, Рамат Ган'],
 
   // Substring mappings
   ['שטיינר', 'Штайнер Ортопедия'],
+  ['אבן גבירול 46 תל אביב', 'Ибн Гвироль 46, Тель-Авив'],
   ['קניון הזהב', 'Золотой молл'],
+  ['ראשון לציון', 'Ришон ле-Цион'],
   ['כפר סבא', 'Кфар Саба'],
   ['ירושלים', 'Иерусалим'],
+  ['קריית ביאליק', 'Кирьят Биалик'],
   ['קריון', 'Кирьон'],
   ['אסף סנטר', 'Центр Асаф'],
   ['קניון אורות', 'Молл Орот'],
