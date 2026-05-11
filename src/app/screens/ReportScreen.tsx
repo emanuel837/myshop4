@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { getAirtableLink, getLabFormUrl } from '../../lib/links'
 import { useI18n } from '../i18n/I18nProvider'
 
@@ -57,6 +58,23 @@ function IconArrowRight(props: { className?: string }) {
     >
       <path d="M5 12h14" />
       <path d="m13 5 7 7-7 7" />
+    </svg>
+  )
+}
+
+function IconChevronDown(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m6 9 6 6 6-6" />
     </svg>
   )
 }
@@ -303,6 +321,7 @@ function ActionCard({
 }) {
   const { t } = useI18n()
   const iconTone = getActionIconTone(item.action)
+  const cardTone = getActionCardTone(item.action)
 
   return (
     <button
@@ -318,7 +337,10 @@ function ActionCard({
         }
         window.open(href, '_blank', 'noopener,noreferrer')
       }}
-      className="w-full rounded-[24px] border border-[#233667]/15 bg-white px-5 py-5 text-start shadow-[0_2px_8px_rgba(35,54,103,0.08)] transition-transform duration-100 hover:border-[#233667]/25 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/15"
+      className={[
+        'w-full rounded-[24px] border bg-white px-5 py-5 text-start shadow-[0_2px_8px_rgba(35,54,103,0.08)] transition-transform duration-100 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4',
+        cardTone,
+      ].join(' ')}
     >
       {/* Force LTR row so "left" is visually left even in RTL UI */}
       <div className="flex flex-row items-center gap-4">
@@ -461,6 +483,17 @@ const ADDITIONAL_ITEMS: ActionItem[] = [
   },
 ]
 
+function getActionCardTone(action: ActionItem['action']) {
+  switch (action) {
+    case 'orderItem':
+      return 'border-[#233667]/45 hover:border-[#233667]/65 focus-visible:ring-[#233667]/15'
+    case 'cancelOnlineOrder':
+      return 'border-rose-300/70 hover:border-rose-400/90 focus-visible:ring-rose-500/15'
+    default:
+      return 'border-[#233667]/15 hover:border-[#233667]/25 focus-visible:ring-[#233667]/15'
+  }
+}
+
 function getActionIconTone(action: ActionItem['action']) {
   switch (action) {
     case 'receivedPackage':
@@ -474,14 +507,14 @@ function getActionIconTone(action: ActionItem['action']) {
     case 'branchIssue':
       return 'bg-rose-50 text-rose-900 ring-rose-100'
     case 'cancelOnlineOrder':
-      return 'bg-slate-100 text-slate-600 ring-slate-200'
+      return 'bg-transparent text-rose-600 ring-rose-300/70'
     case 'orderEquipment':
     case 'insoleProductionForm':
     case 'branchVisibilityPhoto':
     case 'checkPhoto':
       return 'bg-slate-100 text-slate-600 ring-slate-200'
     case 'orderItem':
-      return 'bg-[#233667]/10 text-[#233667] ring-[#233667]/15'
+      return 'bg-transparent text-[#233667] ring-[#233667]/30'
     case 'hotModel':
       return 'bg-[#233667]/10 text-[#233667] ring-[#233667]/15'
   }
@@ -516,12 +549,69 @@ function getActionIcon(action: ActionItem['action']) {
   }
 }
 
+function AdditionalReportsModal({
+  branch,
+  onClose,
+  onUnavailable,
+}: {
+  branch: string
+  onClose: () => void
+  onUnavailable: (message: string) => void
+}) {
+  const { t } = useI18n()
+  return (
+    <div
+      className="fixed inset-0 z-20"
+      role="dialog"
+      aria-modal="true"
+      aria-label={t('report.moreReports')}
+    >
+      <button
+        type="button"
+        className="absolute inset-0 bg-slate-950/40"
+        onClick={onClose}
+        aria-label={t('home.close')}
+      />
+      <div className="absolute bottom-0 left-0 right-0 mx-auto max-w-md rounded-t-[28px] bg-white p-4 text-slate-950 shadow-2xl ring-1 ring-[#233667]/15">
+        <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-[#233667]/15" />
+        <div className="flex items-center justify-between">
+          <h3 className="text-base font-semibold">{t('report.moreReports')}</h3>
+          <button
+            type="button"
+            className="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-xl font-semibold leading-none text-slate-600 hover:bg-slate-200 hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500/30"
+            onClick={onClose}
+            aria-label={t('home.close')}
+          >
+            ×
+          </button>
+        </div>
+
+        <div className="mt-3 max-h-[65vh] space-y-3 overflow-auto pb-2">
+          {ADDITIONAL_ITEMS.map((item) => (
+            <ActionCard
+              key={item.action}
+              item={item}
+              branch={branch}
+              onUnavailable={(message) => {
+                onClose()
+                onUnavailable(message)
+              }}
+              icon={getActionIcon(item.action)}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 type ReportScreenProps = {
   branch: string
   onUnavailable: (message: string | null) => void
 }
 
 export default function ReportScreen({ branch, onUnavailable }: ReportScreenProps) {
+  const [isAdditionalOpen, setIsAdditionalOpen] = useState(false)
   const { t } = useI18n()
 
   return (
@@ -563,16 +653,39 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
           onUnavailable={(m) => onUnavailable(m)}
           icon={getActionIcon(MAIN_ITEMS[4].action)}
         />
-        {ADDITIONAL_ITEMS.map((item) => (
-          <ActionCard
-            key={item.action}
-            item={item}
-            branch={branch}
-            onUnavailable={(m) => onUnavailable(m)}
-            icon={getActionIcon(item.action)}
-          />
-        ))}
+        <button
+          type="button"
+          onClick={() => setIsAdditionalOpen(true)}
+          className="w-full rounded-[24px] border border-[#233667]/15 bg-white px-5 py-5 text-start shadow-[0_2px_8px_rgba(35,54,103,0.08)] transition-transform duration-100 hover:border-[#233667]/25 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/15"
+        >
+          <div className="flex flex-row items-center gap-4">
+            <div className="grid h-12 w-12 flex-none place-items-center rounded-2xl bg-gradient-to-br from-slate-600 to-slate-700 text-white shadow-lg shadow-slate-700/20 ring-1 ring-slate-400">
+              <IconFileText className="h-6 w-6" />
+            </div>
+
+            <div className="min-w-0 flex-1 text-right">
+              <div className="text-lg font-extrabold text-slate-950">
+                {t('report.moreReports')}
+              </div>
+              <div className="mt-1 text-sm font-medium text-slate-500">
+                {t('report.moreReportsSubtitle')}
+              </div>
+            </div>
+
+            <div className="flex-none text-slate-500" aria-hidden="true">
+              <IconChevronDown className="h-5 w-5" />
+            </div>
+          </div>
+        </button>
       </div>
+
+      {isAdditionalOpen ? (
+        <AdditionalReportsModal
+          branch={branch}
+          onClose={() => setIsAdditionalOpen(false)}
+          onUnavailable={(m) => onUnavailable(m)}
+        />
+      ) : null}
     </main>
   )
 }
