@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getAirtableLink, getLabFormUrl } from '../../lib/links'
+import { useI18n } from '../i18n/I18nProvider'
 
 type ActionItem = {
   title: string
@@ -538,10 +539,11 @@ type ReportScreenProps = {
 
 export default function ReportScreen({ branch, onUnavailable }: ReportScreenProps) {
   const [isAdditionalOpen, setIsAdditionalOpen] = useState(false)
+  const { t, dir } = useI18n()
 
   return (
-    <main className="mx-auto max-w-md px-4 pb-28 pt-6">
-      <h2 className="text-xl font-extrabold text-[#233667]">דיווח</h2>
+    <main className="mx-auto max-w-md px-4 pb-28 pt-6" dir={dir}>
+      <h2 className="text-xl font-extrabold text-[#233667]">{t('tab.report')}</h2>
 
       <div className="mt-4 space-y-3">
         <MissingReportCard

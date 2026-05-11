@@ -1,4 +1,5 @@
 import { getAirtableLink } from '../../lib/links'
+import { useI18n } from '../i18n/I18nProvider'
 
 type ActionItem = {
   title: string
@@ -150,9 +151,10 @@ export default function TrackingScreen({
   branch,
   onUnavailable,
 }: TrackingScreenProps) {
+  const { t, dir } = useI18n()
   return (
-    <main className="mx-auto max-w-md px-4 pb-28 pt-6">
-      <h2 className="text-xl font-extrabold text-[#233667]">מעקב</h2>
+    <main className="mx-auto max-w-md px-4 pb-28 pt-6" dir={dir}>
+      <h2 className="text-xl font-extrabold text-[#233667]">{t('tab.tracking')}</h2>
 
       <div className="mt-4 space-y-3">
         <ActionCard

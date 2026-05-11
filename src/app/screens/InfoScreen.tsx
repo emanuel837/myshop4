@@ -1,3 +1,6 @@
+import type { ReactNode } from 'react'
+import { useI18n } from '../i18n/I18nProvider'
+
 type InfoScreenProps = {
   employeeName: string
   branch: string
@@ -27,7 +30,7 @@ function SectionCard({
   children,
 }: {
   title: string
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <section className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_2px_8px_rgba(35,54,103,0.08)]">
@@ -71,9 +74,10 @@ export default function InfoScreen({
   branch,
   onChangeBranch,
 }: InfoScreenProps) {
+  const { t, dir } = useI18n()
   return (
-    <main className="mx-auto max-w-md px-4 pb-28 pt-6">
-      <h2 className="text-xl font-extrabold text-slate-800">מידע</h2>
+    <main className="mx-auto max-w-md px-4 pb-28 pt-6" dir={dir}>
+      <h2 className="text-xl font-extrabold text-slate-800">{t('tab.info')}</h2>
 
       <div className="mt-4 space-y-3">
         <SectionCard title="פרטי העובד שלי">

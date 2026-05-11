@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useI18n } from '../i18n/I18nProvider'
 
 const BRANCHES: { name: string; phone: string | null }[] = [
   { name: 'ביאליק 4 - רמת גן', phone: '03-6728725' },
@@ -56,6 +57,7 @@ function BranchDisplayName({ name }: { name: string }) {
 }
 
 export default function BranchesScreen() {
+  const { t, dir } = useI18n()
   const [search, setSearch] = useState('')
 
   const filteredBranches = useMemo(() => {
@@ -65,8 +67,8 @@ export default function BranchesScreen() {
   }, [search])
 
   return (
-    <main className="mx-auto max-w-md px-4 pb-28 pt-6">
-      <h2 className="text-xl font-extrabold text-[#233667]">סניפים</h2>
+    <main className="mx-auto max-w-md px-4 pb-28 pt-6" dir={dir}>
+      <h2 className="text-xl font-extrabold text-[#233667]">{t('tab.branches')}</h2>
 
       <div className="mt-4">
         <label className="sr-only" htmlFor="branch-search">

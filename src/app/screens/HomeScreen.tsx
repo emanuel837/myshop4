@@ -4,6 +4,7 @@ import InfoScreen from './InfoScreen'
 import ReportScreen from './ReportScreen'
 import TrackingScreen from './TrackingScreen'
 import { getAirtableLink, getLabFormUrl, type LinkActionKey } from '../../lib/links'
+import { useI18n } from '../i18n/I18nProvider'
 
 type HomeScreenProps = {
   onLogout: () => void
@@ -34,12 +35,17 @@ type TabKey = 'home' | 'report' | 'tracking' | 'branches' | 'info'
 type SearchAction = {
   title: string
   action: LinkActionKey | 'sendLab'
+  titleI18nKey?: 'action.orderItem' | 'action.sendLab' | 'action.receivedPackage'
 }
 
 const SEARCH_ACTIONS: SearchAction[] = [
-  { title: 'הזמנת פריט', action: 'orderItem' },
-  { title: 'שליחה למעבדה', action: 'sendLab' },
-  { title: 'קיבלתי חבילה מכץ', action: 'receivedPackage' },
+  { title: 'הזמנת פריט', titleI18nKey: 'action.orderItem', action: 'orderItem' },
+  { title: 'שליחה למעבדה', titleI18nKey: 'action.sendLab', action: 'sendLab' },
+  {
+    title: 'קיבלתי חבילה מכץ',
+    titleI18nKey: 'action.receivedPackage',
+    action: 'receivedPackage',
+  },
   { title: 'דיווח על חוסר - הזמנות אתר', action: 'reportMissingOnline' },
   { title: 'דיווח על חוסר - הזמנות סניפים', action: 'reportMissingOffline' },
   { title: 'הזמנת איסוף', action: 'pickupOrder' },
@@ -251,6 +257,7 @@ function IconBranches(props: { className?: string }) {
 }
 
 export default function HomeScreen({ onLogout }: HomeScreenProps) {
+  const { lang, setLang, t, dir } = useI18n()
   const [employeeName] = useState(() => {
     try {
       return localStorage.getItem(LS_EMPLOYEE_NAME) ?? ''
@@ -279,12 +286,15 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
     null,
   )
   const firstName = getFirstName(employeeName)
+  const getSearchTitle = (item: SearchAction) => {
+    return item.titleI18nKey ? t(item.titleI18nKey) : item.title
+  }
   const filteredSearchActions = useMemo(() => {
     const query = searchQuery.trim()
     if (!query) return []
 
-    return SEARCH_ACTIONS.filter((item) => item.title.includes(query))
-  }, [searchQuery])
+    return SEARCH_ACTIONS.filter((item) => getSearchTitle(item).includes(query))
+  }, [getSearchTitle, searchQuery])
 
   useEffect(() => {
     function closeSearchOnOutsideClick(event: PointerEvent) {
@@ -337,7 +347,10 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-[#f0f4f8] text-slate-950">
+    <div
+      className="min-h-screen bg-gradient-to-b from-white to-[#f0f4f8] text-slate-950"
+      dir={dir}
+    >
       <header className="sticky top-0 z-10 border-b border-[#233667]/15 bg-white/95 shadow-sm shadow-[#233667]/5 backdrop-blur">
         <div className="mx-auto max-w-md px-4 py-3">
           <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-3">
@@ -379,6 +392,50 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
 
             <div className="text-end">
               <h1 className="text-xl font-semibold tracking-tight">myShop 4</h1>
+              <div className="mt-1 flex justify-end gap-1">
+                <button
+                  type="button"
+                  onClick={() => setLang('he')}
+                  className={[
+                    'inline-flex h-7 w-7 items-center justify-center rounded-lg text-sm leading-none ring-1 transition',
+                    lang === 'he'
+                      ? 'bg-[#233667] text-white ring-[#233667]/30'
+                      : 'bg-white text-slate-700 ring-[#233667]/15 hover:bg-[#233667]/5',
+                  ].join(' ')}
+                  aria-label="עברית"
+                  title="עברית"
+                >
+                  🇮🇱
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLang('en')}
+                  className={[
+                    'inline-flex h-7 w-7 items-center justify-center rounded-lg text-sm leading-none ring-1 transition',
+                    lang === 'en'
+                      ? 'bg-[#233667] text-white ring-[#233667]/30'
+                      : 'bg-white text-slate-700 ring-[#233667]/15 hover:bg-[#233667]/5',
+                  ].join(' ')}
+                  aria-label="English"
+                  title="English"
+                >
+                  🇬🇧
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLang('ru')}
+                  className={[
+                    'inline-flex h-7 w-7 items-center justify-center rounded-lg text-sm leading-none ring-1 transition',
+                    lang === 'ru'
+                      ? 'bg-[#233667] text-white ring-[#233667]/30'
+                      : 'bg-white text-slate-700 ring-[#233667]/15 hover:bg-[#233667]/5',
+                  ].join(' ')}
+                  aria-label="Русский"
+                  title="Русский"
+                >
+                  🇷🇺
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -401,7 +458,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 <input
                   id="home-action-search"
                   type="search"
-                  dir="rtl"
+                  dir={dir}
                   value={searchQuery}
                   onFocus={() => {
                     if (searchQuery.trim()) setIsSearchOpen(true)
@@ -411,7 +468,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                     setIsSearchOpen(true)
                   }}
                   className="w-full rounded-2xl border border-[#233667]/15 bg-white py-3 pl-4 pr-12 text-base font-semibold text-slate-950 shadow-[0_2px_8px_rgba(35,54,103,0.08)] outline-none placeholder:text-slate-400 focus:border-[#233667] focus:ring-4 focus:ring-[#233667]/10"
-                  placeholder="חפש פעולה..."
+                  placeholder={t('search.placeholder')}
                 />
               </div>
 
@@ -426,7 +483,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                         className="flex w-full flex-row items-center gap-3 rounded-2xl border border-[#233667]/15 bg-white px-4 py-3 text-start shadow-[0_2px_8px_rgba(35,54,103,0.08)] transition-transform duration-100 hover:bg-[#233667]/5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/20"
                       >
                         <span className="min-w-0 flex-1 text-base font-extrabold text-slate-950">
-                          {item.title}
+                          {getSearchTitle(item)}
                         </span>
                         <span
                           className="flex-none text-[#233667]"
@@ -470,7 +527,9 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 <span className="grid h-14 w-14 place-items-center rounded-2xl bg-[#233667]/10 text-[#233667] shadow-lg shadow-[#233667]/10 ring-1 ring-[#233667]/15">
                   <IconShoppingBag className="h-7 w-7" />
                 </span>
-                <span className="mt-3 text-xl font-extrabold">הזמנת פריט</span>
+                <span className="mt-3 text-xl font-extrabold">
+                  {t('action.orderItem')}
+                </span>
                 <span className="mt-1.5 text-sm font-medium text-[#233667]/80">
                   להזמין פריט עבור לקוח במהירות ובקלות
                 </span>
@@ -494,7 +553,9 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 <span className="grid h-14 w-14 place-items-center rounded-2xl bg-purple-50 text-purple-600 shadow-lg shadow-purple-600/10 ring-1 ring-purple-100">
                   <IconWrench className="h-7 w-7" />
                 </span>
-                <span className="mt-3 text-xl font-extrabold">שליחה למעבדה</span>
+                <span className="mt-3 text-xl font-extrabold">
+                  {t('action.sendLab')}
+                </span>
                 <span className="mt-1.5 text-sm font-medium text-[#233667]/80">
                   לפתוח פנייה ולשלוח פריט לתיקון / בדיקה
                 </span>
@@ -519,7 +580,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                   <IconPackage className="h-7 w-7" />
                 </span>
                 <span className="mt-3 text-xl font-extrabold">
-                  קיבלתי חבילה מכץ
+                  {t('action.receivedPackage')}
                 </span>
                 <span className="mt-1.5 text-sm font-medium text-[#233667]/80">
                   לעדכן שהחבילה הגיעה ולסיים את הטיפול
@@ -556,7 +617,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             aria-current={tab === 'home' ? 'page' : undefined}
           >
             <IconHome className="h-6 w-6" />
-            <span className="text-xs font-semibold">בית</span>
+            <span className="text-xs font-semibold">{t('tab.home')}</span>
           </button>
 
           <button
@@ -571,7 +632,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             aria-current={tab === 'report' ? 'page' : undefined}
           >
             <IconReport className="h-6 w-6" />
-            <span className="text-xs font-semibold">דיווח</span>
+            <span className="text-xs font-semibold">{t('tab.report')}</span>
           </button>
 
           <button
@@ -586,7 +647,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             aria-current={tab === 'tracking' ? 'page' : undefined}
           >
             <IconTracking className="h-6 w-6" />
-            <span className="text-xs font-semibold">מעקב</span>
+            <span className="text-xs font-semibold">{t('tab.tracking')}</span>
           </button>
 
           <button
@@ -601,7 +662,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             aria-current={tab === 'info' ? 'page' : undefined}
           >
             <IconInfo className="h-6 w-6" />
-            <span className="text-xs font-semibold">מידע</span>
+            <span className="text-xs font-semibold">{t('tab.info')}</span>
           </button>
 
           <button
@@ -616,7 +677,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             aria-current={tab === 'branches' ? 'page' : undefined}
           >
             <IconBranches className="h-6 w-6" />
-            <span className="text-xs font-semibold">סניפים</span>
+            <span className="text-xs font-semibold">{t('tab.branches')}</span>
           </button>
         </div>
       </nav>
