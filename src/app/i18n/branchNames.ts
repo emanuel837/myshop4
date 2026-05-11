@@ -4,6 +4,19 @@ const EN_REPLACEMENTS: Array<[string, string]> = [
   // Specific full-name mapping
   ['ביאליק 4 - רמת גן', 'Tiv Tov - Bialik 4, Ramat Gan'],
 
+  // Exact address fragments (must match as-is)
+  ['רוטשילד 61, כפר סבא', 'Rothschild 61, Kfar Saba'],
+  ['קניון התחנה המרכזית', 'Central Station Mall'],
+  ['קריית ביאליק', 'Kiryat Bialik'],
+  ['באר יעקב', "Be'er Ya'akov"],
+  ['אור עקיבא', 'Or Akiva'],
+  ['רמת גן', 'Ramat Gan'],
+  ['נוף הגליל', 'Nazareth Illit'],
+  ['חיפה', 'Haifa'],
+  ['בת ים', 'Bat Yam'],
+  ['נס ציונה', 'Nes Ziona'],
+  ['נתניה', 'Netanya'],
+
   // Substring mappings
   ['שטיינר', 'Shtainer Orthopedics'],
   ['אבן גבירול 46 תל אביב', 'Ibn Gabirol 46, Tel Aviv'],
@@ -11,7 +24,6 @@ const EN_REPLACEMENTS: Array<[string, string]> = [
   ['ראשון לציון', 'Rishon LeZion'],
   ['כפר סבא', 'Kfar Saba'],
   ['ירושלים', 'Jerusalem'],
-  ['קריית ביאליק', 'Kiryat Bialik'],
   ['קריון', 'Kiryon'],
   ['אסף סנטר', 'Asaf Center'],
   ['קניון אורות', 'Orot Mall'],
@@ -27,6 +39,19 @@ const RU_REPLACEMENTS: Array<[string, string]> = [
   // Specific full-name mapping
   ['ביאליק 4 - רמת גן', 'Тив Тов - Биалик 4, Рамат Ган'],
 
+  // Exact address fragments (must match as-is)
+  ['רוטשילד 61, כפר סבא', 'Ротшильд 61, Кфар Саба'],
+  ['קניון התחנה המרכזית', 'Молл Центральный вокзал'],
+  ['קריית ביאליק', 'Кирьят Биалик'],
+  ['באר יעקב', 'Беэр Яаков'],
+  ['אור עקיבא', 'Ор Акива'],
+  ['רמת גן', 'Рамат Ган'],
+  ['נוף הגליל', 'Нацрат Илит'],
+  ['חיפה', 'Хайфа'],
+  ['בת ים', 'Бат Ям'],
+  ['נס ציונה', 'Нес Циона'],
+  ['נתניה', 'Нетания'],
+
   // Substring mappings
   ['שטיינר', 'Штайнер Ортопедия'],
   ['אבן גבירול 46 תל אביב', 'Ибн Гвироль 46, Тель-Авив'],
@@ -34,7 +59,6 @@ const RU_REPLACEMENTS: Array<[string, string]> = [
   ['ראשון לציון', 'Ришон ле-Цион'],
   ['כפר סבא', 'Кфар Саба'],
   ['ירושלים', 'Иерусалим'],
-  ['קריית ביאליק', 'Кирьят Биалик'],
   ['קריון', 'Кирьон'],
   ['אסף סנטר', 'Центр Асаф'],
   ['קניון אורות', 'Молл Орот'],
