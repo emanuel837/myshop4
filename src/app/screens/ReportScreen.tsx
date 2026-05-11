@@ -15,6 +15,7 @@ type ActionItem = {
     | 'report.orderEquipment'
     | 'report.homeDelivery'
     | 'report.reportIssue'
+    | 'report.cancelOnlineOrder'
   subtitleKey:
     | 'report.orderItemSubtitle'
     | 'report.receivePackageSubtitle'
@@ -27,6 +28,7 @@ type ActionItem = {
     | 'report.orderEquipmentSubtitle'
     | 'report.homeDeliverySubtitle'
     | 'report.reportIssueSubtitle'
+    | 'report.cancelOnlineOrderSubtitle'
   action:
     | 'orderItem'
     | 'orderEquipment'
@@ -39,6 +41,7 @@ type ActionItem = {
     | 'receivedPackage'
     | 'pickupOrder'
     | 'sendLab'
+    | 'cancelOnlineOrder'
 }
 
 function IconArrowRight(props: { className?: string }) {
@@ -286,6 +289,25 @@ function IconTruck(props: { className?: string }) {
   )
 }
 
+function IconXCircle(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="m15 9-6 6" />
+      <path d="m9 9 6 6" />
+    </svg>
+  )
+}
+
 function ActionCard({
   item,
   icon,
@@ -426,6 +448,11 @@ const ADDITIONAL_ITEMS: ActionItem[] = [
     action: 'checkPhoto',
   },
   {
+    titleKey: 'report.cancelOnlineOrder',
+    subtitleKey: 'report.cancelOnlineOrderSubtitle',
+    action: 'cancelOnlineOrder',
+  },
+  {
     titleKey: 'report.storeAppearance',
     subtitleKey: 'report.storeAppearanceSubtitle',
     action: 'branchVisibilityPhoto',
@@ -464,6 +491,8 @@ function getActionIconTone(action: ActionItem['action']) {
       return 'bg-purple-50 text-purple-600 ring-purple-100'
     case 'branchIssue':
       return 'bg-rose-50 text-rose-900 ring-rose-100'
+    case 'cancelOnlineOrder':
+      return 'bg-slate-100 text-slate-600 ring-slate-200'
     case 'orderEquipment':
     case 'insoleProductionForm':
     case 'branchVisibilityPhoto':
@@ -500,6 +529,8 @@ function getActionIcon(action: ActionItem['action']) {
       return <IconAlert className="h-6 w-6" />
     case 'hotModel':
       return <IconFire className="h-6 w-6" />
+    case 'cancelOnlineOrder':
+      return <IconXCircle className="h-6 w-6" />
   }
 }
 
