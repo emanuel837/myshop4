@@ -46,6 +46,7 @@ export type TranslationKey =
   | 'report.orderEquipment'
   | 'report.homeDelivery'
   | 'report.reportIssue'
+  | 'report.cancelOnlineOrder'
   | 'report.orderItemSubtitle'
   | 'report.receivePackageSubtitle'
   | 'report.requestPickupSubtitle'
@@ -57,6 +58,7 @@ export type TranslationKey =
   | 'report.orderEquipmentSubtitle'
   | 'report.homeDeliverySubtitle'
   | 'report.reportIssueSubtitle'
+  | 'report.cancelOnlineOrderSubtitle'
   | 'report.moreReportsSubtitle'
   | 'tracking.trackOrders'
   | 'tracking.trackLabStatus'
@@ -139,6 +141,7 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'report.orderEquipment': 'הזמנת ציוד',
     'report.homeDelivery': 'משלוח עד הבית',
     'report.reportIssue': 'דיווח על תקלה',
+    'report.cancelOnlineOrder': 'ביטול עסקה מהאתר',
     'report.orderItemSubtitle': 'להזמין פריט מהמחסן או מסניף אחר',
     'report.receivePackageSubtitle': 'לעדכן קבלת חבילה',
     'report.requestPickupSubtitle': 'הזמנת איסוף מהסניף',
@@ -150,6 +153,7 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'report.orderEquipmentSubtitle': 'להזמין ציוד לסניף',
     'report.homeDeliverySubtitle': 'שליחת הזמנה עד הבית של הלקוח',
     'report.reportIssueSubtitle': 'לדווח על תקלה בסניף',
+    'report.cancelOnlineOrderSubtitle': 'לביטול עסקה שבוצעה באתר',
     'report.moreReportsSubtitle': 'פתיחת פעולות נוספות',
     'tracking.trackOrders': 'מעקב אחר הזמנות',
     'tracking.trackLabStatus': 'מעקב בדיקת מעבדה',
@@ -230,6 +234,7 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'report.orderEquipment': 'Order Equipment',
     'report.homeDelivery': 'Home Delivery',
     'report.reportIssue': 'Report Issue',
+    'report.cancelOnlineOrder': 'Cancel Online Order',
     'report.orderItemSubtitle': 'Order an item from the warehouse or another branch',
     'report.receivePackageSubtitle': 'Update package received',
     'report.requestPickupSubtitle': 'Request pickup from the branch',
@@ -241,6 +246,7 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'report.orderEquipmentSubtitle': 'Order equipment for the branch',
     'report.homeDeliverySubtitle': 'Send an order to the customer’s home',
     'report.reportIssueSubtitle': 'Report a branch issue',
+    'report.cancelOnlineOrderSubtitle': 'Cancel an order made on the website',
     'report.moreReportsSubtitle': 'Open additional actions',
     'tracking.trackOrders': 'Track Orders',
     'tracking.trackLabStatus': 'Track Lab Status',
@@ -320,6 +326,7 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'report.orderEquipment': 'Заказ оборудования',
     'report.homeDelivery': 'Доставка на дом',
     'report.reportIssue': 'Сообщить о проблеме',
+    'report.cancelOnlineOrder': 'Отмена онлайн заказа',
     'report.orderItemSubtitle': 'Заказать товар со склада или из другого филиала',
     'report.receivePackageSubtitle': 'Обновить получение посылки',
     'report.requestPickupSubtitle': 'Запросить забор из филиала',
@@ -331,6 +338,7 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'report.orderEquipmentSubtitle': 'Заказать оборудование для филиала',
     'report.homeDeliverySubtitle': 'Отправить заказ домой клиенту',
     'report.reportIssueSubtitle': 'Сообщить о проблеме в филиале',
+    'report.cancelOnlineOrderSubtitle': 'Отменить заказ с сайта',
     'report.moreReportsSubtitle': 'Открыть дополнительные действия',
     'tracking.trackOrders': 'Отслеживать заказы',
     'tracking.trackLabStatus': 'Статус мастерской',

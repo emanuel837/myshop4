@@ -60,6 +60,7 @@ export type LinkActionKey =
   | 'hotModel'
   | 'receivedPackage'
   | 'pickupOrder'
+  | 'cancelOnlineOrder'
   | 'trackOrders'
   | 'trackLab'
 
@@ -89,6 +90,9 @@ const BRANCH_ISSUE_URL =
 
 const HOT_MODEL_URL =
   'https://airtable.com/appMi9L7QDrJZ00cz/pagal5LlJdq5yhn6y/form'
+
+const CANCEL_ONLINE_ORDER_URL =
+  'https://airtable.com/appZdzUZAvVj25hm9/shrcCP8YUGZyNlqdT'
 
 const REPORT_MISSING_ONLINE: Record<BranchName, string> = {
   'ביאליק 4 - רמת גן': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrmQVERqhkXImAqW',
@@ -201,6 +205,8 @@ export function getAirtableLink(
   branch: string,
 ): string | undefined {
   switch (action) {
+    case 'cancelOnlineOrder':
+      return CANCEL_ONLINE_ORDER_URL
     case 'orderEquipment':
       return EQUIPMENT_ORDER_URL
     case 'insoleProductionForm':
