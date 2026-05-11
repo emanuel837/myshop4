@@ -5,6 +5,7 @@ import ReportScreen from './ReportScreen'
 import TrackingScreen from './TrackingScreen'
 import { getAirtableLink, getLabFormUrl, type LinkActionKey } from '../../lib/links'
 import { useI18n } from '../i18n/I18nProvider'
+import { getBranchDisplayName } from '../i18n/branchNames'
 
 type HomeScreenProps = {
   onLogout: () => void
@@ -374,7 +375,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                   onClick={() => setIsBranchModalOpen(true)}
                   className="font-normal text-slate-600 underline decoration-[#233667]/30 underline-offset-4 hover:text-[#233667] hover:decoration-[#233667] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/40"
                 >
-                  {branch || t('home.chooseBranch')}
+                  {branch ? getBranchDisplayName(branch, lang) : t('home.chooseBranch')}
                 </button>
               </div>
             </div>
@@ -527,7 +528,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                   {t('action.orderItem')}
                 </span>
                 <span className="mt-1.5 text-sm font-medium text-[#233667]/80">
-                  להזמין פריט עבור לקוח במהירות ובקלות
+                  {t('home.card.orderItemSubtitle')}
                 </span>
               </div>
             </button>
@@ -553,7 +554,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                   {t('action.sendLab')}
                 </span>
                 <span className="mt-1.5 text-sm font-medium text-[#233667]/80">
-                  לפתוח פנייה ולשלוח פריט לתיקון / בדיקה
+                  {t('home.card.sendLabSubtitle')}
                 </span>
               </div>
             </button>
@@ -579,7 +580,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                   {t('action.receivedPackage')}
                 </span>
                 <span className="mt-1.5 text-sm font-medium text-[#233667]/80">
-                  לעדכן שהחבילה הגיעה ולסיים את הטיפול
+                  {t('home.card.receivedPackageSubtitle')}
                 </span>
               </div>
             </button>
@@ -720,7 +721,9 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                       active ? 'bg-[#233667]/10 text-[#233667]' : '',
                     ].join(' ')}
                   >
-                    <span className="text-sm font-semibold">{b}</span>
+                    <span className="text-sm font-semibold">
+                      {getBranchDisplayName(b, lang)}
+                    </span>
                     {active ? (
                         <span className="text-xs font-semibold text-[#233667]">
                         {t('home.selected')}

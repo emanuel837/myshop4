@@ -13,6 +13,9 @@ export type TranslationKey =
   | 'action.orderItem'
   | 'action.sendLab'
   | 'action.receivedPackage'
+  | 'home.card.orderItemSubtitle'
+  | 'home.card.sendLabSubtitle'
+  | 'home.card.receivedPackageSubtitle'
   | 'tab.report'
   | 'tab.tracking'
   | 'tab.info'
@@ -103,6 +106,9 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'action.orderItem': 'הזמנת פריט',
     'action.sendLab': 'שליחה למעבדה',
     'action.receivedPackage': 'קיבלתי חבילה מכץ',
+    'home.card.orderItemSubtitle': 'להזמין פריט עבור לקוח במהירות ובקלות',
+    'home.card.sendLabSubtitle': 'לפתוח פנייה ולשלוח פריט לתיקון / בדיקה',
+    'home.card.receivedPackageSubtitle': 'לעדכן שהחבילה הגיעה ולסיים את הטיפול',
     'tab.report': 'דיווח',
     'tab.tracking': 'מעקב',
     'tab.info': 'מידע',
@@ -190,6 +196,10 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'action.orderItem': 'Order Item',
     'action.sendLab': 'Send to Lab',
     'action.receivedPackage': 'Received Package',
+    'home.card.orderItemSubtitle': 'Order an item from warehouse or another branch',
+    'home.card.sendLabSubtitle': 'Send item for lab inspection or repair',
+    'home.card.receivedPackageSubtitle':
+      'Confirm package arrival and close the process',
     'tab.report': 'Report',
     'tab.tracking': 'Tracking',
     'tab.info': 'Info',
@@ -277,6 +287,9 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'action.orderItem': 'Заказ товара',
     'action.sendLab': 'Отправка в мастерскую',
     'action.receivedPackage': 'Получена посылка',
+    'home.card.orderItemSubtitle': 'Заказать товар со склада или другого филиала',
+    'home.card.sendLabSubtitle': 'Отправить товар на проверку или ремонт',
+    'home.card.receivedPackageSubtitle': 'Подтвердить получение посылки',
     'tab.report': 'Отчёт',
     'tab.tracking': 'Отслеживание',
     'tab.info': 'Информация',

@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useI18n } from '../i18n/I18nProvider'
+import { getBranchDisplayName } from '../i18n/branchNames'
 
 type EmployeeDetailsScreenProps = {
   onSubmitSuccess: () => void
@@ -28,7 +29,7 @@ const LS_EMPLOYEE_BRANCH = 'myshop4.employee.branch'
 export default function EmployeeDetailsScreen({
   onSubmitSuccess,
 }: EmployeeDetailsScreenProps) {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const initialName = useMemo(() => {
     try {
       return localStorage.getItem(LS_EMPLOYEE_NAME) ?? ''
@@ -136,7 +137,7 @@ export default function EmployeeDetailsScreen({
                 </option>
                 {BRANCHES.map((b) => (
                   <option key={b} value={b}>
-                    {b}
+                    {getBranchDisplayName(b, lang)}
                   </option>
                 ))}
               </select>

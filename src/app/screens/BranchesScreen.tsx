@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useI18n } from '../i18n/I18nProvider'
+import { getBranchDisplayName } from '../i18n/branchNames'
 
 const BRANCHES: { name: string; phone: string | null }[] = [
   { name: 'ביאליק 4 - רמת גן', phone: '03-6728725' },
@@ -57,14 +58,16 @@ function BranchDisplayName({ name }: { name: string }) {
 }
 
 export default function BranchesScreen() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const [search, setSearch] = useState('')
 
   const filteredBranches = useMemo(() => {
     const query = search.trim()
     if (!query) return BRANCHES
-    return BRANCHES.filter((branch) => branch.name.includes(query))
-  }, [search])
+    return BRANCHES.filter((branch) =>
+      getBranchDisplayName(branch.name, lang).includes(query),
+    )
+  }, [lang, search])
 
   return (
     <main className="mx-auto max-w-md px-4 pb-28 pt-6">
@@ -98,7 +101,7 @@ export default function BranchesScreen() {
 
                 <div className="min-w-0 flex-1 text-right">
                   <div className="text-lg text-[#233667]">
-                    <BranchDisplayName name={branch.name} />
+                    <BranchDisplayName name={getBranchDisplayName(branch.name, lang)} />
                   </div>
                   {branch.phone ? (
                     <a
