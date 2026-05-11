@@ -2,22 +2,65 @@ import { useMemo, useState } from 'react'
 import { useI18n } from '../i18n/I18nProvider'
 import { getBranchDisplayName } from '../i18n/branchNames'
 
-const BRANCHES: { name: string; phone: string | null }[] = [
+type Branch = {
+  name: string
+  phone: string | null
+  addressEn?: string
+  addressRu?: string
+}
+
+const BRANCHES: Branch[] = [
   { name: 'ביאליק 4 - רמת גן', phone: '03-6728725' },
   { name: 'שטיינר - אבן גבירול 46 תל אביב', phone: '03-6955883' },
   { name: 'קניון הזהב - ראשון לציון', phone: '03-9413437' },
-  { name: 'רוטשילד 61 - כפר סבא', phone: '09-7657635' },
+  {
+    name: 'רוטשילד 61 - כפר סבא',
+    phone: '09-7657635',
+    addressEn: 'Rothschild 61, Kfar Saba',
+    addressRu: 'Ротшильд 61, Кфар Саба',
+  },
   { name: 'קניון התחנה המרכזית - ירושלים', phone: '02-5370040' },
-  { name: 'קניון הקריון - קריית ביאליק', phone: '04-8744020' },
+  {
+    name: 'קניון הקריון - קריית ביאליק',
+    phone: '04-8744020',
+    addressEn: 'Kiryon Mall - Kiryat Bialik',
+    addressRu: 'Кирьят Биалик',
+  },
   { name: 'אסף סנטר - באר יעקב', phone: '08-9201565' },
   { name: 'קניון אורות - אור עקיבא', phone: '04-8322523' },
   { name: 'קניון מרום - רמת גן', phone: '03-5477991' },
-  { name: 'עופר סנטר - נוף הגליל', phone: '04-6568166' },
+  {
+    name: 'עופר סנטר - נוף הגליל',
+    phone: '04-6568166',
+    addressEn: 'Ofer Center - Nazareth Illit',
+    addressRu: 'Нацрат Илит',
+  },
   { name: 'חוצות המפרץ - חיפה אאוטלט', phone: '04-8403441' },
-  { name: 'קניון ביג פאשן - בת ים', phone: '074-7580208' },
-  { name: 'קניותר - נס ציונה', phone: '08-9229810' },
-  { name: 'קניון השרון - נתניה', phone: '072-2044901' },
-] as const
+  {
+    name: 'קניון ביג פאשן - בת ים',
+    phone: '074-7580208',
+    addressEn: 'Big Fashion Mall - Bat Yam',
+    addressRu: 'Бат Ям',
+  },
+  {
+    name: 'קניותר - נס ציונה',
+    phone: '08-9229810',
+    addressEn: 'Kenyoter - Nes Ziona',
+    addressRu: 'Нес Циона',
+  },
+  {
+    name: 'קניון השרון - נתניה',
+    phone: '072-2044901',
+    addressEn: 'Hasharon Mall - Netanya',
+    addressRu: 'Нетания',
+  },
+]
+
+function getBranchAddress(branch: Branch, lang: 'he' | 'en' | 'ru') {
+  if (lang === 'en') return branch.addressEn ?? null
+  if (lang === 'ru') return branch.addressRu ?? null
+  return null
+}
 
 function getTelHref(phone: string) {
   return `tel:${phone.replace(/\D/g, '')}`
@@ -103,6 +146,11 @@ export default function BranchesScreen() {
                   <div className="text-lg text-[#233667]">
                     <BranchDisplayName name={getBranchDisplayName(branch.name, lang)} />
                   </div>
+                  {getBranchAddress(branch, lang) ? (
+                    <div className="mt-1 text-sm font-semibold text-slate-600">
+                      {getBranchAddress(branch, lang)}
+                    </div>
+                  ) : null}
                   {branch.phone ? (
                     <a
                       href={getTelHref(branch.phone)}
