@@ -56,10 +56,56 @@ const BRANCHES: Branch[] = [
   },
 ]
 
+function translateAddressHe(addressHe: string, lang: 'he' | 'en' | 'ru') {
+  if (lang === 'he') return addressHe
+
+  const enMap: Array<[string, string]> = [
+    ['רוטשילד 61, כפר סבא', 'Rothschild 61, Kfar Saba'],
+    ['קניון התחנה המרכזית', 'Central Station Mall'],
+    ['קריית ביאליק', 'Kiryat Bialik'],
+    ['באר יעקב', "Be'er Ya'akov"],
+    ['אור עקיבא', 'Or Akiva'],
+    ['רמת גן', 'Ramat Gan'],
+    ['נוף הגליל', 'Nazareth Illit'],
+    ['חיפה', 'Haifa'],
+    ['בת ים', 'Bat Yam'],
+    ['נס ציונה', 'Nes Ziona'],
+    ['נתניה', 'Netanya'],
+    // extra common fragments (not in the list but appear on screen)
+    ['אאוטלט', 'Outlet'],
+  ]
+
+  const ruMap: Array<[string, string]> = [
+    ['רוטשילד 61, כפר סבא', 'Ротшильд 61, Кфар Саба'],
+    ['קניון התחנה המרכזית', 'Молл Центральный вокзал'],
+    ['קריית ביאליק', 'Кирьят Биалик'],
+    ['באר יעקב', 'Беэр Яаков'],
+    ['אור עקיבא', 'Ор Акива'],
+    ['רמת גן', 'Рамат Ган'],
+    ['נוף הגליל', 'Нацрат Илит'],
+    ['חיפה', 'Хайфа'],
+    ['בת ים', 'Бат Ям'],
+    ['נס ציונה', 'Нес Циона'],
+    ['נתניה', 'Нетания'],
+    // extra common fragments (not in the list but appear on screen)
+    ['אאוטלט', 'Аутлет'],
+  ]
+
+  const map = lang === 'en' ? enMap : ruMap
+  let out = addressHe
+  for (const [from, to] of map) out = out.replaceAll(from, to)
+  return out
+}
+
 function getBranchAddress(branch: Branch, lang: 'he' | 'en' | 'ru') {
-  if (lang === 'en') return branch.addressEn ?? null
-  if (lang === 'ru') return branch.addressRu ?? null
-  return null
+  if (lang === 'he') return null
+  if (lang === 'en' && branch.addressEn) return branch.addressEn
+  if (lang === 'ru' && branch.addressRu) return branch.addressRu
+
+  const separator = ' - '
+  const idx = branch.name.indexOf(separator)
+  const addressHe = idx === -1 ? branch.name : branch.name.slice(idx + separator.length)
+  return translateAddressHe(addressHe, lang)
 }
 
 function getTelHref(phone: string) {
