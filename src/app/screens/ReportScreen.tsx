@@ -3,8 +3,30 @@ import { getAirtableLink, getLabFormUrl } from '../../lib/links'
 import { useI18n } from '../i18n/I18nProvider'
 
 type ActionItem = {
-  title: string
-  subtitle: string
+  titleKey:
+    | 'report.orderItem'
+    | 'report.receivePackage'
+    | 'report.requestPickup'
+    | 'report.sendToLab'
+    | 'report.hotModel'
+    | 'report.checkPhoto'
+    | 'report.storeAppearance'
+    | 'report.insoleForm'
+    | 'report.orderEquipment'
+    | 'report.homeDelivery'
+    | 'report.reportIssue'
+  subtitleKey:
+    | 'report.orderItemSubtitle'
+    | 'report.receivePackageSubtitle'
+    | 'report.requestPickupSubtitle'
+    | 'report.sendToLabSubtitle'
+    | 'report.hotModelSubtitle'
+    | 'report.checkPhotoSubtitle'
+    | 'report.storeAppearanceSubtitle'
+    | 'report.insoleFormSubtitle'
+    | 'report.orderEquipmentSubtitle'
+    | 'report.homeDeliverySubtitle'
+    | 'report.reportIssueSubtitle'
   action:
     | 'orderItem'
     | 'orderEquipment'
@@ -275,6 +297,7 @@ function ActionCard({
   branch: string
   onUnavailable: (message: string) => void
 }) {
+  const { t } = useI18n()
   const iconTone = getActionIconTone(item.action)
 
   return (
@@ -286,7 +309,7 @@ function ActionCard({
             ? getLabFormUrl(branch)
             : getAirtableLink(item.action, branch)
         if (!href) {
-          onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
+          onUnavailable(t('app.unavailableForBranch'))
           return
         }
         window.open(href, '_blank', 'noopener,noreferrer')
@@ -300,9 +323,9 @@ function ActionCard({
         </div>
 
         <div className="min-w-0 flex-1 text-right">
-          <div className="text-lg font-extrabold text-slate-950">{item.title}</div>
+          <div className="text-lg font-extrabold text-slate-950">{t(item.titleKey)}</div>
           <div className="mt-1 text-sm font-medium text-slate-500">
-            {item.subtitle}
+            {t(item.subtitleKey)}
           </div>
         </div>
 
@@ -321,13 +344,16 @@ function MissingReportCard({
   branch: string
   onUnavailable: (message: string) => void
 }) {
+  const { t } = useI18n()
   return (
     <section className="rounded-[24px] border border-amber-200 bg-[#FFF9C4] px-5 py-5 shadow-[0_2px_8px_rgba(35,54,103,0.08)]">
       <div className="flex flex-row items-center gap-3">
         <div className="grid h-12 w-12 flex-none place-items-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-lg shadow-orange-500/25 ring-1 ring-amber-300">
           <IconAlert className="h-6 w-6" />
         </div>
-        <h3 className="text-lg font-extrabold text-slate-950">דיווח על חוסר</h3>
+        <h3 className="text-lg font-extrabold text-slate-950">
+          {t('report.shortageTitle')}
+        </h3>
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-3">
@@ -336,14 +362,14 @@ function MissingReportCard({
           onClick={() => {
             const href = getAirtableLink('reportMissingOnline', branch)
             if (!href) {
-              onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
+              onUnavailable(t('app.unavailableForBranch'))
               return
             }
             window.open(href, '_blank', 'noopener,noreferrer')
           }}
           className="min-h-20 rounded-2xl bg-white px-3 py-4 text-center text-base font-extrabold text-amber-900 shadow-[0_2px_8px_rgba(35,54,103,0.08)] ring-1 ring-amber-200 transition-transform duration-100 hover:bg-amber-50 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-500/15"
         >
-          הזמנות אתר
+          {t('report.websiteOrders')}
         </button>
 
         <button
@@ -351,14 +377,14 @@ function MissingReportCard({
           onClick={() => {
             const href = getAirtableLink('reportMissingOffline', branch)
             if (!href) {
-              onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
+              onUnavailable(t('app.unavailableForBranch'))
               return
             }
             window.open(href, '_blank', 'noopener,noreferrer')
           }}
           className="grid min-h-20 place-items-center rounded-2xl bg-white px-3 py-4 text-center text-base font-extrabold text-amber-900 shadow-[0_2px_8px_rgba(35,54,103,0.08)] ring-1 ring-amber-200 transition-transform duration-100 hover:bg-amber-50 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-500/15"
         >
-          הזמנות סניפים
+          {t('report.branchOrders')}
         </button>
       </div>
     </section>
@@ -367,61 +393,61 @@ function MissingReportCard({
 
 const MAIN_ITEMS: ActionItem[] = [
   {
-    title: 'הזמנת פריט',
-    subtitle: 'להזמין פריט מהמחסן או מסניף אחר',
+    titleKey: 'report.orderItem',
+    subtitleKey: 'report.orderItemSubtitle',
     action: 'orderItem',
   },
   {
-    title: 'קבלת חבילה מכץ',
-    subtitle: 'לעדכן קבלת חבילה',
+    titleKey: 'report.receivePackage',
+    subtitleKey: 'report.receivePackageSubtitle',
     action: 'receivedPackage',
   },
   {
-    title: 'הזמנת איסוף',
-    subtitle: 'הזמנת איסוף מהסניף',
+    titleKey: 'report.requestPickup',
+    subtitleKey: 'report.requestPickupSubtitle',
     action: 'pickupOrder',
   },
   {
-    title: 'שליחה למעבדה',
-    subtitle: 'שליחת פריט לבדיקת מעבדה',
+    titleKey: 'report.sendToLab',
+    subtitleKey: 'report.sendToLabSubtitle',
     action: 'sendLab',
   },
   {
-    title: 'דגם חם 🔥',
-    subtitle: 'לדווח על מוצר עם ביקוש גבוה',
+    titleKey: 'report.hotModel',
+    subtitleKey: 'report.hotModelSubtitle',
     action: 'hotModel',
   },
 ]
 
 const ADDITIONAL_ITEMS: ActionItem[] = [
   {
-    title: "צילום צ'ק",
-    subtitle: "שליחת צילום של צ'ק",
+    titleKey: 'report.checkPhoto',
+    subtitleKey: 'report.checkPhotoSubtitle',
     action: 'checkPhoto',
   },
   {
-    title: 'צילום נראות הסניף',
-    subtitle: 'כל יום ראשון עד 12:00',
+    titleKey: 'report.storeAppearance',
+    subtitleKey: 'report.storeAppearanceSubtitle',
     action: 'branchVisibilityPhoto',
   },
   {
-    title: 'הזנת טופס ייצור מדרסים',
-    subtitle: 'הזנת טופס לייצור מדרסים ללקוח',
+    titleKey: 'report.insoleForm',
+    subtitleKey: 'report.insoleFormSubtitle',
     action: 'insoleProductionForm',
   },
   {
-    title: 'הזמנת ציוד',
-    subtitle: 'להזמין ציוד לסניף',
+    titleKey: 'report.orderEquipment',
+    subtitleKey: 'report.orderEquipmentSubtitle',
     action: 'orderEquipment',
   },
   {
-    title: 'משלוח עד הבית',
-    subtitle: 'שליחת הזמנה עד הבית של הלקוח',
+    titleKey: 'report.homeDelivery',
+    subtitleKey: 'report.homeDeliverySubtitle',
     action: 'homeDelivery',
   },
   {
-    title: 'דיווח על תקלה',
-    subtitle: 'לדווח על תקלה בסניף',
+    titleKey: 'report.reportIssue',
+    subtitleKey: 'report.reportIssueSubtitle',
     action: 'branchIssue',
   },
 ]
@@ -486,28 +512,29 @@ function AdditionalReportsModal({
   onClose: () => void
   onUnavailable: (message: string) => void
 }) {
+  const { t } = useI18n()
   return (
     <div
       className="fixed inset-0 z-20"
       role="dialog"
       aria-modal="true"
-      aria-label="דיווחים נוספים"
+      aria-label={t('report.moreReports')}
     >
       <button
         type="button"
         className="absolute inset-0 bg-slate-950/40"
         onClick={onClose}
-        aria-label="סגירה"
+        aria-label={t('home.close')}
       />
       <div className="absolute bottom-0 left-0 right-0 mx-auto max-w-md rounded-t-[28px] bg-white p-4 text-slate-950 shadow-2xl ring-1 ring-[#233667]/15">
         <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-[#233667]/15" />
         <div className="flex items-center justify-between">
-          <h3 className="text-base font-semibold">דיווחים נוספים</h3>
+          <h3 className="text-base font-semibold">{t('report.moreReports')}</h3>
           <button
             type="button"
             className="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-xl font-semibold leading-none text-slate-600 hover:bg-slate-200 hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500/30"
             onClick={onClose}
-            aria-label="סגירת דיווחים נוספים"
+            aria-label={t('home.close')}
           >
             ×
           </button>
@@ -539,10 +566,10 @@ type ReportScreenProps = {
 
 export default function ReportScreen({ branch, onUnavailable }: ReportScreenProps) {
   const [isAdditionalOpen, setIsAdditionalOpen] = useState(false)
-  const { t, dir } = useI18n()
+  const { t } = useI18n()
 
   return (
-    <main className="mx-auto max-w-md px-4 pb-28 pt-6" dir={dir}>
+    <main className="mx-auto max-w-md px-4 pb-28 pt-6">
       <h2 className="text-xl font-extrabold text-[#233667]">{t('tab.report')}</h2>
 
       <div className="mt-4 space-y-3">
@@ -592,10 +619,10 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
 
             <div className="min-w-0 flex-1 text-right">
               <div className="text-lg font-extrabold text-slate-950">
-                דיווחים נוספים
+                {t('report.moreReports')}
               </div>
               <div className="mt-1 text-sm font-medium text-slate-500">
-                פתיחת פעולות נוספות
+                {t('report.moreReportsSubtitle')}
               </div>
             </div>
 

@@ -1,9 +1,15 @@
 import { getAirtableLink } from '../../lib/links'
-import { useI18n } from '../i18n/I18nProvider'
+import { type TranslationKey, useI18n } from '../i18n/I18nProvider'
 
 type ActionItem = {
-  title: string
-  subtitle: string
+  titleKey:
+    | 'tracking.trackOrders'
+    | 'tracking.trackLabStatus'
+    | 'tracking.confirmPackage'
+  subtitleKey:
+    | 'tracking.trackOrdersSubtitle'
+    | 'tracking.trackLabStatusSubtitle'
+    | 'tracking.confirmPackageSubtitle'
   action: 'trackOrders' | 'trackLab' | 'receivedPackage'
 }
 
@@ -73,6 +79,7 @@ function ActionCard({
   branch: string
   onUnavailable: (message: string) => void
 }) {
+  const { t } = useI18n()
   const iconTone = getActionIconTone(item.action)
 
   return (
@@ -86,7 +93,7 @@ function ActionCard({
               ? getAirtableLink('trackLab', branch)
               : getAirtableLink('receivedPackage', branch)
         if (!href) {
-          onUnavailable('הפעולה אינה זמינה עבור הסניף שלך')
+          onUnavailable(t('app.unavailableForBranch'))
           return
         }
         window.open(href, '_blank', 'noopener,noreferrer')
@@ -99,9 +106,9 @@ function ActionCard({
         </div>
 
         <div className="min-w-0 flex-1 text-right">
-          <div className="text-lg font-extrabold text-slate-950">{item.title}</div>
+          <div className="text-lg font-extrabold text-slate-950">{t(item.titleKey)}</div>
           <div className="mt-1 text-sm font-medium text-slate-500">
-            {item.subtitle}
+            {t(item.subtitleKey satisfies TranslationKey)}
           </div>
         </div>
 
@@ -115,18 +122,18 @@ function ActionCard({
 
 const ITEMS: ActionItem[] = [
   {
-    title: 'מעקב אחר הזמנות',
-    subtitle: 'ראה סטטוס הזמנות',
+    titleKey: 'tracking.trackOrders',
+    subtitleKey: 'tracking.trackOrdersSubtitle',
     action: 'trackOrders',
   },
   {
-    title: 'מעקב בדיקת מעבדה',
-    subtitle: 'ראה סטטוס תיקונים',
+    titleKey: 'tracking.trackLabStatus',
+    subtitleKey: 'tracking.trackLabStatusSubtitle',
     action: 'trackLab',
   },
   {
-    title: 'קבלת חבילה מכץ',
-    subtitle: 'אשר קבלת חבילה',
+    titleKey: 'tracking.confirmPackage',
+    subtitleKey: 'tracking.confirmPackageSubtitle',
     action: 'receivedPackage',
   },
 ]
@@ -151,9 +158,9 @@ export default function TrackingScreen({
   branch,
   onUnavailable,
 }: TrackingScreenProps) {
-  const { t, dir } = useI18n()
+  const { t } = useI18n()
   return (
-    <main className="mx-auto max-w-md px-4 pb-28 pt-6" dir={dir}>
+    <main className="mx-auto max-w-md px-4 pb-28 pt-6">
       <h2 className="text-xl font-extrabold text-[#233667]">{t('tab.tracking')}</h2>
 
       <div className="mt-4 space-y-3">

@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useI18n } from '../i18n/I18nProvider'
 
 type LoginScreenProps = {
   onSuccess: () => void
 }
 
-function getHebrewGreeting(date: Date) {
+function getGreetingKey(date: Date) {
   const hour = date.getHours()
-  if (hour >= 5 && hour <= 11) return 'בוקר טוב'
-  if (hour >= 12 && hour <= 16) return 'צהריים טובים'
-  return 'ערב טוב'
+  if (hour >= 5 && hour <= 11) return 'login.goodMorning' as const
+  if (hour >= 12 && hour <= 16) return 'login.goodAfternoon' as const
+  return 'login.goodEvening' as const
 }
 
 const VALID_ACCESS_CODES = new Set(['1010', '1020'])
@@ -28,7 +29,8 @@ function formatCountdown(ms: number) {
 }
 
 export default function LoginScreen({ onSuccess }: LoginScreenProps) {
-  const greeting = useMemo(() => getHebrewGreeting(new Date()), [])
+  const { t } = useI18n()
+  const greetingKey = useMemo(() => getGreetingKey(new Date()), [])
   const [pin, setPin] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [attempts, setAttempts] = useState(() => {
@@ -115,7 +117,7 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
       return
     }
 
-    setError('קוד גישה שגוי. נסו שוב.')
+    setError(t('login.invalidCode'))
   }
 
   return (
@@ -131,13 +133,15 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
           <div className="mb-5 flex justify-center">
             <img
               src="/logo_halev_hakachol__1_.png"
-              alt="הלב הכחול"
+              alt={t('login.logoAlt')}
               className="h-9 w-auto object-contain"
             />
           </div>
-          <h2 className="text-2xl font-extrabold text-[#233667]">{greeting}</h2>
+          <h2 className="text-2xl font-extrabold text-[#233667]">
+            {t(greetingKey)}
+          </h2>
           <p className="mt-2 text-base text-slate-600">
-            הזינו קוד גישה בן 4 ספרות
+            {t('login.prompt')}
           </p>
 
           <form
@@ -152,7 +156,8 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
                 className="rounded-xl bg-amber-50 px-4 py-3 text-base font-extrabold text-amber-900 ring-1 ring-amber-200"
                 role="status"
               >
-                הגישה נחסמה. נסה שוב בעוד {formatCountdown(remainingMs)} דקות
+                {t('login.lockedPrefix')} {formatCountdown(remainingMs)}{' '}
+                {t('login.minutesSuffix')}
               </p>
             ) : null}
 
@@ -161,7 +166,7 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
                 htmlFor="pin"
                 className="block text-lg font-medium text-slate-900"
               >
-                קוד גישה
+                {t('login.accessCode')}
               </label>
               <input
                 id="pin"
@@ -202,7 +207,7 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
               disabled={isLocked || pin.length !== 4}
               className="w-full rounded-2xl bg-[#233667] px-4 py-4 text-xl font-extrabold text-white shadow-lg shadow-[#233667]/20 hover:bg-[#1b2a50] disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/20"
             >
-              כניסה
+              {t('login.enter')}
             </button>
           </form>
         </section>

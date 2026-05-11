@@ -41,11 +41,12 @@ function SectionCard({
 }
 
 function DetailRow({ label, value }: { label: string; value: string }) {
+  const { t } = useI18n()
   return (
     <div className="flex items-center justify-between gap-4 rounded-2xl bg-slate-50 px-4 py-3 shadow-[0_2px_8px_rgba(35,54,103,0.08)] ring-1 ring-slate-200">
       <span className="text-sm font-medium text-slate-500">{label}</span>
       <span className="min-w-0 text-left text-base font-extrabold text-slate-800">
-        {value || 'לא הוגדר'}
+        {value || t('info.notSet')}
       </span>
     </div>
   )
@@ -74,39 +75,39 @@ export default function InfoScreen({
   branch,
   onChangeBranch,
 }: InfoScreenProps) {
-  const { t, dir } = useI18n()
+  const { t } = useI18n()
   return (
-    <main className="mx-auto max-w-md px-4 pb-28 pt-6" dir={dir}>
+    <main className="mx-auto max-w-md px-4 pb-28 pt-6">
       <h2 className="text-xl font-extrabold text-slate-800">{t('tab.info')}</h2>
 
       <div className="mt-4 space-y-3">
-        <SectionCard title="פרטי העובד שלי">
+        <SectionCard title={t('info.myDetails')}>
           <div className="space-y-3">
-            <DetailRow label="שם העובד" value={employeeName} />
-            <DetailRow label="סניף נוכחי" value={branch} />
+            <DetailRow label={t('info.employeeName')} value={employeeName} />
+            <DetailRow label={t('info.currentBranch')} value={branch} />
             <button
               type="button"
               onClick={onChangeBranch}
               className="w-full rounded-2xl bg-slate-700 px-4 py-3 text-base font-extrabold text-white shadow-[0_2px_8px_rgba(35,54,103,0.08)] transition-transform duration-100 hover:bg-slate-800 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-slate-500/20"
             >
-              החלפת סניף
+              {t('info.changeBranch')}
             </button>
           </div>
         </SectionCard>
 
-        <SectionCard title="קישורים שימושיים">
+        <SectionCard title={t('info.usefulLinks')}>
           <div className="space-y-3">
             <LinkRow
-              label="אתר הלב הכחול"
+              label={t('info.blueHeartWebsite')}
               href="https://www.blueheart.co.il"
             />
           </div>
         </SectionCard>
 
-        <SectionCard title="גרסה">
+        <SectionCard title={t('info.version')}>
           <div className="rounded-2xl bg-slate-50 px-4 py-4 shadow-[0_2px_8px_rgba(35,54,103,0.08)] ring-1 ring-slate-200">
             <p className="text-base font-extrabold text-slate-800">
-              myShop 4 | גרסה 4.0
+              myShop 4 | 4.0
             </p>
             <p className="mt-1 text-sm font-medium text-slate-500">
               פותח עבור רשת הלב הכחול

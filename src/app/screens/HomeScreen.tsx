@@ -257,7 +257,7 @@ function IconBranches(props: { className?: string }) {
 }
 
 export default function HomeScreen({ onLogout }: HomeScreenProps) {
-  const { lang, setLang, t, dir } = useI18n()
+  const { lang, setLang, t } = useI18n()
   const [employeeName] = useState(() => {
     try {
       return localStorage.getItem(LS_EMPLOYEE_NAME) ?? ''
@@ -338,7 +338,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
     setIsSearchOpen(false)
 
     if (!href) {
-      setUnavailableMessage('הפעולה אינה זמינה עבור הסניף שלך')
+      setUnavailableMessage(t('app.unavailableForBranch'))
       return
     }
 
@@ -347,37 +347,34 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
   }
 
   return (
-    <div
-      className="min-h-screen bg-gradient-to-b from-white to-[#f0f4f8] text-slate-950"
-      dir={dir}
-    >
+    <div className="min-h-screen bg-gradient-to-b from-white to-[#f0f4f8] text-slate-950">
       <header className="sticky top-0 z-10 border-b border-[#233667]/15 bg-white/95 shadow-sm shadow-[#233667]/5 backdrop-blur">
         <div className="mx-auto max-w-md px-4 py-3">
           <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-3">
             <div className="text-start">
               <div className="flex items-center gap-2">
                 <span className="text-base font-semibold">
-                  היי {firstName || 'עובד'}
+                  {t('home.hi')} {firstName || t('home.employeeFallback')}
                 </span>
                 <button
                   type="button"
                   onClick={onLogout}
                   className="inline-flex items-center justify-center rounded-xl bg-[#233667]/10 p-2 text-[#233667] hover:bg-[#233667]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/40"
-                  aria-label="התנתקות"
-                  title="התנתקות"
+                  aria-label={t('home.logout')}
+                  title={t('home.logout')}
                 >
                   <IconArrowRight className="h-4 w-4" />
                 </button>
               </div>
 
               <div className="mt-1 text-xs text-slate-500">
-                <span>סניף: </span>
+                <span>{t('home.branchLabel')}</span>
                 <button
                   type="button"
                   onClick={() => setIsBranchModalOpen(true)}
                   className="font-normal text-slate-600 underline decoration-[#233667]/30 underline-offset-4 hover:text-[#233667] hover:decoration-[#233667] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/40"
                 >
-                  {branch || 'בחרו סניף'}
+                  {branch || t('home.chooseBranch')}
                 </button>
               </div>
             </div>
@@ -458,7 +455,6 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 <input
                   id="home-action-search"
                   type="search"
-                  dir={dir}
                   value={searchQuery}
                   onFocus={() => {
                     if (searchQuery.trim()) setIsSearchOpen(true)
@@ -495,7 +491,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                     ))
                   ) : (
                     <p className="rounded-2xl px-4 py-3 text-sm font-semibold text-slate-500">
-                      לא נמצאו תוצאות
+                      {t('home.noResults')}
                     </p>
                   )}
                 </div>
@@ -515,7 +511,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
               onClick={() => {
                 const href = getAirtableLink('orderItem', branch)
                 if (!href) {
-                  setUnavailableMessage('הפעולה אינה זמינה עבור הסניף שלך')
+                  setUnavailableMessage(t('app.unavailableForBranch'))
                   return
                 }
                 setUnavailableMessage(null)
@@ -541,7 +537,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
               onClick={() => {
                 const href = getLabFormUrl(branch)
                 if (!href) {
-                  setUnavailableMessage('הפעולה אינה זמינה עבור הסניף שלך')
+                  setUnavailableMessage(t('app.unavailableForBranch'))
                   return
                 }
                 setUnavailableMessage(null)
@@ -567,7 +563,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
               onClick={() => {
                 const href = getAirtableLink('receivedPackage', branch)
                 if (!href) {
-                  setUnavailableMessage('הפעולה אינה זמינה עבור הסניף שלך')
+                  setUnavailableMessage(t('app.unavailableForBranch'))
                   return
                 }
                 setUnavailableMessage(null)
@@ -693,18 +689,18 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
             type="button"
             className="absolute inset-0 bg-slate-950/40"
             onClick={() => setIsBranchModalOpen(false)}
-            aria-label="סגירה"
+            aria-label={t('home.close')}
           />
           <div className="absolute bottom-0 left-0 right-0 mx-auto max-w-md rounded-t-[28px] bg-white p-4 text-slate-950 shadow-2xl ring-1 ring-[#233667]/15">
             <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-[#233667]/15" />
             <div className="flex items-center justify-between">
-              <h3 className="text-base font-semibold">בחירת סניף</h3>
+              <h3 className="text-base font-semibold">{t('home.branchSelectTitle')}</h3>
               <button
                 type="button"
                 className="rounded-lg px-3 py-2 text-sm font-medium text-slate-500 hover:text-[#233667] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/30"
                 onClick={() => setIsBranchModalOpen(false)}
               >
-                סגור
+                {t('home.close')}
               </button>
             </div>
 
@@ -727,7 +723,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                     <span className="text-sm font-semibold">{b}</span>
                     {active ? (
                         <span className="text-xs font-semibold text-[#233667]">
-                        נבחר
+                        {t('home.selected')}
                       </span>
                     ) : null}
                   </button>

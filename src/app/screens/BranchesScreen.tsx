@@ -57,7 +57,7 @@ function BranchDisplayName({ name }: { name: string }) {
 }
 
 export default function BranchesScreen() {
-  const { t, dir } = useI18n()
+  const { t } = useI18n()
   const [search, setSearch] = useState('')
 
   const filteredBranches = useMemo(() => {
@@ -67,12 +67,12 @@ export default function BranchesScreen() {
   }, [search])
 
   return (
-    <main className="mx-auto max-w-md px-4 pb-28 pt-6" dir={dir}>
+    <main className="mx-auto max-w-md px-4 pb-28 pt-6">
       <h2 className="text-xl font-extrabold text-[#233667]">{t('tab.branches')}</h2>
 
       <div className="mt-4">
         <label className="sr-only" htmlFor="branch-search">
-          חיפוש סניף
+          {t('branches.searchLabel')}
         </label>
         <input
           id="branch-search"
@@ -80,7 +80,7 @@ export default function BranchesScreen() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full rounded-2xl border border-[#233667]/15 bg-white px-4 py-3 text-base font-semibold text-slate-950 shadow-[0_2px_8px_rgba(35,54,103,0.08)] outline-none placeholder:text-slate-400 focus:border-[#233667] focus:ring-4 focus:ring-[#233667]/10"
-          placeholder="חיפוש לפי שם סניף"
+          placeholder={t('branches.searchPlaceholder')}
         />
       </div>
 
@@ -109,7 +109,7 @@ export default function BranchesScreen() {
                     </a>
                   ) : (
                     <div className="mt-1 text-sm font-medium text-slate-400">
-                      אין מספר זמין
+                      {t('branches.noPhone')}
                     </div>
                   )}
                 </div>
@@ -118,9 +118,9 @@ export default function BranchesScreen() {
                   <a
                     href={getTelHref(branch.phone)}
                     className="flex-none rounded-xl bg-[#233667] px-3 py-2 text-sm font-extrabold text-white shadow-[0_2px_8px_rgba(35,54,103,0.08)] transition-transform duration-100 hover:bg-[#1b2a50] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#233667]/30"
-                    aria-label={`התקשר אל ${branch.name}`}
+                    aria-label={`${t('branches.callAriaPrefix')} ${branch.name}`}
                   >
-                    התקשר
+                    {t('branches.call')}
                   </a>
                 ) : null}
               </div>
@@ -128,7 +128,7 @@ export default function BranchesScreen() {
           ))
         ) : (
           <p className="rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-slate-500 shadow-[0_2px_8px_rgba(35,54,103,0.08)] ring-1 ring-[#233667]/15">
-            לא נמצאו סניפים
+            {t('branches.noBranches')}
           </p>
         )}
       </div>

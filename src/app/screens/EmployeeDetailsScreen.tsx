@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useI18n } from '../i18n/I18nProvider'
 
 type EmployeeDetailsScreenProps = {
   onSubmitSuccess: () => void
@@ -27,6 +28,7 @@ const LS_EMPLOYEE_BRANCH = 'myshop4.employee.branch'
 export default function EmployeeDetailsScreen({
   onSubmitSuccess,
 }: EmployeeDetailsScreenProps) {
+  const { t } = useI18n()
   const initialName = useMemo(() => {
     try {
       return localStorage.getItem(LS_EMPLOYEE_NAME) ?? ''
@@ -54,7 +56,7 @@ export default function EmployeeDetailsScreen({
 
   function onSubmit() {
     if (!canSubmit) {
-      setError('נא למלא שם מלא ולבחור סניף.')
+      setError(t('employeeDetails.errorFillAll'))
       return
     }
 
@@ -79,7 +81,9 @@ export default function EmployeeDetailsScreen({
 
       <main className="mx-auto max-w-md px-4 py-8">
         <section className="rounded-[28px] border border-[#233667]/15 bg-white p-6 shadow-[0_14px_35px_rgba(15,23,42,0.08)]">
-          <h2 className="text-2xl font-extrabold text-[#233667]">פרטי העובד</h2>
+          <h2 className="text-2xl font-extrabold text-[#233667]">
+            {t('employeeDetails.title')}
+          </h2>
 
           <form
             className="mt-6 space-y-5"
@@ -93,7 +97,7 @@ export default function EmployeeDetailsScreen({
                 htmlFor="fullName"
                 className="block text-lg font-medium text-slate-900"
               >
-                שם מלא
+                {t('employeeDetails.fullName')}
               </label>
               <input
                 id="fullName"
@@ -106,7 +110,7 @@ export default function EmployeeDetailsScreen({
                   setError(null)
                 }}
                 className="w-full rounded-2xl border border-[#233667]/15 bg-white px-4 py-4 text-xl text-slate-900 shadow-sm outline-none placeholder:text-slate-400 focus:border-[#233667] focus:ring-4 focus:ring-[#233667]/10"
-                placeholder="לדוגמה: ישראל ישראלי"
+                placeholder={t('employeeDetails.namePlaceholder')}
               />
             </div>
 
@@ -115,7 +119,7 @@ export default function EmployeeDetailsScreen({
                 htmlFor="branch"
                 className="block text-lg font-medium text-slate-900"
               >
-                אני מסניף
+                {t('employeeDetails.myBranch')}
               </label>
               <select
                 id="branch"
@@ -128,7 +132,7 @@ export default function EmployeeDetailsScreen({
                 className="w-full appearance-none rounded-2xl border border-[#233667]/15 bg-white px-4 py-4 text-xl text-slate-900 shadow-sm outline-none focus:border-[#233667] focus:ring-4 focus:ring-[#233667]/10"
               >
                 <option value="" disabled>
-                  בחרו סניף…
+                  {t('employeeDetails.branchPlaceholder')}
                 </option>
                 {BRANCHES.map((b) => (
                   <option key={b} value={b}>
@@ -152,7 +156,7 @@ export default function EmployeeDetailsScreen({
               disabled={!canSubmit}
               className="w-full rounded-2xl bg-[#233667] px-4 py-4 text-xl font-extrabold text-white shadow-lg shadow-[#233667]/20 hover:bg-[#1b2a50] disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/20"
             >
-              כניסה למערכת
+              {t('employeeDetails.enterSystem')}
             </button>
           </form>
         </section>
