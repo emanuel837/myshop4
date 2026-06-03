@@ -443,14 +443,14 @@ const MAIN_ITEMS: ActionItem[] = [
     subtitleKey: 'report.cancelOnlineOrderSubtitle',
     action: 'cancelOnlineOrder',
   },
+]
+
+const ADDITIONAL_ITEMS: ActionItem[] = [
   {
     titleKey: 'report.hotModel',
     subtitleKey: 'report.hotModelSubtitle',
     action: 'hotModel',
   },
-]
-
-const ADDITIONAL_ITEMS: ActionItem[] = [
   {
     titleKey: 'report.checkPhoto',
     subtitleKey: 'report.checkPhotoSubtitle',
@@ -516,7 +516,7 @@ function getActionIconTone(action: ActionItem['action']) {
     case 'orderItem':
       return 'bg-transparent text-[#233667] ring-[#233667]/30'
     case 'hotModel':
-      return 'bg-[#233667]/10 text-[#233667] ring-[#233667]/15'
+      return 'bg-transparent text-orange-600 ring-orange-300/70'
   }
 }
 

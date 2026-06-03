@@ -120,7 +120,7 @@ const REPORT_MISSING_OFFLINE: Record<BranchName, string> = {
   'קניון הקריון - קריית ביאליק': 'https://airtable.com/appyGTA8v9mY4WcmQ/shr3nQBuwippLvK5s',
   'אסף סנטר - באר יעקב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrau6FjMlQRnV5Jk',
   'קניון אורות - אור עקיבא': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrGbaUK7FrqZoSrA',
-  'קניון מרום - רמת גן': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrUQsPKnLS7krjiR',
+  'קניון מרום - רמת גן': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrQIQ1riNoG3FG7P/tblOOB1C3a9oIRiy2',
   'עופר סנטר - נוף הגליל': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrieEeBe1P8v69dC',
   'חוצות המפרץ - חיפה אאוטלט': 'https://airtable.com/appyGTA8v9mY4WcmQ/shry36dp8HLQj1xNm',
   'קניון ביג פאשן - בת ים': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrapk7hxt6IywSff',
