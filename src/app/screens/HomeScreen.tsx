@@ -3,11 +3,8 @@ import BranchesScreen from './BranchesScreen'
 import InfoScreen from './InfoScreen'
 import ReportScreen from './ReportScreen'
 import TrackingScreen from './TrackingScreen'
-import {
-  ActionCard,
-  CHECK_MINUSES_ITEM,
-  getActionIcon,
-} from '../components/ReportActionCard'
+import { HomeActionCard } from '../components/HomeActionCard'
+import { CHECK_MINUSES_ITEM } from '../components/ReportActionCard'
 import { getAirtableLink, getLabFormUrl, type LinkActionKey } from '../../lib/links'
 import { useI18n } from '../i18n/I18nProvider'
 import { getBranchDisplayName } from '../i18n/branchNames'
@@ -159,6 +156,24 @@ function IconPackage(props: { className?: string }) {
       <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
       <path d="M3.3 7.7 12 12.8l8.7-5.1" />
       <path d="M12 22V12.8" />
+    </svg>
+  )
+}
+
+function IconClipboard(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
     </svg>
   )
 }
@@ -352,6 +367,16 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
     window.open(href, '_blank', 'noopener,noreferrer')
   }
 
+  function openBranchLink(getHref: () => string | undefined) {
+    const href = getHref()
+    if (!href) {
+      setUnavailableMessage(t('app.unavailableForBranch'))
+      return
+    }
+    setUnavailableMessage(null)
+    window.open(href, '_blank', 'noopener,noreferrer')
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-[#f0f4f8] text-slate-950">
       <header className="sticky top-0 z-10 border-b border-[#233667]/15 bg-white/95 shadow-sm shadow-[#233667]/5 backdrop-blur">
@@ -512,89 +537,40 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 {unavailableMessage}
               </p>
             ) : null}
-            <button
-              type="button"
-              onClick={() => {
-                const href = getAirtableLink('orderItem', branch)
-                if (!href) {
-                  setUnavailableMessage(t('app.unavailableForBranch'))
-                  return
-                }
-                setUnavailableMessage(null)
-                window.open(href, '_blank', 'noopener,noreferrer')
-              }}
-              className="w-full rounded-[28px] border border-[#233667]/45 bg-white px-5 py-5 text-[#233667] shadow-[0_14px_35px_rgba(15,23,42,0.08)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/15"
-            >
-              <div className="flex flex-col items-center text-center">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-transparent text-[#233667] shadow-lg shadow-[#233667]/10 ring-1 ring-[#233667]/30">
-                  <IconShoppingBag className="h-7 w-7" />
-                </span>
-                <span className="mt-3 text-xl font-extrabold">
-                  {t('action.orderItem')}
-                </span>
-                <span className="mt-1.5 text-sm font-medium text-[#233667]/80">
-                  {t('home.card.orderItemSubtitle')}
-                </span>
-              </div>
-            </button>
+            <HomeActionCard
+              title={t('action.orderItem')}
+              subtitle={t('home.card.orderItemSubtitle')}
+              icon={<IconShoppingBag className="h-7 w-7" />}
+              iconContainerClassName="bg-transparent text-[#233667] shadow-lg shadow-[#233667]/10 ring-1 ring-[#233667]/30"
+              buttonClassName="border-[#233667]/45 focus-visible:ring-[#233667]/15"
+              onClick={() => openBranchLink(() => getAirtableLink('orderItem', branch))}
+            />
 
-            <button
-              type="button"
-              onClick={() => {
-                const href = getLabFormUrl(branch)
-                if (!href) {
-                  setUnavailableMessage(t('app.unavailableForBranch'))
-                  return
-                }
-                setUnavailableMessage(null)
-                window.open(href, '_blank', 'noopener,noreferrer')
-              }}
-              className="w-full rounded-[28px] border border-purple-100 bg-white px-5 py-5 text-[#233667] shadow-[0_14px_35px_rgba(15,23,42,0.08)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-purple-500/15"
-            >
-              <div className="flex flex-col items-center text-center">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-purple-50 text-purple-600 shadow-lg shadow-purple-600/10 ring-1 ring-purple-100">
-                  <IconWrench className="h-7 w-7" />
-                </span>
-                <span className="mt-3 text-xl font-extrabold">
-                  {t('action.sendLab')}
-                </span>
-                <span className="mt-1.5 text-sm font-medium text-[#233667]/80">
-                  {t('home.card.sendLabSubtitle')}
-                </span>
-              </div>
-            </button>
+            <HomeActionCard
+              title={t('action.sendLab')}
+              subtitle={t('home.card.sendLabSubtitle')}
+              icon={<IconWrench className="h-7 w-7" />}
+              iconContainerClassName="bg-purple-50 text-purple-600 shadow-lg shadow-purple-600/10 ring-1 ring-purple-100"
+              buttonClassName="border-purple-100 focus-visible:ring-purple-500/15"
+              onClick={() => openBranchLink(() => getLabFormUrl(branch))}
+            />
 
-            <button
-              type="button"
-              onClick={() => {
-                const href = getAirtableLink('receivedPackage', branch)
-                if (!href) {
-                  setUnavailableMessage(t('app.unavailableForBranch'))
-                  return
-                }
-                setUnavailableMessage(null)
-                window.open(href, '_blank', 'noopener,noreferrer')
-              }}
-              className="w-full rounded-[28px] border border-[#233667]/15 bg-white px-5 py-5 text-[#233667] shadow-[0_14px_35px_rgba(15,23,42,0.08)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#233667]/15"
-            >
-              <div className="flex flex-col items-center text-center">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-600/25">
-                  <IconPackage className="h-7 w-7" />
-                </span>
-                <span className="mt-3 text-xl font-extrabold">
-                  {t('action.receivedPackage')}
-                </span>
-                <span className="mt-1.5 text-sm font-medium text-[#233667]/80">
-                  {t('home.card.receivedPackageSubtitle')}
-                </span>
-              </div>
-            </button>
+            <HomeActionCard
+              title={t('action.receivedPackage')}
+              subtitle={t('home.card.receivedPackageSubtitle')}
+              icon={<IconPackage className="h-7 w-7" />}
+              iconContainerClassName="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-600/25"
+              onClick={() =>
+                openBranchLink(() => getAirtableLink('receivedPackage', branch))
+              }
+            />
 
-            <ActionCard
-              item={CHECK_MINUSES_ITEM}
-              branch={branch}
-              onUnavailable={(message) => setUnavailableMessage(message)}
-              icon={getActionIcon(CHECK_MINUSES_ITEM.action)}
+            <HomeActionCard
+              title={t(CHECK_MINUSES_ITEM.titleKey)}
+              subtitle={t(CHECK_MINUSES_ITEM.subtitleKey)}
+              icon={<IconClipboard className="h-7 w-7" />}
+              iconContainerClassName="bg-transparent text-[#233667] shadow-lg shadow-[#233667]/10 ring-1 ring-[#233667]/30"
+              onClick={() => openBranchLink(() => getAirtableLink('checkMinuses', branch))}
             />
           </div>
         </main>
