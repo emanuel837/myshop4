@@ -3,6 +3,11 @@ import BranchesScreen from './BranchesScreen'
 import InfoScreen from './InfoScreen'
 import ReportScreen from './ReportScreen'
 import TrackingScreen from './TrackingScreen'
+import {
+  ActionCard,
+  CHECK_MINUSES_ITEM,
+  getActionIcon,
+} from '../components/ReportActionCard'
 import { getAirtableLink, getLabFormUrl, type LinkActionKey } from '../../lib/links'
 import { useI18n } from '../i18n/I18nProvider'
 import { getBranchDisplayName } from '../i18n/branchNames'
@@ -584,6 +589,13 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
                 </span>
               </div>
             </button>
+
+            <ActionCard
+              item={CHECK_MINUSES_ITEM}
+              branch={branch}
+              onUnavailable={(message) => setUnavailableMessage(message)}
+              icon={getActionIcon(CHECK_MINUSES_ITEM.action)}
+            />
           </div>
         </main>
       ) : tab === 'report' ? (

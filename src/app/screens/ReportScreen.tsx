@@ -1,69 +1,12 @@
 import { useState } from 'react'
-import { getAirtableLink, getLabFormUrl } from '../../lib/links'
+import {
+  ActionCard,
+  CHECK_MINUSES_ITEM,
+  getActionIcon,
+  type ActionItem,
+} from '../components/ReportActionCard'
+import { getAirtableLink } from '../../lib/links'
 import { useI18n } from '../i18n/I18nProvider'
-
-type ActionItem = {
-  titleKey:
-    | 'report.orderItem'
-    | 'report.receivePackage'
-    | 'report.requestPickup'
-    | 'report.sendToLab'
-    | 'report.hotModel'
-    | 'report.checkPhoto'
-    | 'report.storeAppearance'
-    | 'report.insoleForm'
-    | 'report.orderEquipment'
-    | 'report.homeDelivery'
-    | 'report.reportIssue'
-    | 'report.cancelOnlineOrder'
-  | 'report.checkMinuses'
-  subtitleKey:
-    | 'report.orderItemSubtitle'
-    | 'report.receivePackageSubtitle'
-    | 'report.requestPickupSubtitle'
-    | 'report.sendToLabSubtitle'
-    | 'report.hotModelSubtitle'
-    | 'report.checkPhotoSubtitle'
-    | 'report.storeAppearanceSubtitle'
-    | 'report.insoleFormSubtitle'
-    | 'report.orderEquipmentSubtitle'
-    | 'report.homeDeliverySubtitle'
-    | 'report.reportIssueSubtitle'
-    | 'report.cancelOnlineOrderSubtitle'
-    | 'report.checkMinusesSubtitle'
-  action:
-    | 'orderItem'
-    | 'orderEquipment'
-    | 'insoleProductionForm'
-    | 'branchVisibilityPhoto'
-    | 'homeDelivery'
-    | 'checkPhoto'
-    | 'branchIssue'
-    | 'hotModel'
-    | 'receivedPackage'
-    | 'pickupOrder'
-    | 'sendLab'
-    | 'cancelOnlineOrder'
-    | 'checkMinuses'
-}
-
-function IconArrowRight(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M5 12h14" />
-      <path d="m13 5 7 7-7 7" />
-    </svg>
-  )
-}
 
 function IconChevronDown(props: { className?: string }) {
   return (
@@ -78,63 +21,6 @@ function IconChevronDown(props: { className?: string }) {
       strokeLinejoin="round"
     >
       <path d="m6 9 6 6 6-6" />
-    </svg>
-  )
-}
-
-function IconShoppingBag(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M6 8h12l-1 13H7L6 8Z" />
-      <path d="M9 8a3 3 0 0 1 6 0" />
-    </svg>
-  )
-}
-
-function IconShoppingCart(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M6 6h15l-2 8H8L6 6Z" />
-      <path d="M6 6 5.3 3H3" />
-      <path d="M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" />
-      <path d="M18 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" />
-    </svg>
-  )
-}
-
-function IconCreditCard(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect x="3" y="5" width="18" height="14" rx="2" />
-      <path d="M3 10h18" />
-      <path d="M7 15h4" />
     </svg>
   )
 }
@@ -158,61 +44,6 @@ function IconAlert(props: { className?: string }) {
   )
 }
 
-function IconFire(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 22c4 0 7-3 7-7 0-3-2-5.5-4-7 .2 2-1 3.5-2.2 4.2C13.2 8.7 11.2 5.3 8 3c.4 4-3 6.2-3 11 0 4.5 3 8 7 8Z" />
-      <path d="M10 18c0-1.7 1.3-2.7 2.6-3.7.1 1.3.8 2.1 1.4 2.7 0 1.7-1.2 3-2.7 3A2.8 2.8 0 0 1 10 18Z" />
-    </svg>
-  )
-}
-
-function IconCamera(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M14.5 4 16 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3l1.5-3h5Z" />
-      <path d="M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
-    </svg>
-  )
-}
-
-function IconHome(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M3 10.5 12 3l9 7.5" />
-      <path d="M5 9.5V21h14V9.5" />
-      <path d="M9 21v-7h6v7" />
-    </svg>
-  )
-}
-
 function IconFileText(props: { className?: string }) {
   return (
     <svg
@@ -231,156 +62,6 @@ function IconFileText(props: { className?: string }) {
       <path d="M9 17h6" />
       <path d="M9 9h1" />
     </svg>
-  )
-}
-
-function IconClipboard(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-    </svg>
-  )
-}
-
-function IconWrench(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4L15 12l-3-3 2.7-2.7Z" />
-    </svg>
-  )
-}
-
-function IconPackage(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M16.5 9.4 7.5 4.2" />
-      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-      <path d="M3.3 7.7 12 12.8l8.7-5.1" />
-      <path d="M12 22V12.8" />
-    </svg>
-  )
-}
-
-function IconTruck(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M10 17h4V5H2v12h2" />
-      <path d="M14 17h1a3 3 0 1 0 0-6h-1" />
-      <path d="M18 17h2v-5l-3-3h-3" />
-      <path d="M6.5 20a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
-      <path d="M17.5 20a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
-    </svg>
-  )
-}
-
-function IconXCircle(props: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={props.className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <path d="m15 9-6 6" />
-      <path d="m9 9 6 6" />
-    </svg>
-  )
-}
-
-function ActionCard({
-  item,
-  icon,
-  branch,
-  onUnavailable,
-}: {
-  item: ActionItem
-  icon: React.ReactNode
-  branch: string
-  onUnavailable: (message: string) => void
-}) {
-  const { t } = useI18n()
-  const iconTone = getActionIconTone(item.action)
-  const cardTone = getActionCardTone(item.action)
-
-  return (
-    <button
-      type="button"
-      onClick={() => {
-        const href =
-          item.action === 'sendLab'
-            ? getLabFormUrl(branch)
-            : getAirtableLink(item.action, branch)
-        if (!href) {
-          onUnavailable(t('app.unavailableForBranch'))
-          return
-        }
-        window.open(href, '_blank', 'noopener,noreferrer')
-      }}
-      className={[
-        'w-full rounded-[24px] border bg-white px-5 py-5 text-start shadow-[0_2px_8px_rgba(35,54,103,0.08)] transition-transform duration-100 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4',
-        cardTone,
-      ].join(' ')}
-    >
-      {/* Force LTR row so "left" is visually left even in RTL UI */}
-      <div className="flex flex-row items-center gap-4">
-        <div className={`grid h-12 w-12 flex-none place-items-center rounded-2xl ring-1 ${iconTone}`}>
-          {icon}
-        </div>
-
-        <div className="min-w-0 flex-1 text-right">
-          <div className="text-lg font-extrabold text-slate-950">{t(item.titleKey)}</div>
-          <div className="mt-1 text-sm font-medium text-slate-500">
-            {t(item.subtitleKey)}
-          </div>
-        </div>
-
-        <div className="flex-none text-[#233667]" aria-hidden="true">
-          <IconArrowRight className="h-5 w-5" />
-        </div>
-      </div>
-    </button>
   )
 }
 
@@ -464,11 +145,7 @@ const MAIN_ITEMS: ActionItem[] = [
     subtitleKey: 'report.cancelOnlineOrderSubtitle',
     action: 'cancelOnlineOrder',
   },
-  {
-    titleKey: 'report.checkMinuses',
-    subtitleKey: 'report.checkMinusesSubtitle',
-    action: 'checkMinuses',
-  },
+  CHECK_MINUSES_ITEM,
 ]
 
 const ADDITIONAL_ITEMS: ActionItem[] = [
@@ -508,76 +185,6 @@ const ADDITIONAL_ITEMS: ActionItem[] = [
     action: 'branchIssue',
   },
 ]
-
-function getActionCardTone(action: ActionItem['action']) {
-  switch (action) {
-    case 'orderItem':
-      return 'border-[#233667]/45 hover:border-[#233667]/65 focus-visible:ring-[#233667]/15'
-    case 'cancelOnlineOrder':
-      return 'border-rose-300/70 hover:border-rose-400/90 focus-visible:ring-rose-500/15'
-    default:
-      return 'border-[#233667]/15 hover:border-[#233667]/25 focus-visible:ring-[#233667]/15'
-  }
-}
-
-function getActionIconTone(action: ActionItem['action']) {
-  switch (action) {
-    case 'receivedPackage':
-      return 'bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-600/25 ring-emerald-300'
-    case 'pickupOrder':
-      return 'bg-gradient-to-br from-orange-400 to-orange-500 text-white shadow-lg shadow-orange-500/25 ring-orange-300'
-    case 'homeDelivery':
-      return 'bg-emerald-50 text-emerald-600 ring-emerald-100'
-    case 'sendLab':
-      return 'bg-purple-50 text-purple-600 ring-purple-100'
-    case 'branchIssue':
-      return 'bg-rose-50 text-rose-900 ring-rose-100'
-    case 'cancelOnlineOrder':
-      return 'bg-transparent text-rose-600 ring-rose-300/70'
-    case 'orderEquipment':
-    case 'insoleProductionForm':
-    case 'branchVisibilityPhoto':
-    case 'checkPhoto':
-      return 'bg-slate-100 text-slate-600 ring-slate-200'
-    case 'orderItem':
-      return 'bg-transparent text-[#233667] ring-[#233667]/30'
-    case 'hotModel':
-      return 'bg-transparent text-orange-600 ring-orange-300/70'
-    case 'checkMinuses':
-      return 'bg-transparent text-[#233667] ring-[#233667]/30'
-  }
-}
-
-function getActionIcon(action: ActionItem['action']) {
-  switch (action) {
-    case 'orderItem':
-      return <IconShoppingBag className="h-6 w-6" />
-    case 'receivedPackage':
-      return <IconPackage className="h-6 w-6" />
-    case 'pickupOrder':
-      return <IconTruck className="h-6 w-6" />
-    case 'sendLab':
-      return <IconWrench className="h-6 w-6" />
-    case 'orderEquipment':
-      return <IconShoppingCart className="h-6 w-6" />
-    case 'insoleProductionForm':
-      return <IconFileText className="h-6 w-6" />
-    case 'branchVisibilityPhoto':
-      return <IconCamera className="h-6 w-6" />
-    case 'homeDelivery':
-      return <IconHome className="h-6 w-6" />
-    case 'checkPhoto':
-      return <IconCreditCard className="h-6 w-6" />
-    case 'branchIssue':
-      return <IconAlert className="h-6 w-6" />
-    case 'hotModel':
-      return <IconFire className="h-6 w-6" />
-    case 'cancelOnlineOrder':
-      return <IconXCircle className="h-6 w-6" />
-    case 'checkMinuses':
-      return <IconClipboard className="h-6 w-6" />
-  }
-}
 
 function AdditionalReportsModal({
   branch,
@@ -725,4 +332,3 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
     </main>
   )
 }
-
