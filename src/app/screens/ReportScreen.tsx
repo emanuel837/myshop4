@@ -16,6 +16,7 @@ type ActionItem = {
     | 'report.homeDelivery'
     | 'report.reportIssue'
     | 'report.cancelOnlineOrder'
+  | 'report.checkMinuses'
   subtitleKey:
     | 'report.orderItemSubtitle'
     | 'report.receivePackageSubtitle'
@@ -29,6 +30,7 @@ type ActionItem = {
     | 'report.homeDeliverySubtitle'
     | 'report.reportIssueSubtitle'
     | 'report.cancelOnlineOrderSubtitle'
+    | 'report.checkMinusesSubtitle'
   action:
     | 'orderItem'
     | 'orderEquipment'
@@ -42,6 +44,7 @@ type ActionItem = {
     | 'pickupOrder'
     | 'sendLab'
     | 'cancelOnlineOrder'
+    | 'checkMinuses'
 }
 
 function IconArrowRight(props: { className?: string }) {
@@ -227,6 +230,24 @@ function IconFileText(props: { className?: string }) {
       <path d="M9 13h6" />
       <path d="M9 17h6" />
       <path d="M9 9h1" />
+    </svg>
+  )
+}
+
+function IconClipboard(props: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={props.className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
     </svg>
   )
 }
@@ -443,6 +464,11 @@ const MAIN_ITEMS: ActionItem[] = [
     subtitleKey: 'report.cancelOnlineOrderSubtitle',
     action: 'cancelOnlineOrder',
   },
+  {
+    titleKey: 'report.checkMinuses',
+    subtitleKey: 'report.checkMinusesSubtitle',
+    action: 'checkMinuses',
+  },
 ]
 
 const ADDITIONAL_ITEMS: ActionItem[] = [
@@ -517,6 +543,8 @@ function getActionIconTone(action: ActionItem['action']) {
       return 'bg-transparent text-[#233667] ring-[#233667]/30'
     case 'hotModel':
       return 'bg-transparent text-orange-600 ring-orange-300/70'
+    case 'checkMinuses':
+      return 'bg-transparent text-[#233667] ring-[#233667]/30'
   }
 }
 
@@ -546,6 +574,8 @@ function getActionIcon(action: ActionItem['action']) {
       return <IconFire className="h-6 w-6" />
     case 'cancelOnlineOrder':
       return <IconXCircle className="h-6 w-6" />
+    case 'checkMinuses':
+      return <IconClipboard className="h-6 w-6" />
   }
 }
 
@@ -652,6 +682,12 @@ export default function ReportScreen({ branch, onUnavailable }: ReportScreenProp
           branch={branch}
           onUnavailable={(m) => onUnavailable(m)}
           icon={getActionIcon(MAIN_ITEMS[4].action)}
+        />
+        <ActionCard
+          item={MAIN_ITEMS[5]}
+          branch={branch}
+          onUnavailable={(m) => onUnavailable(m)}
+          icon={getActionIcon(MAIN_ITEMS[5].action)}
         />
         <button
           type="button"

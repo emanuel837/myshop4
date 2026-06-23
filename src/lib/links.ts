@@ -61,6 +61,7 @@ export type LinkActionKey =
   | 'receivedPackage'
   | 'pickupOrder'
   | 'cancelOnlineOrder'
+  | 'checkMinuses'
   | 'trackOrders'
   | 'trackLab'
 
@@ -146,20 +147,36 @@ const ORDER_ITEM: Record<BranchName, string> = {
 }
 
 const RECEIVED_PACKAGE: Record<BranchName, string> = {
-  'ביאליק 4 - רמת גן': 'https://airtable.com/appBawqi4kZnr8rtL/shrA4hMkvjFcZqsxQ',
-  'שטיינר - אבן גבירול 46 תל אביב': 'https://airtable.com/appBawqi4kZnr8rtL/shrzJOm5HM3fMMGvs',
-  'קניון הזהב - ראשון לציון': 'https://airtable.com/appBawqi4kZnr8rtL/shreY9RppZvNOleoR',
-  'רוטשילד 61 - כפר סבא': 'https://airtable.com/appBawqi4kZnr8rtL/shrWWfqFKhbaqI6IW',
-  'קניון התחנה המרכזית - ירושלים': 'https://airtable.com/appBawqi4kZnr8rtL/shrB0T1V3zqtv2WjB',
-  'קניון הקריון - קריית ביאליק': 'https://airtable.com/appBawqi4kZnr8rtL/shrKXGbS0ZxYPX4OR',
-  'אסף סנטר - באר יעקב': 'https://airtable.com/appBawqi4kZnr8rtL/shrBbt0KFWL4mJNGi',
-  'קניון אורות - אור עקיבא': 'https://airtable.com/appBawqi4kZnr8rtL/shr3iSysY5Qlb2auf',
-  'קניון מרום - רמת גן': 'https://airtable.com/appBawqi4kZnr8rtL/shruDcZDoTfctk9K2',
-  'עופר סנטר - נוף הגליל': 'https://airtable.com/appBawqi4kZnr8rtL/shrmePtMlE5jOkq5v',
-  'חוצות המפרץ - חיפה אאוטלט': 'https://airtable.com/appBawqi4kZnr8rtL/shrdlnyGKEMP5ZViI',
+  'ביאליק 4 - רמת גן': 'https://packages-portal.vercel.app/?b=02',
+  'שטיינר - אבן גבירול 46 תל אביב': 'https://packages-portal.vercel.app/?b=03',
+  'קניון הזהב - ראשון לציון': 'https://packages-portal.vercel.app/?b=06',
+  'רוטשילד 61 - כפר סבא': 'https://packages-portal.vercel.app/?b=07',
+  'קניון התחנה המרכזית - ירושלים': 'https://packages-portal.vercel.app/?b=10',
+  'קניון הקריון - קריית ביאליק': 'https://packages-portal.vercel.app/?b=15',
+  'אסף סנטר - באר יעקב': 'https://packages-portal.vercel.app/?b=16',
+  'קניון אורות - אור עקיבא': 'https://packages-portal.vercel.app/?b=21',
+  'קניון מרום - רמת גן': 'https://packages-portal.vercel.app/?b=25',
+  'עופר סנטר - נוף הגליל': 'https://packages-portal.vercel.app/?b=26',
+  'חוצות המפרץ - חיפה אאוטלט': 'https://packages-portal.vercel.app/?b=27',
   'קניון ביג פאשן - בת ים': 'https://airtable.com/appBawqi4kZnr8rtL/shrDHyjUBLujra4G4',
-  'קניותר - נס ציונה': 'https://airtable.com/appBawqi4kZnr8rtL/shrQTIt2lO51G3lp6',
-  'קניון השרון - נתניה': 'https://airtable.com/appBawqi4kZnr8rtL/shrg4zdyFkP314H7Y',
+  'קניותר - נס ציונה': 'https://packages-portal.vercel.app/?b=38',
+  'קניון השרון - נתניה': 'https://packages-portal.vercel.app/?b=39',
+}
+
+const CHECK_MINUSES: Partial<Record<BranchName, string>> = {
+  'ביאליק 4 - רמת גן': 'https://branch-portal-seven.vercel.app/?b=02',
+  'שטיינר - אבן גבירול 46 תל אביב': 'https://branch-portal-seven.vercel.app/?b=03',
+  'קניון הזהב - ראשון לציון': 'https://branch-portal-seven.vercel.app/?b=06',
+  'רוטשילד 61 - כפר סבא': 'https://branch-portal-seven.vercel.app/?b=07',
+  'קניון התחנה המרכזית - ירושלים': 'https://branch-portal-seven.vercel.app/?b=10',
+  'קניון הקריון - קריית ביאליק': 'https://branch-portal-seven.vercel.app/?b=15',
+  'אסף סנטר - באר יעקב': 'https://branch-portal-seven.vercel.app/?b=16',
+  'קניון אורות - אור עקיבא': 'https://branch-portal-seven.vercel.app/?b=21',
+  'קניון מרום - רמת גן': 'https://branch-portal-seven.vercel.app/?b=25',
+  'עופר סנטר - נוף הגליל': 'https://branch-portal-seven.vercel.app/?b=26',
+  'חוצות המפרץ - חיפה אאוטלט': 'https://branch-portal-seven.vercel.app/?b=27',
+  'קניותר - נס ציונה': 'https://branch-portal-seven.vercel.app/?b=38',
+  'קניון השרון - נתניה': 'https://branch-portal-seven.vercel.app/?b=39',
 }
 
 const TRACK_ORDERS: Record<BranchName, string> = {
@@ -234,6 +251,8 @@ export function getAirtableLink(
       return ORDER_ITEM[branch]
     case 'receivedPackage':
       return RECEIVED_PACKAGE[branch]
+    case 'checkMinuses':
+      return CHECK_MINUSES[branch]
     case 'pickupOrder':
       return `${PICKUP_ORDER_FORM_URL}?prefill_%D7%A1%D7%A0%D7%99%D7%A3=${encodeURIComponent(
         branch,
