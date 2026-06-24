@@ -350,7 +350,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
         : href
     }
 
-    return getAirtableLink(item.action, branch)
+    return getAirtableLink(item.action, branch, lang)
   }
 
   function openSearchAction(item: SearchAction) {
@@ -543,7 +543,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
               icon={<IconShoppingBag className="h-7 w-7" />}
               iconContainerClassName="bg-transparent text-[#233667] shadow-lg shadow-[#233667]/10 ring-1 ring-[#233667]/30"
               buttonClassName="border-[#233667]/45 focus-visible:ring-[#233667]/15"
-              onClick={() => openBranchLink(() => getAirtableLink('orderItem', branch))}
+              onClick={() => openBranchLink(() => getAirtableLink('orderItem', branch, lang))}
             />
 
             <HomeActionCard
@@ -561,7 +561,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
               icon={<IconPackage className="h-7 w-7" />}
               iconContainerClassName="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-600/25"
               onClick={() =>
-                openBranchLink(() => getAirtableLink('receivedPackage', branch))
+                openBranchLink(() => getAirtableLink('receivedPackage', branch, lang))
               }
             />
 
@@ -570,7 +570,7 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
               subtitle={t(CHECK_MINUSES_ITEM.subtitleKey)}
               icon={<IconClipboard className="h-7 w-7" />}
               iconContainerClassName="bg-transparent text-[#233667] shadow-lg shadow-[#233667]/10 ring-1 ring-[#233667]/30"
-              onClick={() => openBranchLink(() => getAirtableLink('checkMinuses', branch))}
+              onClick={() => openBranchLink(() => getAirtableLink('checkMinuses', branch, lang))}
             />
           </div>
         </main>
