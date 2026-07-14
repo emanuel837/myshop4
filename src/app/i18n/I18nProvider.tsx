@@ -13,9 +13,11 @@ export type TranslationKey =
   | 'action.orderItem'
   | 'action.sendLab'
   | 'action.receivedPackage'
+  | 'action.itemMovements'
   | 'home.card.orderItemSubtitle'
   | 'home.card.sendLabSubtitle'
   | 'home.card.receivedPackageSubtitle'
+  | 'home.card.itemMovementsSubtitle'
   | 'tab.report'
   | 'tab.tracking'
   | 'tab.info'
@@ -110,9 +112,11 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'action.orderItem': 'הזמנת פריט',
     'action.sendLab': 'שליחה למעבדה',
     'action.receivedPackage': 'קיבלתי חבילה מכץ',
+    'action.itemMovements': 'תנועות מלאי לפריט',
     'home.card.orderItemSubtitle': 'להזמין פריט עבור לקוח במהירות ובקלות',
     'home.card.sendLabSubtitle': 'לפתוח פנייה ולשלוח פריט לתיקון / בדיקה',
     'home.card.receivedPackageSubtitle': 'לעדכן שהחבילה הגיעה ולסיים את הטיפול',
+    'home.card.itemMovementsSubtitle': 'לראות תנועות מלאי לפי מספר דגם',
     'tab.report': 'דיווח',
     'tab.tracking': 'מעקב',
     'tab.info': 'מידע',
@@ -204,10 +208,12 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'action.orderItem': 'Order Item',
     'action.sendLab': 'Send to Lab',
     'action.receivedPackage': 'Received Package',
+    'action.itemMovements': 'Item Stock Movements',
     'home.card.orderItemSubtitle': 'Order an item from warehouse or another branch',
     'home.card.sendLabSubtitle': 'Send item for lab inspection or repair',
     'home.card.receivedPackageSubtitle':
       'Confirm package arrival and close the process',
+    'home.card.itemMovementsSubtitle': 'View stock movements by style number',
     'tab.report': 'Report',
     'tab.tracking': 'Tracking',
     'tab.info': 'Info',
@@ -299,9 +305,11 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'action.orderItem': 'Заказ товара',
     'action.sendLab': 'Отправка в мастерскую',
     'action.receivedPackage': 'Получена посылка',
+    'action.itemMovements': 'Движение товара',
     'home.card.orderItemSubtitle': 'Заказать товар со склада или другого филиала',
     'home.card.sendLabSubtitle': 'Отправить товар на проверку или ремонт',
     'home.card.receivedPackageSubtitle': 'Подтвердить получение посылки',
+    'home.card.itemMovementsSubtitle': 'Посмотреть движение товара по артикулу',
     'tab.report': 'Отчёт',
     'tab.tracking': 'Отслеживание',
     'tab.info': 'Информация',

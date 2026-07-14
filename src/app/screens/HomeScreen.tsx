@@ -5,7 +5,7 @@ import ReportScreen from './ReportScreen'
 import TrackingScreen from './TrackingScreen'
 import { HomeActionCard } from '../components/HomeActionCard'
 import { CHECK_MINUSES_ITEM } from '../components/ReportActionCard'
-import { getAirtableLink, getLabFormUrl, type LinkActionKey } from '../../lib/links'
+import { getAirtableLink, getItemMovementsUrl, getLabFormUrl, type LinkActionKey } from '../../lib/links'
 import { useI18n } from '../i18n/I18nProvider'
 import { getBranchDisplayName } from '../i18n/branchNames'
 
@@ -571,6 +571,14 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
               icon={<IconClipboard className="h-7 w-7" />}
               iconContainerClassName="bg-transparent text-[#233667] shadow-lg shadow-[#233667]/10 ring-1 ring-[#233667]/30"
               onClick={() => openBranchLink(() => getAirtableLink('checkMinuses', branch, lang))}
+            />
+
+            <HomeActionCard
+              title={t('action.itemMovements')}
+              subtitle={t('home.card.itemMovementsSubtitle')}
+              icon={<IconSearch className="h-7 w-7" />}
+              iconContainerClassName="bg-transparent text-[#233667] shadow-lg shadow-[#233667]/10 ring-1 ring-[#233667]/30"
+              onClick={() => window.open(getItemMovementsUrl(lang), '_blank', 'noopener,noreferrer')}
             />
           </div>
         </main>

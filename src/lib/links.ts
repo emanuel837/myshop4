@@ -95,6 +95,9 @@ const HOT_MODEL_URL =
 const CANCEL_ONLINE_ORDER_URL =
   'https://airtable.com/appZdzUZAvVj25hm9/pagF3j7cOweX1qKeP/form'
 
+// דוח תנועות מלאי לפריט — פורטל עצמאי (לא תלוי סניף)
+const ITEM_MOVEMENTS_URL = 'https://item-lookup-portal.vercel.app'
+
 const REPORT_MISSING_ONLINE: Record<BranchName, string> = {
   'ביאליק 4 - רמת גן': 'https://airtable.com/appyGTA8v9mY4WcmQ/shrmQVERqhkXImAqW',
   'שטיינר - אבן גבירול 46 תל אביב': 'https://airtable.com/appyGTA8v9mY4WcmQ/shruS9JK2bomcyCXz',
@@ -217,9 +220,20 @@ export function isBranchName(value: string): value is BranchName {
   return Object.prototype.hasOwnProperty.call(BRANCH_IDS, value)
 }
 
+function withLang(url: string, lang?: string): string {
+  if (!lang || lang === 'he') return url
+  return `${url}${url.includes('?') ? '&' : '?'}lang=${lang}`
+}
+
+// פורטל תנועות מלאי לפריט — כתובת אחת, מעביר את שפת האפליקציה
+export function getItemMovementsUrl(lang?: string): string {
+  return withLang(ITEM_MOVEMENTS_URL, lang)
+}
+
 export function getAirtableLink(
   action: LinkActionKey,
   branch: string,
+  lang?: string,
 ): string | undefined {
   switch (action) {
     case 'cancelOnlineOrder':
@@ -250,9 +264,11 @@ export function getAirtableLink(
     case 'orderItem':
       return ORDER_ITEM[branch]
     case 'receivedPackage':
-      return RECEIVED_PACKAGE[branch]
-    case 'checkMinuses':
-      return CHECK_MINUSES[branch]
+      return withLang(RECEIVED_PACKAGE[branch], lang)
+    case 'checkMinuses': {
+      const url = CHECK_MINUSES[branch]
+      return url ? withLang(url, lang) : undefined
+    }
     case 'pickupOrder':
       return `${PICKUP_ORDER_FORM_URL}?prefill_%D7%A1%D7%A0%D7%99%D7%A3=${encodeURIComponent(
         branch,
