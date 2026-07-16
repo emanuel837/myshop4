@@ -580,6 +580,14 @@ export default function HomeScreen({ onLogout }: HomeScreenProps) {
               iconContainerClassName="bg-transparent text-[#233667] shadow-lg shadow-[#233667]/10 ring-1 ring-[#233667]/30"
               onClick={() => window.open(getItemMovementsUrl(lang), '_blank', 'noopener,noreferrer')}
             />
+
+            <HomeActionCard
+              title={t('action.websitePickup')}
+              subtitle={t('home.card.websitePickupSubtitle')}
+              icon={<IconShoppingBag className="h-7 w-7" />}
+              iconContainerClassName="bg-gradient-to-br from-blue-500 to-blue-700 text-white shadow-lg shadow-blue-600/25"
+              onClick={() => openBranchLink(() => getAirtableLink('websitePickup', branch, lang))}
+            />
           </div>
         </main>
       ) : tab === 'report' ? (

@@ -62,6 +62,7 @@ export type LinkActionKey =
   | 'pickupOrder'
   | 'cancelOnlineOrder'
   | 'checkMinuses'
+  | 'websitePickup'
   | 'trackOrders'
   | 'trackLab'
 
@@ -269,6 +270,11 @@ export function getAirtableLink(
       const url = CHECK_MINUSES[branch]
       return url ? withLang(url, lang) : undefined
     }
+    case 'websitePickup':
+      return withLang(
+        `https://pickup-portal.vercel.app/?b=${String(BRANCH_IDS[branch]).padStart(2, '0')}`,
+        lang,
+      )
     case 'pickupOrder':
       return `${PICKUP_ORDER_FORM_URL}?prefill_%D7%A1%D7%A0%D7%99%D7%A3=${encodeURIComponent(
         branch,

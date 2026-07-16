@@ -14,10 +14,12 @@ export type TranslationKey =
   | 'action.sendLab'
   | 'action.receivedPackage'
   | 'action.itemMovements'
+  | 'action.websitePickup'
   | 'home.card.orderItemSubtitle'
   | 'home.card.sendLabSubtitle'
   | 'home.card.receivedPackageSubtitle'
   | 'home.card.itemMovementsSubtitle'
+  | 'home.card.websitePickupSubtitle'
   | 'tab.report'
   | 'tab.tracking'
   | 'tab.info'
@@ -113,10 +115,12 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'action.sendLab': 'שליחה למעבדה',
     'action.receivedPackage': 'קיבלתי חבילה מכץ',
     'action.itemMovements': 'תנועות מלאי לפריט',
+    'action.websitePickup': 'איסוף הזמנות אתר',
     'home.card.orderItemSubtitle': 'להזמין פריט עבור לקוח במהירות ובקלות',
     'home.card.sendLabSubtitle': 'לפתוח פנייה ולשלוח פריט לתיקון / בדיקה',
     'home.card.receivedPackageSubtitle': 'לעדכן שהחבילה הגיעה ולסיים את הטיפול',
     'home.card.itemMovementsSubtitle': 'לראות תנועות מלאי לפי מספר דגם',
+    'home.card.websitePickupSubtitle': 'הזמנות אתר שלקוחות אוספים מהסניף',
     'tab.report': 'דיווח',
     'tab.tracking': 'מעקב',
     'tab.info': 'מידע',
@@ -209,11 +213,13 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'action.sendLab': 'Send to Lab',
     'action.receivedPackage': 'Received Package',
     'action.itemMovements': 'Item Stock Movements',
+    'action.websitePickup': 'Website Order Pickup',
     'home.card.orderItemSubtitle': 'Order an item from warehouse or another branch',
     'home.card.sendLabSubtitle': 'Send item for lab inspection or repair',
     'home.card.receivedPackageSubtitle':
       'Confirm package arrival and close the process',
     'home.card.itemMovementsSubtitle': 'View stock movements by style number',
+    'home.card.websitePickupSubtitle': 'Online orders customers collect at the branch',
     'tab.report': 'Report',
     'tab.tracking': 'Tracking',
     'tab.info': 'Info',
@@ -306,10 +312,12 @@ const translations: Record<AppLanguage, Record<TranslationKey, string>> = {
     'action.sendLab': 'Отправка в мастерскую',
     'action.receivedPackage': 'Получена посылка',
     'action.itemMovements': 'Движение товара',
+    'action.websitePickup': 'Выдача интернет-заказов',
     'home.card.orderItemSubtitle': 'Заказать товар со склада или другого филиала',
     'home.card.sendLabSubtitle': 'Отправить товар на проверку или ремонт',
     'home.card.receivedPackageSubtitle': 'Подтвердить получение посылки',
     'home.card.itemMovementsSubtitle': 'Посмотреть движение товара по артикулу',
+    'home.card.websitePickupSubtitle': 'Интернет-заказы для самовывоза из филиала',
     'tab.report': 'Отчёт',
     'tab.tracking': 'Отслеживание',
     'tab.info': 'Информация',
