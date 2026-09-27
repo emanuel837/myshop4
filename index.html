@@ -4,13 +4,76 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#111827" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-<title>myShop 4</title>
-    <meta name="robots" content="noindex">
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/png" href="/logo_halev_hakachol__1_.png" />
+    <title>myShop עבר לכתובת חדשה</title>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px;
+        background: #ffffff;
+        color: #0f172a;
+        font-family: system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+        line-height: 1.5;
+      }
+      main { width: 100%; max-width: 420px; text-align: center; }
+      img { width: 200px; max-width: 70%; height: auto; margin-bottom: 28px; }
+      h1 { margin: 0 0 8px; font-size: 1.5rem; line-height: 1.3; }
+      .status { margin: 0 0 24px; color: #475569; font-size: 1.05rem; }
+      .btn {
+        display: block;
+        padding: 14px 20px;
+        border-radius: 12px;
+        background: #111827;
+        color: #ffffff;
+        font-size: 1.05rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .btn:active { opacity: 0.85; }
+      .note {
+        margin: 24px 0 0;
+        padding: 14px 16px;
+        border-radius: 12px;
+        background: #f1f5f9;
+        color: #334155;
+        font-size: 0.95rem;
+        text-align: right;
+      }
+    </style>
   </head>
-  <body class="bg-white text-slate-900">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body>
+    <main>
+      <img src="/logo_halev_hakachol__1_.png" alt="הלב הכחול" />
+      <h1>myShop עבר לכתובת חדשה</h1>
+      <p class="status">מעבירים אותך אוטומטית...</p>
+      <a class="btn" href="https://myshop-blueheart.vercel.app">מעבר ידני</a>
+      <p class="note">
+        אחרי המעבר מומלץ להוסיף את האפליקציה החדשה למסך הבית ולמחוק את האייקון הישן.
+        בכניסה הראשונה יש להזין שוב שם וסניף.
+      </p>
+    </main>
+    <script>
+      // Fallback cleanup in case the old service worker is still registered
+      // (public/sw.js normally removes itself on update).
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations()
+          .then((regs) => regs.forEach((reg) => reg.unregister()))
+          .catch(() => {})
+      }
+      if ('caches' in window) {
+        caches.keys()
+          .then((keys) => keys.forEach((key) => caches.delete(key)))
+          .catch(() => {})
+      }
+
+      setTimeout(() => {
+        location.replace('https://myshop-blueheart.vercel.app')
+      }, 2000)
+    </script>
   </body>
 </html>
